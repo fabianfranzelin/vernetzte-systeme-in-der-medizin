@@ -21,17 +21,17 @@
 <section id="sec-title-slide"><h2>Digitale Gesundheitsplattformen und APIs</h2><h4>Architekturansätze für skalierbare e-Health Vernetzung am Beispiel der Telematikinfrastruktur</h4><p>Fabian Franzelin · 2026-09-24</p><p style="font-size:0.6em;">Probevortrag · W2 Vernetzte Systeme in der Medizin · Hochschule Reutlingen</p>
 </section>
 <section>
-<section id="slide-org2a5d289" data-background="#f8f4f0">
-<h2 id="org2a5d289">Einführung</h2>
+<section id="slide-org500efd2" data-background="#f8f4f0">
+<h2 id="org500efd2">Einführung</h2>
 </section>
-<section id="slide-org87a2efe" data-background="#f8f4f0">
-<h3 id="org87a2efe">Was ist die Telematikinfrastruktur?</h3>
+<section id="slide-orga6e0a2e" data-background="#f8f4f0">
+<h3 id="orga6e0a2e">Was ist die Telematikinfrastruktur?</h3>
 <p>
 TODO: Motivation, Historie, gematik, Akteure.
 </p>
 </section>
-<section id="slide-org4577cb7" data-background="#f8f4f0">
-<h3 id="org4577cb7">Voraussetzungen</h3>
+<section id="slide-org2372687" data-background="#f8f4f0">
+<h3 id="org2372687">Voraussetzungen</h3>
 <p>
 TODO: Bezug auf Vorlesungen "Verteilte Systeme", "Kommunikationsnetze",
 "Standards und Prozesse".
@@ -39,62 +39,62 @@ TODO: Bezug auf Vorlesungen "Verteilte Systeme", "Kommunikationsnetze",
 </section>
 </section>
 <section>
-<section id="slide-org8667ab8" data-background="#ffffff">
-<h2 id="org8667ab8">Architekturprinzipien der TI</h2>
+<section id="slide-org059953a" data-background="#ffffff">
+<h2 id="org059953a">Architekturprinzipien der TI</h2>
 </section>
-<section id="slide-org644227b" data-background="#ffffff">
-<h3 id="org644227b">Zentrale Komponenten</h3>
+<section id="slide-orgfc62892" data-background="#ffffff">
+<h3 id="orgfc62892">Zentrale Komponenten</h3>
 <p>
 TODO: Konnektor, VPN, TSL, Fachdienste (ePA, eRezept, KIM, TI-Messenger).
 </p>
 </section>
-<section id="slide-orgc4bcb57" data-background="#ffffff">
-<h3 id="orgc4bcb57">Zero-Trust-Ansatz</h3>
+<section id="slide-org9f9844a" data-background="#ffffff">
+<h3 id="org9f9844a">Zero-Trust-Ansatz</h3>
 <p>
 TODO: TI 2.0, Wegfall des Konnektors, Identitätsföderation.
 </p>
 </section>
 </section>
 <section>
-<section id="slide-orga3fda36" data-background="#ffffff">
-<h2 id="orga3fda36">APIs und Standards</h2>
+<section id="slide-org2eb167c" data-background="#ffffff">
+<h2 id="org2eb167c">APIs und Standards</h2>
 </section>
-<section id="slide-org34799b9" data-background="#ffffff">
-<h3 id="org34799b9">FHIR als Datenaustauschstandard</h3>
+<section id="slide-org2a7e148" data-background="#ffffff">
+<h3 id="org2a7e148">FHIR als Datenaustauschstandard</h3>
 <p>
 TODO: FHIR-Ressourcen, Profile (MII, ISiK), REST-API-Muster.
 </p>
 </section>
-<section id="slide-org4ff63b3" data-background="#ffffff">
-<h3 id="org4ff63b3">IHE-Profile</h3>
+<section id="slide-orga5c06aa" data-background="#ffffff">
+<h3 id="orga5c06aa">IHE-Profile</h3>
 <p>
 TODO: XDS, XCA, PIX, Zusammenspiel mit FHIR.
 </p>
 </section>
 </section>
 <section>
-<section id="slide-org0b46bfd" data-background="#ffffff">
-<h2 id="org0b46bfd">Skalierbarkeit</h2>
+<section id="slide-org6af93e1" data-background="#ffffff">
+<h2 id="org6af93e1">Skalierbarkeit</h2>
 </section>
-<section id="slide-org35a974f" data-background="#ffffff">
-<h3 id="org35a974f">Herausforderungen</h3>
+<section id="slide-orgb02cca7" data-background="#ffffff">
+<h3 id="orgb02cca7">Herausforderungen</h3>
 <p>
 TODO: Millionen Endpunkte, Verfügbarkeit, Rückwärtskompatibilität.
 </p>
 </section>
-<section id="slide-org7f3e229" data-background="#ffffff">
-<h3 id="org7f3e229">Muster</h3>
+<section id="slide-orgfeb3229" data-background="#ffffff">
+<h3 id="orgfeb3229">Muster</h3>
 <p>
 TODO: Föderation, API-Gateways, Event-Driven Architecture.
 </p>
 </section>
 </section>
 <section>
-<section id="slide-org8f7acf9" data-background="#eef5fa">
-<h2 id="org8f7acf9">Brücke zum englischen Vortrag</h2>
+<section id="slide-org550e9ec" data-background="#eef5fa">
+<h2 id="org550e9ec">Brücke zum englischen Vortrag</h2>
 </section>
-<section id="slide-org56920f7" data-background="#eef5fa">
-<h3 id="org56920f7">Zwei Ebenen desselben Stacks</h3>
+<section id="slide-org80281a5" data-background="#eef5fa">
+<h3 id="org80281a5">Zwei Ebenen desselben Stacks</h3>
 <ul>
 <li><b>Diese Ebene:</b> System-zu-System, Klinik-zu-Klinik, Sekunden bis Minuten.
 → FHIR, KIM, TI-Messenger, ePA.</li>
@@ -110,18 +110,18 @@ sondern eine kohärente Architekturhaltung über mehrere Ebenen.</i>
 </section>
 </section>
 <section>
-<section id="slide-orgcf9463e" data-background="#f5f0f8">
-<h2 id="orgcf9463e">Ausblick</h2>
+<section id="slide-org47fd3ef" data-background="#f5f0f8">
+<h2 id="org47fd3ef">Ausblick</h2>
 </section>
-<section id="slide-orgcbcd10c" data-background="#f5f0f8">
-<h3 id="orgcbcd10c">Forschungsrichtungen für die HS Reutlingen</h3>
+<section id="slide-org71acb6c" data-background="#f5f0f8">
+<h3 id="org71acb6c">Forschungsrichtungen für die HS Reutlingen</h3>
 <p>
 TODO: Interoperabilitätstests, Digital Twins für TI-Komponenten,
 Konformitätstests von FHIR-Profilen.
 </p>
 </section>
-<section id="slide-org9622649" data-background="#f5f0f8">
-<h3 id="org9622649">Abschluss</h3>
+<section id="slide-org1eccc0d" data-background="#f5f0f8">
+<h3 id="org1eccc0d">Abschluss</h3>
 <p>
 TODO: Zusammenfassung, Fragen.
 </p>
@@ -142,5 +142,5 @@ plugins: [RevealHighlight, RevealPointer]
 });
 
 </script>
-<style>#ff-reveal-footer{position:fixed;bottom:10px;left:10px;right:10px;display:flex;justify-content:space-between;align-items:center;font-size:18px;color:#666;z-index:1000;pointer-events:none;font-family:sans-serif;}.reveal .slide-number{display:none!important;}</style><div id="ff-reveal-footer"><span>Public — CC0-1.0 · Fabian Franzelin · 2026</span><span id="ff-reveal-footer-page"></span></div><script>document.addEventListener('DOMContentLoaded',function(){if(typeof Reveal!=='undefined'){function u(){var el=document.getElementById('ff-reveal-footer-page');if(el){el.textContent=Reveal.getIndices().h+1;}}Reveal.on('slidechanged',u);Reveal.on('ready',u);}});</script></body>
+<style>#ff-reveal-footer{position:fixed;bottom:10px;left:10px;right:10px;display:flex;justify-content:space-between;align-items:center;font-size:18px;color:#666;z-index:1000;pointer-events:none;font-family:sans-serif;}.reveal .slide-number{display:none!important;}.reveal .slides section > .ff-fit{display:block;transform-origin:top left;width:100%;}</style><div id="ff-reveal-footer"><span>Public — CC0-1.0 · Fabian Franzelin · 2026</span><span id="ff-reveal-footer-page"></span></div><script>document.addEventListener('DOMContentLoaded',function(){if(typeof Reveal==='undefined')return;function upageCounter(){var el=document.getElementById('ff-reveal-footer-page');if(el){el.textContent=Reveal.getIndices().h+1;}}Reveal.on('slidechanged',upageCounter);Reveal.on('ready',upageCounter);function wrapSection(sec){if(sec.classList.contains('stack'))return;if(sec.querySelector(':scope > .ff-fit'))return;var wrap=document.createElement('div');wrap.className='ff-fit';while(sec.firstChild){wrap.appendChild(sec.firstChild);}sec.appendChild(wrap);}function wrapAll(){Reveal.getSlides().forEach(wrapSection);}function fit(sec){var wrap=sec.querySelector(':scope > .ff-fit');if(!wrap)return;wrap.style.transform='';var slideW=sec.clientWidth||960;var slideH=sec.clientHeight||700;var naturalW=wrap.scrollWidth;var naturalH=wrap.scrollHeight;if(naturalW<=slideW && naturalH<=slideH)return;var s=Math.min(slideW/naturalW,slideH/naturalH,1);wrap.style.transform='scale('+s.toFixed(4)+')';wrap.style.width=(100/s).toFixed(2)+'%';wrap.style.height=(100/s).toFixed(2)+'%';}function fitCurrent(){var cur=Reveal.getCurrentSlide();if(cur)fit(cur);}function fitAll(){Reveal.getSlides().forEach(fit);}Reveal.on('ready',function(){wrapAll();fitAll();});Reveal.on('slidechanged',function(e){fit(e.currentSlide);});Reveal.on('resize',fitAll);window.addEventListener('resize',fitCurrent);});</script></body>
 </html>
