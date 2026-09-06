@@ -50,7 +50,7 @@ body,
 
 .reveal .slides > section,
 .reveal .slides > section > section {
-  padding: 3.5rem 1rem 4rem 1rem;             /* symmetric 1rem horizontal */
+  padding: 1rem 1rem 4rem 1rem;             /* tight top, symmetric 1rem horizontal */
   box-sizing: border-box;
   text-align: left;
   height: 100%;
@@ -58,33 +58,38 @@ body,
 
 /* ---------- typography ---------- */
 
-.reveal h1,
-.reveal h2,
-.reveal h3,
-.reveal h4 {
+/* All heading rules use the higher-specificity `.reveal .slides section`
+ * chain so they beat reveal.css's baseline
+ *     html:not(.print-pdf) .reveal h3 { color:#000!important;
+ *                                       font-size:22pt!important; }
+ * which is specificity (0,2,2) and would otherwise win. */
+
+.reveal .slides section h1,
+.reveal .slides section h2,
+.reveal .slides section h3,
+.reveal .slides section h4 {
   font-family: var(--vsm-font-serif) !important;
   font-weight: 600 !important;
   color: var(--vsm-ink) !important;
   text-transform: none !important;   /* override white-theme uppercase */
   letter-spacing: 0 !important;
   text-shadow: none !important;
-  line-height: 1.15;
-  margin: 0 0 0.55em 0;
+  line-height: 1.15 !important;
+  margin: 0 0 0.55em 0 !important;
 }
 
-.reveal h1 { font-size: 1.9em !important; }
-.reveal h2 { font-size: 1.45em !important; }
-.reveal h3 { font-size: 1.45em !important; }  /* ox-reveal emits h3 for ** sub-slides */
-.reveal h4 { font-size: 1.0em  !important; color: var(--vsm-ink-soft) !important; }
+.reveal .slides section h1 { font-size: 1.9em  !important; }
+.reveal .slides section h2 { font-size: 1.45em !important; }
+.reveal .slides section h3 { font-size: 1.45em !important; }  /* ox-reveal emits h3 for ** */
+.reveal .slides section h4 { font-size: 1.0em  !important; color: var(--vsm-ink-soft) !important; }
 
-/* Slide title underline (2 px accent hairline).
- * ox-reveal emits <h3> for `**` sub-slides, so include it here. */
+/* Slide title underline (2 px accent hairline). */
 .reveal .slides section > h1,
 .reveal .slides section > h2,
 .reveal .slides section > h3 {
-  border-bottom: 2px solid var(--vsm-accent);
-  padding-bottom: 0.35em;
-  margin-bottom: 1em;
+  border-bottom: 2px solid var(--vsm-accent) !important;
+  padding-bottom: 0.35em !important;
+  margin-bottom: 1em !important;
 }
 
 .reveal p, .reveal li, .reveal dd, .reveal dt {
