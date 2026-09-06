@@ -21,17 +21,17 @@
 <section id="sec-title-slide"><h2>Digitale Gesundheitsplattformen und APIs</h2><h4>Architekturansätze für skalierbare e-Health Vernetzung am Beispiel der Telematikinfrastruktur</h4><p>Fabian Franzelin · 2026-09-24</p><p style="font-size:0.6em;">Probevortrag · W2 Vernetzte Systeme in der Medizin · Hochschule Reutlingen</p>
 </section>
 <section>
-<section id="slide-org8498d56" data-background="#f8f4f0">
-<h2 id="org8498d56">Einführung</h2>
+<section id="slide-org8fd1419" data-background="#f8f4f0">
+<h2 id="org8fd1419">Einführung</h2>
 </section>
-<section id="slide-org4075974" data-background="#f8f4f0">
-<h3 id="org4075974">Was ist die Telematikinfrastruktur?</h3>
+<section id="slide-org72dba0b" data-background="#f8f4f0">
+<h3 id="org72dba0b">Was ist die Telematikinfrastruktur?</h3>
 <p>
 TODO: Motivation, Historie, gematik, Akteure.
 </p>
 </section>
-<section id="slide-orgf3e4b92" data-background="#f8f4f0">
-<h3 id="orgf3e4b92">Voraussetzungen</h3>
+<section id="slide-orgb298bc8" data-background="#f8f4f0">
+<h3 id="orgb298bc8">Voraussetzungen</h3>
 <p>
 TODO: Bezug auf Vorlesungen "Verteilte Systeme", "Kommunikationsnetze",
 "Standards und Prozesse".
@@ -39,62 +39,62 @@ TODO: Bezug auf Vorlesungen "Verteilte Systeme", "Kommunikationsnetze",
 </section>
 </section>
 <section>
-<section id="slide-orge699847" data-background="#ffffff">
-<h2 id="orge699847">Architekturprinzipien der TI</h2>
+<section id="slide-org835f529" data-background="#ffffff">
+<h2 id="org835f529">Architekturprinzipien der TI</h2>
 </section>
-<section id="slide-org73110ba" data-background="#ffffff">
-<h3 id="org73110ba">Zentrale Komponenten</h3>
+<section id="slide-org6dfe11d" data-background="#ffffff">
+<h3 id="org6dfe11d">Zentrale Komponenten</h3>
 <p>
 TODO: Konnektor, VPN, TSL, Fachdienste (ePA, eRezept, KIM, TI-Messenger).
 </p>
 </section>
-<section id="slide-org6ac67b1" data-background="#ffffff">
-<h3 id="org6ac67b1">Zero-Trust-Ansatz</h3>
+<section id="slide-org158bbfa" data-background="#ffffff">
+<h3 id="org158bbfa">Zero-Trust-Ansatz</h3>
 <p>
 TODO: TI 2.0, Wegfall des Konnektors, Identitätsföderation.
 </p>
 </section>
 </section>
 <section>
-<section id="slide-orgfbf5831" data-background="#ffffff">
-<h2 id="orgfbf5831">APIs und Standards</h2>
+<section id="slide-org44084c6" data-background="#ffffff">
+<h2 id="org44084c6">APIs und Standards</h2>
 </section>
-<section id="slide-org3870ceb" data-background="#ffffff">
-<h3 id="org3870ceb">FHIR als Datenaustauschstandard</h3>
+<section id="slide-org9f1e8e1" data-background="#ffffff">
+<h3 id="org9f1e8e1">FHIR als Datenaustauschstandard</h3>
 <p>
 TODO: FHIR-Ressourcen, Profile (MII, ISiK), REST-API-Muster.
 </p>
 </section>
-<section id="slide-org2a5edf2" data-background="#ffffff">
-<h3 id="org2a5edf2">IHE-Profile</h3>
+<section id="slide-org58a130b" data-background="#ffffff">
+<h3 id="org58a130b">IHE-Profile</h3>
 <p>
 TODO: XDS, XCA, PIX, Zusammenspiel mit FHIR.
 </p>
 </section>
 </section>
 <section>
-<section id="slide-org1531bc6" data-background="#ffffff">
-<h2 id="org1531bc6">Skalierbarkeit</h2>
+<section id="slide-orga382804" data-background="#ffffff">
+<h2 id="orga382804">Skalierbarkeit</h2>
 </section>
-<section id="slide-org7ea29f6" data-background="#ffffff">
-<h3 id="org7ea29f6">Herausforderungen</h3>
+<section id="slide-orgd2cb923" data-background="#ffffff">
+<h3 id="orgd2cb923">Herausforderungen</h3>
 <p>
 TODO: Millionen Endpunkte, Verfügbarkeit, Rückwärtskompatibilität.
 </p>
 </section>
-<section id="slide-org4381f9d" data-background="#ffffff">
-<h3 id="org4381f9d">Muster</h3>
+<section id="slide-orge4bec62" data-background="#ffffff">
+<h3 id="orge4bec62">Muster</h3>
 <p>
 TODO: Föderation, API-Gateways, Event-Driven Architecture.
 </p>
 </section>
 </section>
 <section>
-<section id="slide-org1246ef2" data-background="#eef5fa">
-<h2 id="org1246ef2">Brücke zum englischen Vortrag</h2>
+<section id="slide-org317720b" data-background="#eef5fa">
+<h2 id="org317720b">Brücke zum englischen Vortrag</h2>
 </section>
-<section id="slide-org1d441f9" data-background="#eef5fa">
-<h3 id="org1d441f9">Zwei Ebenen desselben Stacks</h3>
+<section id="slide-org0d5535f" data-background="#eef5fa">
+<h3 id="org0d5535f">Zwei Ebenen desselben Stacks</h3>
 <ul>
 <li><b>Diese Ebene:</b> System-zu-System, Klinik-zu-Klinik, Sekunden bis Minuten.
 → FHIR, KIM, TI-Messenger, ePA.</li>
@@ -110,18 +110,18 @@ sondern eine kohärente Architekturhaltung über mehrere Ebenen.</i>
 </section>
 </section>
 <section>
-<section id="slide-org595edb9" data-background="#f5f0f8">
-<h2 id="org595edb9">Ausblick</h2>
+<section id="slide-orgafe85e4" data-background="#f5f0f8">
+<h2 id="orgafe85e4">Ausblick</h2>
 </section>
-<section id="slide-org1565737" data-background="#f5f0f8">
-<h3 id="org1565737">Forschungsrichtungen für die HS Reutlingen</h3>
+<section id="slide-org966a69a" data-background="#f5f0f8">
+<h3 id="org966a69a">Forschungsrichtungen für die HS Reutlingen</h3>
 <p>
 TODO: Interoperabilitätstests, Digital Twins für TI-Komponenten,
 Konformitätstests von FHIR-Profilen.
 </p>
 </section>
-<section id="slide-orgfc66517" data-background="#f5f0f8">
-<h3 id="orgfc66517">Abschluss</h3>
+<section id="slide-org9f5c74e" data-background="#f5f0f8">
+<h3 id="org9f5c74e">Abschluss</h3>
 <p>
 TODO: Zusammenfassung, Fragen.
 </p>
