@@ -13,25 +13,28 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/white.css" id="theme"/>
 
+<link rel="stylesheet" href="assets/vsm-theme.css"/>
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-pointer@0.1.4/dist/pointer.css"/>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/plugin/highlight/zenburn.css"/></head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/plugin/highlight/zenburn.css"/><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+</head>
 <body>
 <div class="reveal">
 <div class="slides">
 <section id="sec-title-slide"><h2>Digitale Gesundheitsplattformen und APIs</h2><h4>Architekturansätze für skalierbare e-Health Vernetzung am Beispiel der Telematikinfrastruktur</h4><p>Fabian Franzelin · 2026-09-24</p><p style="font-size:0.6em;">Probevortrag · W2 Vernetzte Systeme in der Medizin · Hochschule Reutlingen</p>
 </section>
 <section>
-<section id="slide-org09a670b" data-background="#f8f4f0">
-<h2 id="org09a670b">Einführung</h2>
+<section id="slide-orgefa59b5" data-background="#f8f4f0">
+<h2 id="orgefa59b5">Einführung</h2>
 </section>
-<section id="slide-org1c44b70" data-background="#f8f4f0">
-<h3 id="org1c44b70">Was ist die Telematikinfrastruktur?</h3>
+<section id="slide-orgdfa23d4" data-background="#f8f4f0">
+<h3 id="orgdfa23d4">Was ist die Telematikinfrastruktur?</h3>
 <p>
 TODO: Motivation, Historie, gematik, Akteure.
 </p>
 </section>
-<section id="slide-orgdec6e3d" data-background="#f8f4f0">
-<h3 id="orgdec6e3d">Voraussetzungen</h3>
+<section id="slide-org6fd5497" data-background="#f8f4f0">
+<h3 id="org6fd5497">Voraussetzungen</h3>
 <p>
 TODO: Bezug auf Vorlesungen "Verteilte Systeme", "Kommunikationsnetze",
 "Standards und Prozesse".
@@ -39,62 +42,62 @@ TODO: Bezug auf Vorlesungen "Verteilte Systeme", "Kommunikationsnetze",
 </section>
 </section>
 <section>
-<section id="slide-org42e215e" data-background="#ffffff">
-<h2 id="org42e215e">Architekturprinzipien der TI</h2>
+<section id="slide-org9fcf038" data-background="#ffffff">
+<h2 id="org9fcf038">Architekturprinzipien der TI</h2>
 </section>
-<section id="slide-orga5f4dad" data-background="#ffffff">
-<h3 id="orga5f4dad">Zentrale Komponenten</h3>
+<section id="slide-orgae5d7b0" data-background="#ffffff">
+<h3 id="orgae5d7b0">Zentrale Komponenten</h3>
 <p>
 TODO: Konnektor, VPN, TSL, Fachdienste (ePA, eRezept, KIM, TI-Messenger).
 </p>
 </section>
-<section id="slide-orgc0bed8e" data-background="#ffffff">
-<h3 id="orgc0bed8e">Zero-Trust-Ansatz</h3>
+<section id="slide-org9e88338" data-background="#ffffff">
+<h3 id="org9e88338">Zero-Trust-Ansatz</h3>
 <p>
 TODO: TI 2.0, Wegfall des Konnektors, Identitätsföderation.
 </p>
 </section>
 </section>
 <section>
-<section id="slide-org62bcfe6" data-background="#ffffff">
-<h2 id="org62bcfe6">APIs und Standards</h2>
+<section id="slide-orge815d36" data-background="#ffffff">
+<h2 id="orge815d36">APIs und Standards</h2>
 </section>
-<section id="slide-orgb4b8a03" data-background="#ffffff">
-<h3 id="orgb4b8a03">FHIR als Datenaustauschstandard</h3>
+<section id="slide-org2998372" data-background="#ffffff">
+<h3 id="org2998372">FHIR als Datenaustauschstandard</h3>
 <p>
 TODO: FHIR-Ressourcen, Profile (MII, ISiK), REST-API-Muster.
 </p>
 </section>
-<section id="slide-org8192ce8" data-background="#ffffff">
-<h3 id="org8192ce8">IHE-Profile</h3>
+<section id="slide-org20c4444" data-background="#ffffff">
+<h3 id="org20c4444">IHE-Profile</h3>
 <p>
 TODO: XDS, XCA, PIX, Zusammenspiel mit FHIR.
 </p>
 </section>
 </section>
 <section>
-<section id="slide-org9db6274" data-background="#ffffff">
-<h2 id="org9db6274">Skalierbarkeit</h2>
+<section id="slide-org2f15d28" data-background="#ffffff">
+<h2 id="org2f15d28">Skalierbarkeit</h2>
 </section>
-<section id="slide-org71bf9e4" data-background="#ffffff">
-<h3 id="org71bf9e4">Herausforderungen</h3>
+<section id="slide-org63bd8e9" data-background="#ffffff">
+<h3 id="org63bd8e9">Herausforderungen</h3>
 <p>
 TODO: Millionen Endpunkte, Verfügbarkeit, Rückwärtskompatibilität.
 </p>
 </section>
-<section id="slide-orgbbc7557" data-background="#ffffff">
-<h3 id="orgbbc7557">Muster</h3>
+<section id="slide-org66dfddb" data-background="#ffffff">
+<h3 id="org66dfddb">Muster</h3>
 <p>
 TODO: Föderation, API-Gateways, Event-Driven Architecture.
 </p>
 </section>
 </section>
 <section>
-<section id="slide-org4895005" data-background="#eef5fa">
-<h2 id="org4895005">Brücke zum englischen Vortrag</h2>
+<section id="slide-org7a07491" data-background="#eef5fa">
+<h2 id="org7a07491">Brücke zum englischen Vortrag</h2>
 </section>
-<section id="slide-org834670c" data-background="#eef5fa">
-<h3 id="org834670c">Zwei Ebenen desselben Stacks</h3>
+<section id="slide-orge446b7e" data-background="#eef5fa">
+<h3 id="orge446b7e">Zwei Ebenen desselben Stacks</h3>
 <ul>
 <li><b>Diese Ebene:</b> System-zu-System, Klinik-zu-Klinik, Sekunden bis Minuten.
 → FHIR, KIM, TI-Messenger, ePA.</li>
@@ -110,18 +113,18 @@ sondern eine kohärente Architekturhaltung über mehrere Ebenen.</i>
 </section>
 </section>
 <section>
-<section id="slide-orga626777" data-background="#f5f0f8">
-<h2 id="orga626777">Ausblick</h2>
+<section id="slide-orgeeb19d9" data-background="#f5f0f8">
+<h2 id="orgeeb19d9">Ausblick</h2>
 </section>
-<section id="slide-org058b700" data-background="#f5f0f8">
-<h3 id="org058b700">Forschungsrichtungen für die HS Reutlingen</h3>
+<section id="slide-org9d78572" data-background="#f5f0f8">
+<h3 id="org9d78572">Forschungsrichtungen für die HS Reutlingen</h3>
 <p>
 TODO: Interoperabilitätstests, Digital Twins für TI-Komponenten,
 Konformitätstests von FHIR-Profilen.
 </p>
 </section>
-<section id="slide-orgf763cbe" data-background="#f5f0f8">
-<h3 id="orgf763cbe">Abschluss</h3>
+<section id="slide-org74b8131" data-background="#f5f0f8">
+<h3 id="org74b8131">Abschluss</h3>
 <p>
 TODO: Zusammenfassung, Fragen.
 </p>
@@ -138,7 +141,8 @@ TODO: Zusammenfassung, Fragen.
 // Full list of configuration options available here:
 // https://github.com/hakimel/reveal.js#configuration
 Reveal.initialize({
-plugins: [RevealHighlight, RevealPointer]
+plugins: [RevealHighlight, RevealPointer],
+center: false, margin: 0.02, transition: 'fade', width: 1200, height: 760
 });
 
 </script>
