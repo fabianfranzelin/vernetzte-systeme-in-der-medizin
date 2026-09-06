@@ -50,7 +50,7 @@ body,
 
 .reveal .slides > section,
 .reveal .slides > section > section {
-  padding: 3.5rem 4.5rem 4rem 4.5rem;   /* 96px-ish margins */
+  padding: 3.5rem 1rem 4rem 1rem;             /* symmetric 1rem horizontal */
   box-sizing: border-box;
   text-align: left;
   height: 100%;

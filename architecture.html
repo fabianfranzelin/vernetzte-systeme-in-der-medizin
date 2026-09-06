@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-09-06 Sun 22:11 -->
+<!-- 2026-09-06 Sun 22:15 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Architecture &#x2014; SDC / IEEE 11073</title>
@@ -18,19 +18,19 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org37e61bd">Overview</a></li>
-<li><a href="#org677fc2a">IEEE 11073 &#x2014; family map</a></li>
-<li><a href="#org1f724fc">BICEPS</a></li>
-<li><a href="#org272ab92">Sequence</a></li>
-<li><a href="#orgcd42a63">Safety Contexts</a></li>
-<li><a href="#orgd4adebf">Transport &#x2014; Medical DPWS</a></li>
-<li><a href="#orgf4ffa38">Related documents</a></li>
+<li><a href="#orgb428065">Overview</a></li>
+<li><a href="#org9aaec00">IEEE 11073 &#x2014; family map</a></li>
+<li><a href="#org8b52d04">BICEPS</a></li>
+<li><a href="#org970c382">Sequence</a></li>
+<li><a href="#orgd3db755">Safety Contexts</a></li>
+<li><a href="#orgfd7003c">Transport &#x2014; Medical DPWS</a></li>
+<li><a href="#orgaf3ba7f">Related documents</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org37e61bd" class="outline-2">
-<h2 id="org37e61bd">Overview</h2>
-<div class="outline-text-2" id="text-org37e61bd">
+<div id="outline-container-orgb428065" class="outline-2">
+<h2 id="orgb428065">Overview</h2>
+<div class="outline-text-2" id="text-orgb428065">
 <p>
 The demo in this repository implements a minimal <i>provider</i> and <i>consumer</i>
 following the <b>Service-Oriented Device Connectivity</b> (SDC) family of standards
@@ -39,9 +39,9 @@ the source code without prior SDC background.
 </p>
 </div>
 </div>
-<div id="outline-container-org677fc2a" class="outline-2">
-<h2 id="org677fc2a">IEEE 11073 &#x2014; family map</h2>
-<div class="outline-text-2" id="text-org677fc2a">
+<div id="outline-container-org9aaec00" class="outline-2">
+<h2 id="org9aaec00">IEEE 11073 &#x2014; family map</h2>
+<div class="outline-text-2" id="text-org9aaec00">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -80,9 +80,9 @@ the source code without prior SDC background.
 </table>
 </div>
 </div>
-<div id="outline-container-org1f724fc" class="outline-2">
-<h2 id="org1f724fc">BICEPS</h2>
-<div class="outline-text-2" id="text-org1f724fc">
+<div id="outline-container-org8b52d04" class="outline-2">
+<h2 id="org8b52d04">BICEPS</h2>
+<div class="outline-text-2" id="text-org8b52d04">
 <p>
 BICEPS = <i>Basic Integrated Clinical Environment Protocol Specification</i>.
 </p>
@@ -118,9 +118,9 @@ per-sample data) &#x2014; Nyquist-safe by construction.
 </p>
 </div>
 </div>
-<div id="outline-container-org272ab92" class="outline-2">
-<h2 id="org272ab92">Sequence</h2>
-<div class="outline-text-2" id="text-org272ab92">
+<div id="outline-container-org970c382" class="outline-2">
+<h2 id="org970c382">Sequence</h2>
+<div class="outline-text-2" id="text-org970c382">
 <p>
 A minimal interaction looks like this:
 </p>
@@ -144,9 +144,9 @@ A minimal interaction looks like this:
 </div>
 </div>
 </div>
-<div id="outline-container-orgcd42a63" class="outline-2">
-<h2 id="orgcd42a63">Safety Contexts</h2>
-<div class="outline-text-2" id="text-orgcd42a63">
+<div id="outline-container-orgd3db755" class="outline-2">
+<h2 id="orgd3db755">Safety Contexts</h2>
+<div class="outline-text-2" id="text-orgd3db755">
 <p>
 A <code>Set</code> operation in SDC is never just a remote procedure call.  It carries
 a <b>Safety Context</b> proving the operation is:
@@ -165,9 +165,9 @@ service bus over TLS.
 </p>
 </div>
 </div>
-<div id="outline-container-orgd4adebf" class="outline-2">
-<h2 id="orgd4adebf">Transport &#x2014; Medical DPWS</h2>
-<div class="outline-text-2" id="text-orgd4adebf">
+<div id="outline-container-orgfd7003c" class="outline-2">
+<h2 id="orgfd7003c">Transport &#x2014; Medical DPWS</h2>
+<div class="outline-text-2" id="text-orgfd7003c">
 <ul class="org-ul">
 <li><b>WS-Discovery</b> over UDP multicast (device discovery)</li>
 <li><b>SOAP over HTTP(S)/TCP</b> (messages)</li>
@@ -177,9 +177,9 @@ service bus over TLS.
 </ul>
 </div>
 </div>
-<div id="outline-container-orgf4ffa38" class="outline-2">
-<h2 id="orgf4ffa38">Related documents</h2>
-<div class="outline-text-2" id="text-orgf4ffa38">
+<div id="outline-container-orgaf3ba7f" class="outline-2">
+<h2 id="orgaf3ba7f">Related documents</h2>
+<div class="outline-text-2" id="text-orgaf3ba7f">
 <ul class="org-ul">
 <li><a href="automotive-vs-medical.html">Automotive vs. Medical Standards</a></li>
 <li><a href="device-layer-vs-platform-layer.html">Device Layer vs. Platform Layer</a></li>
