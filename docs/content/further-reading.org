@@ -1,0 +1,43 @@
+#+TITLE: Further Reading
+#+AUTHOR: Fabian Franzelin
+#+OPTIONS: toc:nil num:nil
+
+* Standards
+
+- IEEE 11073-10207 --- Domain Information & Service Model (BICEPS)
+- IEEE 11073-20701 --- Service-Oriented Device Connectivity
+- IEEE 11073-20702 --- Medical Devices Profile for Web Services
+- IEC 62304 --- Medical device software: software lifecycle processes
+- ISO 14971 --- Application of risk management to medical devices
+- IEC 60601-1 --- Basic safety and essential performance of medical electrical equipment
+- IEC 62443 --- Industrial communication networks: IT security
+- MDR (EU) 2017/745 --- Medical Device Regulation
+
+* Automotive counterparts
+
+- ISO 26262 --- Road vehicles: functional safety
+- ISO/SAE 21434 --- Cybersecurity engineering for road vehicles
+- Automotive SPICE (ASPICE)
+- AUTOSAR Adaptive Platform --- SOME/IP
+
+* Ecosystems and communities
+
+- OR.NET e.V.
+- SDCLib / sdc11073 (open-source implementations)
+- IHE (Integrating the Healthcare Enterprise) profiles
+- HL7 FHIR
+- Object Management Group DDS
+
+* Selected academic references
+
+- Kasparick, M. et al.: OR.NET --- a service-oriented architecture for
+  safe and dynamic medical device interoperability.
+- Andersen, B. et al.: Plug-and-play in the operating room.
+- Wagner, M. et al. (2022): /Surgomics: personalized prediction of morbidity,
+  mortality and long-term outcome in surgery./
+
+* Related work in this repository
+
+- [[file:architecture.org][Architecture]]
+- [[file:automotive-vs-medical.org][Automotive vs. Medical]]
+- [[file:device-layer-vs-platform-layer.org][Device Layer vs. Platform Layer]]

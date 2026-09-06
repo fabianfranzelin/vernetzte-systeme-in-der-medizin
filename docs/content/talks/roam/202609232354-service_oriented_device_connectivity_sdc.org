@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       539ea42a-e7c4-495c-9818-f926bd5b1515
+:END:
+#+title: Service-oriented Device Connectivity (SDC)
+
+- *Original challenge:* How can medical devices from different vendors discover
+  each other and exchange semantically rich data on hospital IP networks — safely
+  and without custom point-to-point integrations? [[id:0ff3a909-702d-45ee-896b-cbcc4c9d17cd][Clinics]]
+- *My experience:* Wearable gait-sensor work with multiple-sclerosis patients
+  (3D acceleration, cadence estimation) and a self-contained demo of a
+  wearable → clinic stream modelled on IEEE 11073 SDC / BICEPS (descriptors,
+  states, MDC-coded metrics, subscribe-and-stream).
+- *Clinical direction:* Extend the same /discover → describe → subscribe → stream/
+  pattern from the ward to home monitoring, so continuous wearable data feeds
+  clinical dashboards with the same semantic guarantees as bedside devices.
+
+\to [[http://localhost:8080/talks/en-service-oriented-communication.html][Link]] to the presentation

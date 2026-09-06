@@ -1,0 +1,79 @@
+#+TITLE: Begleitmaterial zum Vortrag
+#+SUBTITLE: Digitale Gesundheitsplattformen und APIs — Glossar
+#+AUTHOR: Dr. Fabian Franzelin
+#+DATE: 2026-09-24
+#+LANGUAGE: de
+#+OPTIONS: toc:nil num:nil timestamp:nil author:t
+#+LATEX_CLASS: article
+#+LATEX_CLASS_OPTIONS: [10pt,a4paper]
+#+LATEX_HEADER: \usepackage[margin=1.8cm,top=1.6cm,bottom=1.6cm]{geometry}
+#+LATEX_HEADER: \usepackage{enumitem}
+#+LATEX_HEADER: \setlist[description]{leftmargin=0pt,labelindent=0pt,style=nextline,itemsep=2pt,parsep=0pt,topsep=2pt}
+#+LATEX_HEADER: \usepackage{titlesec}
+#+LATEX_HEADER: \titlespacing*{\section}{0pt}{6pt}{2pt}
+#+LATEX_HEADER: \titleformat*{\section}{\large\bfseries}
+#+LATEX_HEADER: \setlength{\parskip}{2pt}
+#+LATEX_HEADER: \setlength{\parindent}{0pt}
+#+LATEX_HEADER: \renewcommand{\baselinestretch}{0.98}
+
+* Kernbegriffe der Plattform-Architektur
+
+- *Container / Pod* — Verpackte Anwendung inklusive aller Abhängigkeiten
+  (Bibliotheken, Laufzeit, Konfiguration); startet in Sekunden und läuft
+  identisch auf Laptop und Cloud. Ein /Pod/ ist die kleinste
+  Ausführungseinheit in Kubernetes und bündelt eng zusammenarbeitende
+  Container. /Analogie:/ Umzugskarton, überall einlagerbar.
+
+- *mTLS (mutual TLS)* — Verschlüsselte Verbindung, bei der /beide Seiten/
+  ein gültiges Zertifikat vorzeigen. Klassisches TLS prüft nur den
+  Server, mTLS zusätzlich den Client. Zentraler Baustein von /Zero Trust/
+  in der TI 2.0. /Analogie:/ zwei Geheimagenten, die beide ihren Ausweis
+  zeigen.
+
+- *Ingress* — Empfangstresen eines Cloud-Systems: nimmt Anfragen aus dem
+  Internet entgegen, authentifiziert, protokolliert und leitet an einen
+  freien Pod weiter. /Analogie:/ Krankenhausrezeption, die Patienten auf
+  freie Zimmer verteilt.
+
+- *Message Queue* — Briefkasten zwischen Diensten. Sender legt eine
+  Nachricht ab und arbeitet weiter; Empfänger holt sie ab, sobald er
+  Kapazität hat. Entkoppelt Sender und Empfänger zeitlich — fällt der
+  Empfänger kurz aus, gehen keine Nachrichten verloren (z.B. eAU an die
+  Krankenkasse). Implementierungen: Apache Kafka, Redis Streams.
+
+- *CI/CD (Continuous Integration / Delivery)* — Automatisierte Pipeline,
+  die bei jeder Code-Änderung übersetzt, testet, den Container baut und
+  nach Freigabe ausrollt. Sicherheitsupdates fließen in Stunden statt
+  Monaten in die laufende TI ein. /Analogie:/ Fließband vom Quellcode
+  bis zum laufenden Dienst.
+
+- *Zero Trust* — Sicherheitsparadigma: keiner Verbindung, Identität oder
+  Netzzone wird vertraut. Jede Anfrage wird einzeln authentifiziert,
+  autorisiert und verschlüsselt — unabhängig davon, ob "intern" oder
+  "extern".
+
+* Begriffe aus dem TI-Kontext
+
+- *eAU* — Elektronische Arbeitsunfähigkeitsbescheinigung; digitaler Nachfolger des gelben Zettels, seit 2023 verpflichtend.
+- *ePA* — Elektronische Patientenakte; seit 2025 als /ePA für alle/
+  (Opt-out-Verfahren).
+- *gematik* — Nationale Agentur für Digitale Medizin; verantwortet Spezifikation, Zulassung und Betrieb der TI.
+- *KIM* (Kommunikation im Medizinwesen) — E-Mail-ähnlicher Dienst
+  innerhalb der TI für verschlüsselten Nachrichtenaustausch zwischen
+  Leistungserbringern und Kostenträgern; basiert auf S/MIME.
+- *OAuth 2.0 / OpenID Connect (OIDC)* — Offene Standards für
+  Autorisierung (OAuth) und Authentifizierung (OIDC); Grundlage
+  föderierter Identitäten in TI 2.0.
+- *PVS* — Praxisverwaltungssystem; Software für Patientendaten,
+  Termine, Abrechnung und Dokumentation.
+- *S/MIME* — Standard zur Ende-zu-Ende-Verschlüsselung und Signatur von
+  E-Mails; von KIM verwendet.
+- *SMC-B* — Institutionsausweis einer Praxis/eines Krankenhauses als
+  Chipkarte; in TI 2.0 zunehmend als HSM-basierte Cloud-Identität.
+- *SOME/IP* — Service-orientiertes Protokoll aus der Automobilindustrie;
+  konzeptionell verwandt mit TI 2.0 und IEEE 11073 SDC.
+- *TI-Gateway* — Cloud-basierter Ersatz des lokalen Konnektors in
+  TI 2.0; übernimmt Authentifizierung, Verschlüsselung und Routing zu
+  den Fachdiensten.
+- *VZD* — Verzeichnisdienst; zentrales Adressbuch der TI mit
+  KIM-Adressen, Zertifikaten und Rollen aller Teilnehmer.

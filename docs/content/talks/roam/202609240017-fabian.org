@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       ba3c4aa1-7296-4858-b7b3-4f9dd41820aa
+:END:
+#+title: Fabian
+
+- [[id:c1bd3194-85e8-4afb-8297-168846f203ec][Research profile at Reutlingen University]]
+- [[id:539ea42a-e7c4-495c-9818-f926bd5b1515][Service-oriented Device Connectivity (SDC)]]
+- [[id:257c50d8-9090-46d7-8a86-ca0daa2f08cd][Cars]]

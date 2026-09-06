@@ -1,0 +1,26 @@
+[project]
+name = "vsm-demo"
+version = "0.1.0"
+description = "Wearable-to-clinic SDC demo (Vernetzte Systeme in der Medizin)"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.29",
+    "numpy>=1.24",
+    "pandas>=2.0",
+    "httpx>=0.27",
+    "sdc11073>=1.1",
+]
+
+[tool.uv]
+package = false
+
+[dependency-groups]
+dev = [
+    "beautifulsoup4>=4.15.0",
+]
+
+[tool.basedpyright]
+reportAny = false
+reportExplicitAny = false
+reportUnusedCallResult = false

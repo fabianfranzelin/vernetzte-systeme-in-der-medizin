@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       0ff3a909-702d-45ee-896b-cbcc4c9d17cd
+:END:
+#+title: Clinics
+
+- [[id:87407397-045b-4833-a253-57ec7ef6ea0a][Digital Twins]]
+- [[id:ca1fc301-1987-41f6-85aa-51fe50f0d4f6][Safe Engineering]]
+- [[id:539ea42a-e7c4-495c-9818-f926bd5b1515][Service-oriented Device Connectivity (SDC)]]

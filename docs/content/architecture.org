@@ -1,0 +1,194 @@
+#+TITLE: Architecture --- SDC / IEEE 11073
+#+AUTHOR: Fabian Franzelin
+#+OPTIONS: toc:2 num:nil
+
+* Overview
+
+The demo in this repository implements a minimal /provider/ and /consumer/
+following the *Service-Oriented Device Connectivity* (SDC) family of standards
+under IEEE 11073.  This document explains the model in enough depth to read
+the source code without prior SDC background.
+
+* IEEE 11073 --- family map
+
+| Part            | Purpose                                       |
+|-----------------+-----------------------------------------------|
+| 11073-10207     | Domain Information & Service Model (BICEPS)   |
+| 11073-20701     | Service-Oriented Device Connectivity          |
+| 11073-20702     | Medical Devices Profile for Web Services      |
+| 11073-10101(nu) | Nomenclature codes                            |
+
+* BICEPS
+
+BICEPS = /Basic Integrated Clinical Environment Protocol Specification/.
+
+Every provider hosts an *MDIB* (Medical Device Information Base) which is
+split into:
+
+- *Descriptors* --- the static structure: what does this device even /have/?
+- *States* --- the current value of everything the descriptors describe.
+
+The hierarchy is roughly:
+
+#+BEGIN_SRC text
+MDS (Medical Device System)
+└── VMD (Virtual Medical Device)
+    └── Channel
+        └── Metric  ← the actual measurement point
+#+END_SRC
+
+/RealTimeSampleArrayMetricState/ is the state variant for waveforms: one
+report carries a batch of consecutive samples together with the declared
+=sample_rate_hz=, so the transport rate can be throttled (e.g. 10 Hz
+reports) while the underlying sample rate is preserved (e.g. 100 Hz
+per-sample data) --- Nyquist-safe by construction.
+
+* Sequence
+
+A minimal interaction looks like this:
+
+#+BEGIN_SRC text
+Consumer                       Provider (wearable)
+   |                                 |
+   |--- Probe (WS-Discovery) ------->|
+   |<-- ProbeMatch ------------------|
+   |                                 |
+   |--- GetMdib -------------------->|
+   |<-- MDIB (descriptors + states)--|
+   |                                 |
+   |--- Subscribe (State Events) --->|
+   |<-- SubscribeResponse -----------|
+   |                                 |
+   |<== EpisodicMetricReport ========|
+   |<== EpisodicMetricReport ========|
+   |<== EpisodicAlertReport =========|
+#+END_SRC
+
+* Safety Contexts
+
+A =Set= operation in SDC is never just a remote procedure call.  It carries
+a *Safety Context* proving the operation is:
+
+- targeting the correct *patient* (=PatientContext=),
+- in the correct *location* (=LocationContext=),
+- during a valid *workflow* (=WorkflowContext=),
+- and by a party currently *permitted* to issue it (=ParticipantKey=).
+
+This is the single most important concept that separates SDC from a naïve
+service bus over TLS.
+
+* Transport --- Medical DPWS
+
+- *WS-Discovery* over UDP multicast (device discovery)
+- *SOAP over HTTP(S)/TCP* (messages)
+- *WS-Eventing* (subscriptions)
+- *TLS* (transport security)
+- *WS-Security* + *XML Signature* (message-level integrity above TLS)
+
+* Components
+
+The demo splits into the components below.  Each component declares which
+requirements from [[file:specs.org][specs.org]] it implements (=:implements:= property), in
+the spirit of [[https://sphinx-needs.readthedocs.io/][sphinx-needs]]: the specification carries the /what/, the
+architecture carries the /how/, and the =REQ-xxx= IDs bind them.
+
+** COMP-MDIB --- Information Model
+   :PROPERTIES:
+   :CUSTOM_ID: COMP-MDIB
+   :implements: [[file:specs.org::#REQ-001][REQ-001]], [[file:specs.org::#REQ-002][REQ-002]], [[file:specs.org::#REQ-009][REQ-009]]
+   :source:   demo/provider.py (MDIB dict, STATE dict)
+   :END:
+
+The static BICEPS descriptor tree (=MDS → VMD → Channel → Metric=) plus
+the mutable state snapshot.  The waveform metric declares its own
+=sample_rate_hz=, which the transport layer relies on to reconstruct
+per-sample timestamps at the consumer.
+
+** COMP-GAIT --- Gait Analysis
+   :PROPERTIES:
+   :CUSTOM_ID: COMP-GAIT
+   :implements: [[file:specs.org::#REQ-004][REQ-004]]
+   :source:   demo/provider.py :: rolling_cadence
+   :END:
+
+Windowed FFT with parabolic peak interpolation over the plausible gait
+band (0.5--3.5 Hz).  Includes an energy gate that forces =0.0= (rather
+than =NaN=) when the signal is at noise level, so "standing" is a
+first-class state on the wire.
+
+** COMP-STREAM --- Sample Pump & Report Batcher
+   :PROPERTIES:
+   :CUSTOM_ID: COMP-STREAM
+   :implements: [[file:specs.org::#REQ-002][REQ-002]], [[file:specs.org::#REQ-003][REQ-003]]
+   :source:   demo/provider.py :: stream_samples
+   :END:
+
+Reads CSV samples at the nominal rate and buffers /every/ sample into a
+=RealTimeSampleArrayReport=, flushed on a fixed report interval
+(100 ms).  Report rate and sample rate are decoupled; Nyquist is
+preserved by construction.
+
+** COMP-EVENTS --- Episodic Report Delivery
+   :PROPERTIES:
+   :CUSTOM_ID: COMP-EVENTS
+   :implements: [[file:specs.org::#REQ-005][REQ-005]], [[file:specs.org::#REQ-009][REQ-009]]
+   :source:   demo/provider.py (EVENTS ring, /events long-poll, /mdib, /state)
+   :END:
+
+Long-poll HTTP facade with monotonically increasing =seq= numbers,
+mirroring WS-Eventing semantics.  =/mdib= and =/state= are served
+independently so descriptors and states can be fetched separately.
+
+** COMP-SUB --- Consumer Subscription Client
+   :PROPERTIES:
+   :CUSTOM_ID: COMP-SUB
+   :implements: [[file:specs.org::#REQ-005][REQ-005]], [[file:specs.org::#REQ-006][REQ-006]]
+   :source:   demo/consumer.py :: subscribe_loop, _handle_event
+   :END:
+
+Performs =GetMdib=, then loops on =/events?after=seq=.  On any error it
+flips the connection status and retries every 2 s.  Reconstructs
+per-sample timestamps from =t_start + i / sample_rate_hz= for waveform
+reports.
+
+** COMP-VIEW --- Rolling In-Memory Views
+   :PROPERTIES:
+   :CUSTOM_ID: COMP-VIEW
+   :implements: [[file:specs.org::#REQ-008][REQ-008]]
+   :source:   demo/consumer.py :: RollingWindow
+   :END:
+
+Time-bounded deques that evict against wall-clock time (not just on
+insert), so a paused stream empties visibly on the dashboard.
+
+** COMP-DASH --- Dashboard UI + JSON API
+   :PROPERTIES:
+   :CUSTOM_ID: COMP-DASH
+   :implements: [[file:specs.org::#REQ-007][REQ-007]]
+   :source:   demo/consumer.py (FastAPI app, /api/*), demo/dashboard/
+   :END:
+
+Serves =index.html= plus =/api/status=, =/api/cadence=, =/api/accel= for
+the browser to poll.  Renders cadence, vertical-axis waveform and
+connection state.
+
+* Traceability matrix
+
+| Requirement                        | Component(s)                                 |
+|------------------------------------+----------------------------------------------|
+| [[file:specs.org::#REQ-001][REQ-001]] MDIB descriptors           | [[#COMP-MDIB][COMP-MDIB]]                                    |
+| [[file:specs.org::#REQ-002][REQ-002]] Waveform metric            | [[#COMP-MDIB][COMP-MDIB]], [[#COMP-STREAM][COMP-STREAM]]                        |
+| [[file:specs.org::#REQ-003][REQ-003]] Nyquist-safe batching      | [[#COMP-STREAM][COMP-STREAM]]                                  |
+| [[file:specs.org::#REQ-004][REQ-004]] Cadence estimation         | [[#COMP-GAIT][COMP-GAIT]]                                    |
+| [[file:specs.org::#REQ-005][REQ-005]] Episodic subscription      | [[#COMP-EVENTS][COMP-EVENTS]], [[#COMP-SUB][COMP-SUB]]                        |
+| [[file:specs.org::#REQ-006][REQ-006]] Auto-reconnect             | [[#COMP-SUB][COMP-SUB]]                                     |
+| [[file:specs.org::#REQ-007][REQ-007]] Live dashboard             | [[#COMP-DASH][COMP-DASH]]                                    |
+| [[file:specs.org::#REQ-008][REQ-008]] Bounded staleness          | [[#COMP-VIEW][COMP-VIEW]]                                    |
+| [[file:specs.org::#REQ-009][REQ-009]] Descriptor/state split     | [[#COMP-MDIB][COMP-MDIB]], [[#COMP-EVENTS][COMP-EVENTS]]                        |
+
+* Related documents
+
+- [[file:specs.org][Specifications --- Use Case and Requirements]]
+- [[file:automotive-vs-medical.org][Automotive vs. Medical Standards]]
+- [[file:device-layer-vs-platform-layer.org][Device Layer vs. Platform Layer]]
+- [[file:further-reading.org][Further Reading]]

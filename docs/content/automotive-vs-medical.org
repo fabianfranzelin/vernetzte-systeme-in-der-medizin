@@ -1,0 +1,49 @@
+#+TITLE: Automotive vs. Medical Standards
+#+AUTHOR: Fabian Franzelin
+#+OPTIONS: toc:2 num:nil
+
+* Motivation
+
+The development of safety-critical networked software follows the same
+principles in automotive and medical devices, but codifies them in
+different standards.  This document maps the two worlds concept-by-concept.
+
+* Standard-by-standard comparison
+
+| Concern                  | Automotive                    | Medical                              |
+|--------------------------+-------------------------------+--------------------------------------|
+| Service-oriented comms   | SOME/IP (AUTOSAR AP)          | SDC (IEEE 11073-20701)               |
+| Real-time streaming      | DDS, iceoryx (zero-copy)      | DDS, SDC waveform states             |
+| Software safety          | ISO 26262 (part 6, ASIL A-D)  | IEC 62304 (Class A/B/C)              |
+| System safety            | ISO 26262 (full)              | IEC 60601-1 + IEC 62304 + ISO 14971  |
+| Risk management          | ISO 26262 part 3 (HARA)       | ISO 14971 (standalone)               |
+| Cybersecurity            | ISO/SAE 21434                 | IEC 62443 + MDR + FDA guidance       |
+| Process maturity         | Automotive SPICE              | ISO 13485 + IEC 62304                |
+| Interoperability testing | AUTOSAR conformance           | IHE Connectathons, OR.NET testevents |
+
+* What transfers
+
+- *Architectural patterns:* service-oriented communication, publish/subscribe,
+  QoS-driven streaming, safety cases, hazard-analysis discipline.
+- *Process discipline:* traceability from stakeholder requirement to test
+  case; independent verification and validation; configuration management.
+- *Test infrastructure:* cloud-based V&V farms, digital twins, MIL/SIL/HIL.
+
+* What does /not/ transfer
+
+- *Domain semantics.*  BICEPS models patients and clinical workflows;
+  CAN/Ethernet frames do not.  The information model /is/ the problem.
+- *Clinical benefit in the risk equation.*  ISO 14971 explicitly weighs
+  residual risk against clinical benefit.  Automotive does not.
+- *Human factors emphasis.*  IEC 62366 (usability) has no direct
+  automotive analogue at the same regulatory weight.
+
+* The core insight
+
+#+BEGIN_QUOTE
+Architectural patterns are transferable across safety-critical domains.
+Domain semantics --- and the way they enter the safety case --- are not.
+#+END_QUOTE
+
+This is where the interesting engineering happens, and why cross-domain
+expertise is undervalued and underused.

@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       ca1fc301-1987-41f6-85aa-51fe50f0d4f6
+:END:
+#+title: Safe Engineering
+
+- *Original challenge:* How can a safety case remain traceable while five agile
+  teams continuously evolve distributed automotive software? [[id:257c50d8-9090-46d7-8a86-ca0daa2f08cd][Cars]]
+
+- *My experience:* Series responsibility under ISO 26262 and ASPICE,
+  coordinating up to five ever changing agile teams developing
+  safety-critical distributed software.
+
+- *Clinical direction:* Adapt risk-based development and automated V&V
+  to IEC 62304 and ISO 14971 --- from research prototype to
+  transferable product. [[id:0ff3a909-702d-45ee-896b-cbcc4c9d17cd][Clinics]]
+
+\to [[http://localhost:8080/talks/en-safe-engineering.html][Link]] to the presentation

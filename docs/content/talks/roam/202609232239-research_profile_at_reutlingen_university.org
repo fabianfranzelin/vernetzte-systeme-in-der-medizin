@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       c1bd3194-85e8-4afb-8297-168846f203ec
+:END:
+#+title: Research profile at Reutlingen University
+
+#+begin_quote
+You are welcome to talk about one of your previous research
+focus areas, so that the audience can get an impression of which
+areas of focus you would like to contribute, or could contribute,
+in your work at the university. /(translated from German)/
+#+end_quote
+
+- [[id:0ff3a909-702d-45ee-896b-cbcc4c9d17cd][Clinics]]
+

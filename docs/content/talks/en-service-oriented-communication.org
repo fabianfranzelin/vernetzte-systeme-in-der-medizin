@@ -1,0 +1,179 @@
+:PROPERTIES:
+:ID:       vsm-en-wearable-demo
+:END:
+#+TITLE: Service-oriented Device Connectivity (SDC)
+#+SUBTITLE: A wearable demo
+#+KEYWORDS: SDC, BICEPS, IEEE 11073, medical devices, interoperability
+#+AUTHOR: Dr. Fabian Franzelin
+#+DATE: 2026-09-24
+#+LANGUAGE: en
+#+CATEGORY: Talk
+#+OPTIONS: toc:nil num:nil timestamp:nil author:t tags:nil ^:{}
+#+EXCLUDE_TAGS: noexport
+#+REVEAL_ROOT: ../assets/vendor/reveal.js
+#+CONFIDENCE: Public — CC0-1.0
+#+REVEAL_REVEAL_JS_VERSION: 4
+#+REVEAL_THEME: white
+#+REVEAL_MARGIN: 0.02
+#+REVEAL_CENTER: nil
+#+REVEAL_INIT_OPTIONS: center: false, margin: 0.02, transition: 'slide', width: 1200, height: 760, hash: true, history: true, hashOneBasedIndex: true
+#+REVEAL_PLUGINS: (highlight RevealPointer)
+#+REVEAL_TITLE_SLIDE: <h2>%t</h2><h4>%s</h4><p>%a · %d</p><p style="font-size:0.6em;">Talk · W2-Professorship Computer Science · Reutlingen University</p>
+#+REVEAL_SLIDE_NUMBER: c/t
+#+REVEAL_HLEVEL: 2
+#+REVEAL_EXTERNAL_PLUGINS: (RevealPointer . "../assets/vendor/reveal.js-pointer/dist/pointer.js")
+#+REVEAL_EXTRA_CSS: assets/vsm-theme.css
+#+REVEAL_EXTRA_CSS: ../assets/vendor/reveal.js-pointer/dist/pointer.css
+#+REVEAL_EXTRA_CSS: ../assets/vendor/reveal.js/plugin/highlight/monokai.css
+#+HTML_HEAD: <link href="../assets/vendor/fonts/fonts.css" rel="stylesheet">
+#+HTML_HEAD: <style>.demo-frame{width:95%;height:560px;border:1px solid #cbd5e1;border-radius:6px;} .two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.5em;align-items:start;} .muted{color:#475569;font-size:0.75em;} .accent{color:#0e7490;} .mini-corner{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);width:528px;height:160px;border:0;border-radius:6px;box-shadow:0 2px 6px rgba(0,0,0,0.08);z-index:5;background:#fff;} .reveal pre{box-shadow:none;background:#272822;border-radius:6px;padding:0.6em 0.8em;} .reveal pre code{background:#272822!important;color:#f8f8f2;font-size:0.75em;line-height:1.35;} .reveal pre code .org-comment,.reveal pre code .hljs-comment{color:#75715e;} .reveal pre code .hljs-string{color:#e6db74;} .reveal pre code .hljs-number{color:#ae81ff;} .reveal pre code .hljs-keyword,.reveal pre code .hljs-built_in{color:#f92672;}</style>
+
+* Home patient → hospital clinician
+
+#+begin_notes
+- A wearable sensor on the belt streams 3D acceleration at 100 Hz.
+- A clinician's dashboard shows the patient's gait cadence in real time.
+- Multiple sclerosis follow-up — no clinic visit needed today.
+#+end_notes
+
+#+BEGIN_EXPORT html
+<iframe class="demo-frame" src="http://localhost:8000" title="Live SDC dashboard"></iframe>
+#+END_EXPORT
+
+* Service-oriented Device Connectivity
+
+*General*
+- Medical devices in clinical settings
+- Discover each other
+- Exchange data over IP networks
+
+*Communication Layers*
+#+ATTR_HTML: :style font-size:1.4em; line-height:1.3;
+#+begin_src text
+BICEPS       what is exchanged   ✅  full model, correct vocabulary
+SDC services how it is exchanged 🟡  same operations, different bindings
+MDPWS        over what           ❌  skipped
+DPWS/SOAP    web-service stack   ❌  skipped; replaced by HTTP
+#+end_src
+
+* The Demo — BICEPS in SDC
+
+/BICEPS (IEEE 11073-10207): the information model behind SDC./
+
+- *Domain model*, not a wire format.
+- *Hierarchy*: =MDS → VMD → Channel → Metric=, joined by /handle/.
+- *Descriptor vs. state*: static structure vs. live values.
+- *Typed metrics*: =NumericMetric=, =RealTimeSampleArrayMetric=, alerts, contexts.
+- *MDC nomenclature*: semantic codes (=MDC_ACT_STEP_RATE=), not just numbers.
+
+** BICEPS in the demo — descriptor
+
+[[file:../../demo/provider.py][=demo/provider.py=]] — Medical Device Information Base (MDIB)
+
+#+BEGIN_SRC python
+# ---------- BICEPS-style information model (static descriptors) ----------
+MDIB = {
+  # medical device system
+  "mds": {
+    "handle": "mds.wearable", "model": "gaitband-sim",
+    # Virtual medical device
+    "vmds": [{"handle": "vmd.gait", "channels": [{"handle": "channel.imu",
+      "metrics": [
+        {"handle": "metric.cadence",
+         "kind": "NumericMetric",
+         "unit": "1/min", "code": "MDC_ACT_STEP_RATE"},
+        {"handle": "metric.accel",
+         "kind": "RealTimeSampleArrayMetric",
+         "unit": "g", "code": "MDC_ACT_ACCEL_VEC",
+         "sample_rate_hz": 100.0, "components": ["ax","ay","az"]},
+      ]}]}]}}
+#+END_SRC
+
+** BICEPS in the demo — state split
+
+[[file:../../demo/provider.py][=demo/provider.py=]] — States
+
+#+BEGIN_SRC python
+STATE = {
+    "metric.cadence": {"value": None, "unit": "1/min",  "ts": 0.0},
+    "metric.accel":   {"value": [None]*3, "unit": "g",  "ts": 0.0},
+}
+#+END_SRC
+
+- *Same handles* as the MDIB
+- *Mutable* — updated each sample
+- *Self-contained values* — unit + timestamp travel with the value.
+- *Snapshot on demand* via =GET /state=; deltas pushed on =GET /events=.
+
+** BICEPS operations → demo endpoints
+
+#+BEGIN_SRC plantuml :file images/en-soc-message-flow.png :exports none
+@startuml
+skinparam backgroundColor transparent
+skinparam sequenceMessageAlign center
+skinparam defaultFontName "Inter, sans-serif"
+skinparam ArrowColor #0e7490
+skinparam SequenceLifeLineBorderColor #94a3b8
+skinparam ParticipantBorderColor #0e7490
+skinparam ParticipantBackgroundColor #ecfeff
+skinparam ParticipantFontStyle bold
+
+participant "Dashboard\n(browser)" as D
+participant "Consumer" as C
+participant "Provider\n(wearable)" as P
+
+== Discovery ==
+C -> P : Probe (WS-Discovery)
+P --> C : ProbeMatch
+
+== Descriptors ==
+C -> P : GetMdib
+P --> C : MDIB (descriptors + states)
+
+== Subscription ==
+C -> P : Subscribe (State Events)
+P --> C : SubscribeResponse
+
+== Streaming ==
+P ->> C : EpisodicMetricReport
+C ->> D : push (SSE / WebSocket)
+@enduml
+#+END_SRC
+
+#+ATTR_HTML: :style max-height:60vh;width:auto;
+[[file:images/en-soc-message-flow.png]]
+
+* Conclusion — Clinics to Cars
+
+#+BEGIN_EXPORT html
+<iframe class="mini-corner" src="http://localhost:8000/mini?v=2" title="Live cadence & activity"></iframe>
+#+END_EXPORT
+
+- Same pattern across domains: /discover → describe → subscribe → stream/.
+- Medical: *SDC* (IEEE 11073) — this demo.
+- Automotive: *SOME/IP* — service discovery + pub/sub on IP.
+- Industrial / avionics: *DDS* — data-centric pub/sub.
+- Takeaway: service-oriented device connectivity is a /pattern/, not a stack.
+
+* References
+:PROPERTIES:
+:reveal_extra_attr: style="font-size:0.55em; line-height:1.15;"
+:END:
+
+*Standards*
+1. IEEE 11073-10207 — Domain Information & Service Model for
+   Service-Oriented Point-of-Care Medical Device Communication (BICEPS).
+2. IEEE 11073-20701 — Service-Oriented Medical Device Exchange
+   Architecture and Protocol Binding (SDC).
+3. IEEE 11073-20702 — Medical Device Communication Profile for Web
+   Services (MDPWS).
+4. OASIS — Devices Profile for Web Services (DPWS) 1.1.
+
+*Open-source implementations*
+5. OR.NET / SDCLib — reference SDC implementation, https://sdclib.github.io/
+
+*Bachelor's Thesis*
+6. Fabian Franzelin: Bachelor-Thesis with Prof. Nassir Navab, TU
+   Munich "IT-Tools zur On- und Offline Analyse von Einzelschritten,
+   die mit dem hochauflösenden 3D-Akzelerometer actibelt®
+   aufgezeichnet werden", 2009

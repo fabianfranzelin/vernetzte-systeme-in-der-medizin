@@ -1,0 +1,51 @@
+#+TITLE: Device Layer vs. Platform Layer
+#+AUTHOR: Fabian Franzelin
+#+OPTIONS: toc:nil num:nil
+
+* Two layers, one stack
+
+Both trial lectures in this repository address /vernetzte Systeme in der
+Medizin/ --- networked systems in medicine.  They operate at different
+layers of the same architectural stack.
+
+#+BEGIN_SRC text
+   +----------------------+
+   |  Physician office    |
+   |  / EHR / national    |
+   |  telematics platform |   ← GERMAN talk
+   +----------+-----------+     (Telematikinfrastruktur)
+              | FHIR / TI-Messenger / KIM
+              | system-to-system, seconds
+   +----------+-----------+
+   |  Hospital gateway    |
+   +----------+-----------+
+              | SDC / IEEE 11073
+              | device-to-device, milliseconds
+   +----------+-----------+
+   |  Bedside monitor,    |   ← ENGLISH talk
+   |  ventilator,         |     (From Cars to Clinics)
+   |  imaging, robotics   |
+   +----------+-----------+
+              | wearable link (BLE/USB/local Wi-Fi)
+   +----------+-----------+
+   |  Patient wearable    |
+   +----------------------+
+#+END_SRC
+
+* Why both matter
+
+- The platform layer (TI) enables *coordination across institutions and
+  time*: referral, dispensing, longitudinal record-keeping.
+- The device layer (SDC) enables *coordination within a clinical space
+  and moment*: alarms, closed-loop control, real-time streaming.
+
+Neither substitutes the other.  A modern e-health system needs both,
+consistently designed.
+
+* Shared architectural principles
+
+- Service-oriented decomposition
+- Interoperability via explicit information models
+- Layered security (transport + message + workflow)
+- Standards-driven, not vendor-driven
+- Everything traceable, everything auditable

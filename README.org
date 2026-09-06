@@ -1,0 +1,64 @@
+#+TITLE: Vernetzte Systeme in der Medizin
+#+AUTHOR: Fabian Franzelin
+#+OPTIONS: toc:nil num:nil
+
+#+html: <a href="https://github.com/fabianfranzelin/vernetzte-systeme-in-der-medizin/actions/workflows/build.yml"><img src="https://github.com/fabianfranzelin/vernetzte-systeme-in-der-medizin/actions/workflows/build.yml/badge.svg?branch=main"/></a>
+#+html: <a href="https://github.com/fabianfranzelin/vernetzte-systeme-in-der-medizin/commits"><img src="https://img.shields.io/github/last-commit/fabianfranzelin/vernetzte-systeme-in-der-medizin"/></a>
+#+html: <a href="https://github.com/fabianfranzelin/vernetzte-systeme-in-der-medizin/blob/main/LICENSE"><img src="https://img.shields.io/github/license/fabianfranzelin/vernetzte-systeme-in-der-medizin"/></a>
+#+html: <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-3.10+-3776AB.svg?style=flat&logo=Python&logoColor=white"/></a>
+#+html: <a href="https://docs.astral.sh/uv/"><img src="https://img.shields.io/badge/uv-managed-DE5FE9.svg?style=flat&logo=uv&logoColor=white"/></a>
+#+html: <a href="https://revealjs.com/"><img src="https://img.shields.io/badge/reveal.js-4-F44336.svg?style=flat&logo=reveal.js&logoColor=white"/></a>
+#+html: <a href="https://www.docker.com/"><img src="https://img.shields.io/badge/Docker-optional-2496ED.svg?style=flat&logo=Docker&logoColor=white"/></a>
+
+Companion repository for two trial lectures given at Reutlingen University
+in September 2026 for the W2 professorship *Informatik, insbesondere
+Vernetzte Systeme in der Medizin*.
+
+Everything you see here — the slides, the demo, the documentation, the
+build pipeline — is public domain (CC0-1.0) and reproducible.
+
+* Talks
+
+- [[file:docs/content/talks/en-from-cars-to-clinics.org][/From Cars to Clinics/ (English)]] --- Service-Oriented Middleware for Networked Medical Devices
+- [[file:docs/content/talks/de-telematikinfrastruktur.org][/Digitale Gesundheitsplattformen und APIs/ (Deutsch)]] --- Telematikinfrastruktur
+- [[file:docs/content/talks/de-glossar.org][/Glossar/ (Deutsch)]] --- 2-seitiges Handout zum TI-Vortrag
+
+* Documentation
+
+- [[file:docs/content/architecture.org][Architecture]] --- BICEPS, sequence diagrams
+- [[file:docs/content/automotive-vs-medical.org][Automotive vs. Medical]] --- SOME/IP ↔ SDC, DDS, ISO 26262 ↔ IEC 62304
+- [[file:docs/content/device-layer-vs-platform-layer.org][Device Layer vs. Platform Layer]] --- how SDC and Telematikinfrastruktur relate
+- [[file:docs/content/rehearsal.org][Rehearsal]] --- pre-flight checklist
+- [[file:docs/content/further-reading.org][Further Reading]]
+
+* Live demo
+
+The demo simulates a wearable inertial sensor (3D accelerometer) streaming
+gait data from a patient to a hospital-side consumer via SDC (IEEE 11073).
+
+#+BEGIN_SRC shell
+make demo   # starts provider + consumer + dashboard on http://localhost:8000
+#+END_SRC
+
+* Build
+
+Runs on the host by default. Requires Emacs 29+, TeX Live with Beamer +
+xelatex + pdflatex, Node.js, and [[https://docs.astral.sh/uv/][uv]] (for the demo's Python deps).
+
+#+BEGIN_SRC shell
+make html      # build reveal.js slides + HTML docs into docs/public/
+make glossar   # build the German glossary handout PDF into docs/public/talks/
+make all       # html + glossar
+make serve     # serve docs/public/ on http://localhost:8080
+#+END_SRC
+
+To run everything inside the pre-built Docker image instead:
+
+#+BEGIN_SRC shell
+make image             # build the image (once)
+DOCKER_RUN=1 make all
+#+END_SRC
+
+* License
+
+CC0-1.0 --- Public Domain Dedication. See [[file:LICENSE][LICENSE]].

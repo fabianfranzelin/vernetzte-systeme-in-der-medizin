@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       257c50d8-9090-46d7-8a86-ca0daa2f08cd
+:END:
+#+title: Cars
+
+- [[id:87407397-045b-4833-a253-57ec7ef6ea0a][Digital Twins]]
+- [[id:ca1fc301-1987-41f6-85aa-51fe50f0d4f6][Safe Engineering]]

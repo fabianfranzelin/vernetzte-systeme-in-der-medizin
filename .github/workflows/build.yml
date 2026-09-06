@@ -1,0 +1,44 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t vsm-build -f docker/Dockerfile .
+
+      - name: Build HTML (reveal.js + docs)
+        run: |
+          docker run --rm -v "$PWD":/work -w /work -e HOME=/tmp vsm-build \
+            emacs -Q --script build.el
+
+      - name: Build PDF
+        run: |
+          docker run --rm -v "$PWD":/work -w /work -e HOME=/tmp vsm-build \
+            emacs -Q --script build.el -- pdf
+
+      - name: Upload PDFs as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: talks-pdf
+          path: docs/public/talks/*.pdf
+          if-no-files-found: warn
+
+      - name: Deploy to GitHub Pages
+        if: github.ref == 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/public
+          cname: ''

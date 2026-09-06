@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Clinic Dashboard --- Wearable Stream</title>
+<style>
+  html,body{margin:0;padding:0;height:100%;background:#f8f9fb;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:#222;}
+  .wrap{padding:0.5em 0.7em;height:100vh;box-sizing:border-box;
+    display:flex;flex-direction:column;gap:0.4em;}
+  header{display:flex;justify-content:space-between;align-items:baseline;
+    flex:0 0 auto;}
+  h1{font-size:0.95em;font-weight:600;margin:0;}
+  .status{font-size:0.75em;color:#666;}
+  .status .dot{display:inline-block;width:7px;height:7px;border-radius:50%;
+    background:#c0392b;margin-right:4px;vertical-align:middle;}
+  .status.ok .dot{background:#27ae60;}
+  .cards{display:flex;gap:0.5em;flex:0 0 auto;}
+  .card{flex:1;background:#fff;border:1px solid #e5e7eb;border-radius:5px;
+    padding:0.3em 0.6em;}
+  .card .label{font-size:0.65em;color:#666;text-transform:uppercase;
+    letter-spacing:0.05em;}
+  .card .value{font-size:1.2em;font-weight:600;margin-top:0.05em;line-height:1.1;}
+  .card .unit{font-size:0.55em;color:#666;font-weight:400;margin-left:0.3em;}
+  .charts{flex:1 1 auto;display:flex;flex-direction:column;gap:0.4em;min-height:0;}
+  .chart-box{flex:1 1 0;background:#fff;border:1px solid #e5e7eb;border-radius:5px;
+    padding:0.25em 0.5em;display:flex;flex-direction:column;min-height:0;}
+  .chart-box .title{font-size:0.68em;color:#666;text-transform:uppercase;
+    letter-spacing:0.05em;margin-bottom:0.15em;flex:0 0 auto;}
+  .chart-box canvas{flex:1 1 0;width:100%;min-height:0;}
+  .arch{display:flex;align-items:center;justify-content:center;gap:0.35em;
+    flex:0 0 auto;font-size:0.7em;color:#555;padding:0.25em 0;
+    border-bottom:1px solid #e5e7eb;margin-bottom:0.1em;}
+  .arch .node{background:#fff;border:1px solid #d0d5dc;border-radius:4px;
+    padding:0.15em 0.55em;white-space:nowrap;}
+  .arch .node b{color:#222;font-weight:600;}
+  .arch .node small{color:#888;margin-left:0.3em;font-size:0.85em;}
+  .arch .arrow{color:#999;font-size:0.9em;}
+  .arch .proto{color:#0645ad;font-size:0.75em;padding:0 0.15em;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="arch" title="Demo architecture">
+    <span class="node"><b>Wearable</b><small>gaitband-sim</small></span>
+    <span class="arrow">→</span>
+    <span class="proto">3D accel · 100 Hz</span>
+    <span class="arrow">→</span>
+    <span class="node"><b>SDC Provider</b><small>:7010</small></span>
+    <span class="arrow">→</span>
+    <span class="proto">RealTimeSampleArray · 100 Hz</span>
+    <span class="arrow">→</span>
+    <span class="node"><b>SDC Consumer</b><small>:8000</small></span>
+    <span class="arrow">→</span>
+    <span class="node"><b>Dashboard</b></span>
+  </div>
+  <header>
+    <h1>Wearable → Clinic <span style="color:#888;font-weight:400;">SDC stream</span></h1>
+    <div id="status" class="status"><span class="dot"></span><span id="statustext">connecting…</span><span id="clock" style="margin-left:0.8em;font-size:0.6em;color:#64748b;font-variant-numeric:tabular-nums;">--:--:--</span></div>
+  </header>
+
+  <div class="cards">
+    <div class="card">
+      <div class="label">Step cadence</div>
+      <div class="value"><span id="cadence">--</span><span class="unit">1/min</span></div>
+    </div>
+    <div class="card">
+      <div class="label">Device</div>
+      <div class="value" style="font-size:1em;"><span id="device">--</span></div>
+    </div>
+  </div>
+
+  <div class="charts">
+    <div class="chart-box">
+      <div class="title">Step cadence · last 10 s</div>
+      <canvas id="chart-cadence"></canvas>
+    </div>
+    <div class="chart-box">
+      <div class="title">Vertical acceleration · last 10 s</div>
+      <canvas id="chart-accel"></canvas>
+    </div>
+  </div>
+</div>
+
+<script>
+function niceStep(range, targetTicks, kind) {
+  if (kind === "time") {
+    const candidates = [1, 2, 5, 10, 15, 30, 60, 120, 300, 600, 900, 1800, 3600];
+    const target = range / targetTicks;
+    for (const c of candidates) if (c >= target) return c;
+    return candidates[candidates.length - 1];
+  }
+  const raw = range / targetTicks;
+  const mag = Math.pow(10, Math.floor(Math.log10(raw)));
+  const norm = raw / mag;
+  let step;
+  if (norm < 1.5) step = 1;
+  else if (norm < 3.5) step = 2;
+  else if (norm < 7.5) step = 5;
+  else step = 10;
+  return step * mag;
+}
+
+function formatTick(v, step, kind) {
+  if (kind === "time") {
+    const d = new Date(v * 1000);
+    const hh = String(d.getHours()).padStart(2, "0");
+    const mm = String(d.getMinutes()).padStart(2, "0");
+    const ss = String(d.getSeconds()).padStart(2, "0");
+    return step >= 60 ? `${hh}:${mm}` : `${hh}:${mm}:${ss}`;
+  }
+  const digits = Math.max(0, -Math.floor(Math.log10(step)));
+  return v.toFixed(digits);
+}
+
+function drawLine(canvas, t, v, opts) {
+  opts = opts || {};
+  const ctx = canvas.getContext("2d");
+  const dpr = window.devicePixelRatio || 1;
+  const w = canvas.clientWidth, h = canvas.clientHeight;
+  if (canvas.width !== w * dpr || canvas.height !== h * dpr) {
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.scale(dpr, dpr);
+  }
+  ctx.clearRect(0, 0, w, h);
+
+  // Layout: reserve space for axis labels + titles.
+  const padTop = 4;
+  const padRight = 8;
+  const padLeft = 42;   // y tick labels + y-axis title
+  const padBottom = 30; // x tick labels + x-axis title
+  const plotW = Math.max(1, w - padLeft - padRight);
+  const plotH = Math.max(1, h - padTop - padBottom);
+  const x0 = padLeft, y0 = padTop;
+
+  ctx.font = "9px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif";
+  ctx.fillStyle = "#666";
+  ctx.strokeStyle = "#c8ccd1";
+  ctx.lineWidth = 1;
+
+  // Determine ranges (no data → still draw empty frame).
+  let vmin = opts.vmin, vmax = opts.vmax;
+  if (v && v.length) {
+    if (vmin === undefined) vmin = Math.min.apply(null, v);
+    if (vmax === undefined) vmax = Math.max.apply(null, v);
+  } else {
+    if (vmin === undefined) vmin = 0;
+    if (vmax === undefined) vmax = 1;
+  }
+  if (vmax - vmin < 1e-6) { vmax = vmin + 1; }
+
+  let tmin, tmax;
+  if (t && t.length) { tmin = t[0]; tmax = t[t.length - 1]; }
+  else { tmin = opts.tmin !== undefined ? opts.tmin : -1;
+         tmax = opts.tmax !== undefined ? opts.tmax : 0; }
+  const trange = (tmax - tmin) || 1;
+
+  // Axis frame.
+  ctx.strokeStyle = "#c8ccd1";
+  ctx.beginPath();
+  ctx.moveTo(x0, y0);
+  ctx.lineTo(x0, y0 + plotH);
+  ctx.lineTo(x0 + plotW, y0 + plotH);
+  ctx.stroke();
+
+  // Horizontal shaded bands (e.g. activity zones on a cadence plot).
+  if (opts.bands && opts.bands.length) {
+    for (const b of opts.bands) {
+      const y1 = y0 + plotH - ((Math.min(b.y1, vmax) - vmin) / (vmax - vmin)) * plotH;
+      const y2 = y0 + plotH - ((Math.max(b.y0, vmin) - vmin) / (vmax - vmin)) * plotH;
+      const top = Math.max(y0, Math.min(y1, y2));
+      const bot = Math.min(y0 + plotH, Math.max(y1, y2));
+      if (bot > top) {
+        ctx.fillStyle = b.color;
+        ctx.fillRect(x0, top, plotW, bot - top);
+      }
+      if (b.label) {
+        ctx.fillStyle = b.textColor || "#555";
+        ctx.font = "9px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif";
+        ctx.textAlign = "right";
+        ctx.textBaseline = "top";
+        ctx.fillText(b.label, x0 + plotW - 4, top + 2);
+      }
+    }
+  }
+
+  // Y ticks + labels.
+  const yStep = niceStep(vmax - vmin, 4);
+  const yStart = Math.ceil(vmin / yStep) * yStep;
+  ctx.fillStyle = "#666";
+  ctx.textAlign = "right";
+  ctx.textBaseline = "middle";
+  ctx.strokeStyle = "#eef0f2";
+  for (let vv = yStart; vv <= vmax + 1e-9; vv += yStep) {
+    const y = y0 + plotH - ((vv - vmin) / (vmax - vmin)) * plotH;
+    ctx.beginPath();
+    ctx.moveTo(x0, y);
+    ctx.lineTo(x0 + plotW, y);
+    ctx.stroke();
+    ctx.fillText(formatTick(vv, yStep), x0 - 4, y);
+  }
+
+  // X ticks + labels (wall-clock aware).
+  const xStep = niceStep(trange, 5, opts.xkind);
+  const xStart = Math.ceil(tmin / xStep) * xStep;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "top";
+  ctx.strokeStyle = "#eef0f2";
+  for (let tt = xStart; tt <= tmax + 1e-9; tt += xStep) {
+    const x = x0 + ((tt - tmin) / trange) * plotW;
+    ctx.beginPath();
+    ctx.moveTo(x, y0);
+    ctx.lineTo(x, y0 + plotH);
+    ctx.stroke();
+    ctx.fillText(formatTick(tt, xStep, opts.xkind), x, y0 + plotH + 3);
+  }
+
+  // Axis titles.
+  ctx.fillStyle = "#444";
+  if (opts.xlabel) {
+    ctx.textAlign = "center";
+    ctx.textBaseline = "bottom";
+    ctx.fillText(opts.xlabel, x0 + plotW / 2, h - 2);
+  }
+  if (opts.ylabel) {
+    ctx.save();
+    ctx.translate(10, y0 + plotH / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(opts.ylabel, 0, 0);
+    ctx.restore();
+  }
+
+  // Data trace.  Gap-aware: NaN or long time jumps break the line.
+  if (!v || !v.length) return;
+  ctx.strokeStyle = opts.color || "#0645ad";
+  ctx.lineWidth = 1.2;
+  ctx.beginPath();
+  const gapThresh = (opts.gapThresh !== undefined
+                     ? opts.gapThresh
+                     : Math.max(2 * trange / plotW, 0.05));
+  let penDown = false;
+  let prevT = null;
+  for (let i = 0; i < v.length; i++) {
+    const vi = v[i], ti = t[i];
+    const finite = (typeof vi === "number") && isFinite(vi);
+    if (!finite) { penDown = false; prevT = null; continue; }
+    if (prevT !== null && (ti - prevT) > gapThresh) { penDown = false; }
+    const x = x0 + ((ti - tmin) / trange) * plotW;
+    const y = y0 + plotH - ((vi - vmin) / (vmax - vmin)) * plotH;
+    if (!penDown) { ctx.moveTo(x, y); penDown = true; }
+    else          { ctx.lineTo(x, y); }
+    prevT = ti;
+  }
+  ctx.stroke();
+}
+
+async function tick() {
+  try {
+    const [status, cad, accel] = await Promise.all([
+      fetch("/api/status").then(r => r.json()),
+      fetch("/api/cadence").then(r => r.json()),
+      fetch("/api/accel").then(r => r.json()),
+    ]);
+    const st = document.getElementById("status");
+    const stt = document.getElementById("statustext");
+    if (status.connected) {
+      st.classList.add("ok");
+      stt.textContent = "connected · seq " + status.last_seq;
+    } else {
+      st.classList.remove("ok");
+      stt.textContent = "reconnecting…";
+    }
+    document.getElementById("device").textContent = status.device || "--";
+    const clockEl = document.getElementById("clock");
+    const tsrc = (cad.t && cad.t.length) ? cad.t[cad.t.length - 1]
+                                         : status.last_update;
+    if (tsrc) {
+      const d = new Date(tsrc * 1000);
+      const p = n => String(n).padStart(2, "0");
+      clockEl.textContent = p(d.getHours()) + ":" + p(d.getMinutes()) + ":" + p(d.getSeconds());
+    } else {
+      clockEl.textContent = "--:--:--";
+    }
+    document.getElementById("cadence").textContent =
+      cad.latest !== null && cad.latest !== undefined ? cad.latest.toFixed(1) : "--";
+    const now = Date.now() / 1000;
+    const windowSec = 10;
+    const tmax = Math.floor(now);        // integer second → deterministic ticks
+    const tmin = tmax - windowSec;
+    drawLine(document.getElementById("chart-cadence"), cad.t, cad.v,
+             {color: "#0645ad", vmin: 0, vmax: 200,
+              xlabel: "time", ylabel: "cadence [1/min]",
+              xkind: "time", tmin: tmin, tmax: tmax,
+              gapThresh: 2.5,
+              bands: [
+                {y0: 0,   y1: 40,  color: "rgba(150,150,150,0.14)",
+                 label: "standing", textColor: "#666"},
+                {y0: 40,  y1: 140, color: "rgba(38,110,196,0.10)",
+                 label: "walking",  textColor: "#26639b"},
+                {y0: 140, y1: 200, color: "rgba(192,57,43,0.12)",
+                 label: "running",  textColor: "#9c3021"},
+              ]});
+    drawLine(document.getElementById("chart-accel"), accel.t, accel.v,
+             {color: "#c0392b", vmin: 0, vmax: 2,
+              xlabel: "time", ylabel: "a_z [g]",
+              xkind: "time", tmin: tmin, tmax: tmax,
+              gapThresh: 0.05});
+  } catch (e) {
+    // silent
+  }
+}
+
+setInterval(tick, 500);
+tick();
+</script>
+</body>
+</html>

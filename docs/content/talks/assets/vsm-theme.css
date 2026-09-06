@@ -1,0 +1,363 @@
+/*
+ * vsm-theme.css --- Vernetzte Systeme in der Medizin
+ *
+ * Editorial + clinical hybrid theme layered on top of reveal.js `white`.
+ * Loaded via #+REVEAL_EXTRA_CSS: assets/vsm-theme.css in each talk.
+ * Fonts (Source Serif 4, Inter, JetBrains Mono) are pulled from a public
+ * CDN via #+REVEAL_HTML_HEAD in each talk --- no vendoring.
+ *
+ * License: CC0-1.0.
+ */
+
+/* ---------- palette (custom properties) ---------- */
+
+:root {
+  --vsm-paper:     #fafaf7;
+  --vsm-wash:      #f1efe9;
+  --vsm-ink:       #0f172a;
+  --vsm-ink-soft:  #475569;
+  --vsm-rule:      #cbd5e1;
+  --vsm-rule-soft: #e5e7eb;
+  --vsm-accent:    #0e7490;
+  --vsm-code-bg:   #f3f2ec;
+  --vsm-font-serif: "Source Serif 4", "Source Serif Pro", Charter, Georgia, serif;
+  --vsm-font-sans:  Inter, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                    "Helvetica Neue", sans-serif;
+  --vsm-font-mono:  "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+}
+
+/* ---------- background + base body ---------- */
+
+body,
+.reveal,
+.reveal .backgrounds,
+.reveal-viewport {
+  background: var(--vsm-paper) !important;
+}
+
+.reveal {
+  font-family: var(--vsm-font-sans);
+  color: var(--vsm-ink);
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+/* ---------- slides: top-anchored grid ---------- */
+
+.reveal .slides {
+  text-align: left;
+}
+
+.reveal .slides > section,
+.reveal .slides > section > section {
+  padding: 1rem 1rem 4rem 1rem;             /* tight top, symmetric 1rem horizontal */
+  box-sizing: border-box;
+  text-align: left;
+  height: 100%;
+}
+
+/* ---------- typography ---------- */
+
+/* All heading rules use the higher-specificity `.reveal .slides section`
+ * chain so they beat reveal.css's baseline
+ *     html:not(.print-pdf) .reveal h3 { color:#000!important;
+ *                                       font-size:22pt!important; }
+ * which is specificity (0,2,2) and would otherwise win. */
+
+.reveal .slides section h1,
+.reveal .slides section h2,
+.reveal .slides section h3,
+.reveal .slides section h4 {
+  font-family: var(--vsm-font-serif) !important;
+  font-weight: 600 !important;
+  color: var(--vsm-ink) !important;
+  text-transform: none !important;   /* override white-theme uppercase */
+  letter-spacing: 0 !important;
+  text-shadow: none !important;
+  line-height: 1.15 !important;
+  margin: 0 0 0.55em 0 !important;
+}
+
+.reveal .slides section h1 { font-size: 1.9em  !important; }
+.reveal .slides section h2 { font-size: 1.45em !important; }
+.reveal .slides section h3 { font-size: 1.45em !important; }  /* ox-reveal emits h3 for ** */
+.reveal .slides section h4 { font-size: 1.0em  !important; color: var(--vsm-ink-soft) !important; }
+
+/* Slide title underline (2 px accent hairline). */
+.reveal .slides section > h1,
+.reveal .slides section > h2,
+.reveal .slides section > h3 {
+  border-bottom: 2px solid var(--vsm-accent) !important;
+  padding-bottom: 0.2em !important;
+  margin-bottom: 0.4em !important;
+}
+
+.reveal p, .reveal li, .reveal dd, .reveal dt {
+  font-size: 0.82em;    /* body: ~22 pt against reveal's 40 pt base */
+  line-height: 1.5;
+}
+
+.reveal p, .reveal li { color: var(--vsm-ink); }
+
+.reveal ul, .reveal ol {
+  margin: 0.35em 0 0.35em 1.25em;
+}
+
+.reveal ul li, .reveal ol li {
+  margin: 0.2em 0;
+}
+
+.reveal ul li::marker {
+  color: var(--vsm-accent);
+}
+
+.reveal strong { font-weight: 600; }
+.reveal em     { font-style: italic; color: var(--vsm-ink); }
+
+/* ---------- links ---------- */
+
+.reveal a {
+  color: var(--vsm-accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 120ms ease;
+}
+.reveal a:hover {
+  color: var(--vsm-accent);
+  border-bottom-color: var(--vsm-accent);
+}
+
+/* ---------- blockquotes ---------- */
+
+.reveal blockquote {
+  background: none;
+  border: none;
+  border-left: 3px solid var(--vsm-accent);
+  box-shadow: none;
+  padding: 0.4em 1em;
+  margin: 0.6em 0;
+  font-family: var(--vsm-font-serif);
+  font-style: italic;
+  color: var(--vsm-ink);
+  font-size: 0.9em;
+  width: fit-content;
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.4;
+}
+
+/* ---------- tables ---------- */
+
+.reveal table {
+  font-family: var(--vsm-font-sans);
+  font-size: 0.6em;
+  line-height: 1.35;
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  margin: 0.4em 0;
+}
+.reveal table th,
+.reveal table td {
+  padding: 0.4em 0.8em;
+  border: none;
+  text-align: left;
+  vertical-align: top;
+}
+.reveal table thead th {
+  border-top: 1.5px solid var(--vsm-ink);
+  border-bottom: 1px solid var(--vsm-ink);
+  font-weight: 600;
+  color: var(--vsm-ink);
+}
+.reveal table tbody tr {
+  border-bottom: 1px solid var(--vsm-rule-soft);
+}
+.reveal table tbody tr:last-child {
+  border-bottom: 1.5px solid var(--vsm-ink);
+}
+.reveal table tbody tr:nth-child(even) {
+  background: var(--vsm-wash);
+}
+
+/* ---------- code + preformatted (ASCII diagrams live here) ---------- */
+
+.reveal code {
+  font-family: var(--vsm-font-mono);
+  background: var(--vsm-code-bg);
+  color: var(--vsm-ink);
+  padding: 0.08em 0.32em;
+  border-radius: 3px;
+  font-size: 0.85em;
+}
+
+.reveal pre {
+  box-shadow: none;
+  width: auto;
+  margin: 0.5em 0;
+  font-size: 0.5em;      /* ~18 pt code */
+  line-height: 1.35;
+  background: var(--vsm-code-bg);
+  border: 1px solid var(--vsm-rule-soft);
+  border-radius: 4px;
+  padding: 0.7em 0.9em;
+}
+.reveal pre code {
+  font-family: var(--vsm-font-mono);
+  background: none;
+  padding: 0;
+  border-radius: 0;
+  color: var(--vsm-ink);
+  display: block;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+/* Style ASCII "text" src blocks (sequence + tree diagrams) as diagrams. */
+.reveal .org-src-container pre.src-text,
+.reveal pre.src-text {
+  background: var(--vsm-paper);
+  border: 1px solid var(--vsm-rule);
+  border-radius: 6px;
+  color: var(--vsm-ink);
+}
+
+/* ---------- title slide ---------- */
+
+.reveal .slides section.title-slide,
+.reveal .slides > section:first-of-type {
+  padding-top: 5rem;
+}
+.reveal .title-slide h1,
+.reveal .slides > section:first-of-type > h1 {
+  font-family: var(--vsm-font-serif);
+  font-size: 2.2em;
+  border: none;
+  margin-bottom: 0.15em;
+}
+.reveal .title-slide h2,
+.reveal .slides > section:first-of-type > h2 {
+  font-family: var(--vsm-font-serif);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--vsm-ink-soft);
+  border: none;
+  font-size: 1.2em;
+  margin-top: 0;
+}
+
+/* ---------- section-opener background wash ---------- */
+
+.reveal .slides section[data-reveal_background] {
+  /* handled inline by ox-reveal via :reveal_background */
+}
+
+/* ---------- fragments ---------- */
+
+.reveal .fragment {
+  transition: opacity 250ms ease;
+}
+
+/* ---------- slide footnotes ---------- */
+
+.reveal a.footref {
+  color: var(--vsm-accent);
+  font-size: 0.62em;
+  vertical-align: super;
+}
+
+.reveal .footnotes {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  left: 1rem;
+  color: var(--vsm-ink-soft);
+  font-size: 0.24em;
+  line-height: 1.25;
+}
+
+.reveal .footdef {
+  margin: 0 0 0.35em 0 !important;
+  color: var(--vsm-ink-soft) !important;
+  font-size: inherit !important;
+  line-height: inherit !important;
+}
+
+.reveal .footdef:last-child {
+  margin-bottom: 0 !important;
+}
+
+.reveal .footdef p {
+  margin: 0 !important;
+  color: var(--vsm-ink-soft) !important;
+  font-size: inherit !important;
+  line-height: inherit !important;
+}
+
+.reveal .footdef sup {
+  color: var(--vsm-accent);
+}
+
+/* ---------- footer coordination ---------- */
+
+/* Keep our ff-reveal-footer palette-consistent (overrides ff-presentations.el
+   defaults where they clash). */
+#ff-reveal-footer {
+  color: var(--vsm-ink-soft) !important;
+  font-family: var(--vsm-font-sans) !important;
+  font-size: 14px !important;
+  border-top: 1px solid var(--vsm-rule-soft);
+  padding-top: 6px;
+  background: var(--vsm-paper);
+}
+
+/* ---------- utility classes for two-column comparison slides ---------- */
+
+.reveal .two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5em;
+  align-items: start;
+}
+.reveal .two-col > * { min-width: 0; }
+.reveal .two-col h3 {
+  font-size: 0.95em;
+  color: var(--vsm-ink-soft);
+  border-bottom: 1px solid var(--vsm-rule);
+  padding-bottom: 0.2em;
+  margin-bottom: 0.5em;
+}
+
+/* ---------- centered figures (e.g. PlantUML diagrams) ---------- */
+
+.reveal .figure {
+  text-align: center;
+}
+.reveal .figure p {
+  text-align: center;
+  margin: 0 auto;
+}
+.reveal .figure img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  max-height: 75vh;
+  height: auto;
+}
+
+/* ---------- misc reveal cleanup ---------- */
+
+.reveal .slide-number { display: none !important; }
+.reveal .controls { color: var(--vsm-ink-soft); }
+.reveal .progress { color: var(--vsm-accent); }
+
+/* ---------- tight-cols helper (shared by talks) ---------- */
+
+.tight-cols p { margin: .15em 0 !important; }
+.tight-cols ul { margin: .1em 0 .5em 0 !important; }
+.tight-cols li { margin: .05em 0 !important; }
+.tight-cols .figure { margin: 0; }
+.tight-cols .figure p { margin: 0 !important; }
+.setup-diagram .figure,
+.setup-diagram .figure p { margin: 0; padding: 0; }

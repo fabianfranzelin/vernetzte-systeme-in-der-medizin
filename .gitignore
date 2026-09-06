@@ -1,0 +1,16 @@
+docs/public/
+docs/content/assets/vendor/
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+demo/.provider.pid
+.emacs.d/
+straight/
+.DS_Store
+*.log
+demo/dashboard/.cache/
+/docs/content/talks/roam/org-roam.db
+/docs/content/talks/de-glossar.pdf
+/docs/content/talks/de-glossar.synctex.gz
+/docs/content/talks/de-glossar.tex

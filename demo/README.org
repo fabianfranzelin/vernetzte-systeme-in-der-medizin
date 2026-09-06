@@ -1,0 +1,51 @@
+#+TITLE: Demo --- Wearable-to-Clinic SDC Stream
+#+AUTHOR: Fabian Franzelin
+#+OPTIONS: toc:nil num:nil
+
+* What this is
+
+A minimal, self-contained demonstration of a *wearable → clinic*
+data-streaming pipeline, following the semantic model of IEEE 11073 SDC:
+
+- =provider.py= --- simulated GaitBand-style wearable streaming 3D
+  acceleration + computed step cadence.
+- =consumer.py= --- clinic-side subscriber with a live HTML dashboard.
+- =dashboard/index.html= --- single self-contained page, no build step.
+- =data/generate_synthetic_gait.py= --- deterministic synthetic dataset.
+
+* Run
+
+Requires [[https://docs.astral.sh/uv/][uv]] (bundled in the Docker image).  From the repository root:
+
+#+BEGIN_SRC shell
+make demo
+#+END_SRC
+
+Or directly in this directory:
+
+#+BEGIN_SRC shell
+uv sync            # creates .venv/ and installs all deps from pyproject.toml
+make demo
+#+END_SRC
+
+Opens =http://localhost:8000/= --- the clinic dashboard.
+
+* Design note --- SDC semantics via HTTP long-polling
+
+The demo uses a plain HTTP facade that mirrors SDC's information model:
+
+| SDC concept                | Demo endpoint                    |
+|----------------------------+----------------------------------|
+| =GetMdib=                  | =GET /mdib=                      |
+| =GetMdState=               | =GET /state=                     |
+| =SubscribeStateEventReport=| =GET /events?after=<seq>= (poll) |
+| =EpisodicMetricReport=     | items returned by =/events=      |
+| BICEPS descriptor tree     | JSON structure returned by =/mdib= |
+
+A production deployment would replace this facade with the =sdc11073=
+library (WS-Discovery + SOAP + WS-Eventing over TLS).  The information
+model and event semantics stay the same --- which is exactly the point.
+
+* License
+
+CC0-1.0.  Public domain, no warranty.

@@ -1,0 +1,46 @@
+# Shared outline fragment for en-from-cars-to-clinics.org
+# Included via:  #+INCLUDE: "_outline-en.org::outline-N" :only-contents t
+# outline-0 = plain roadmap (used under * Framing)
+# outline-1..5 = same list with the N-th item marked "→ ..." in bold
+
+#+NAME: outline-0
+1. Requirements of a networked medical device
+2. Deep dive: SDC / IEEE 11073
+3. Automotive lens --- what transfers
+4. Where this fits in the wider e-health stack
+5. Research directions I would bring to Reutlingen
+
+#+NAME: outline-1
+1. *→ Requirements of a networked medical device*
+2. Deep dive: SDC / IEEE 11073
+3. Automotive lens --- what transfers
+4. Where this fits in the wider e-health stack
+5. Research directions I would bring to Reutlingen
+
+#+NAME: outline-2
+1. Requirements of a networked medical device
+2. *→ Deep dive: SDC / IEEE 11073*
+3. Automotive lens --- what transfers
+4. Where this fits in the wider e-health stack
+5. Research directions I would bring to Reutlingen
+
+#+NAME: outline-3
+1. Requirements of a networked medical device
+2. Deep dive: SDC / IEEE 11073
+3. *→ Automotive lens --- what transfers*
+4. Where this fits in the wider e-health stack
+5. Research directions I would bring to Reutlingen
+
+#+NAME: outline-4
+1. Requirements of a networked medical device
+2. Deep dive: SDC / IEEE 11073
+3. Automotive lens --- what transfers
+4. *→ Where this fits in the wider e-health stack*
+5. Research directions I would bring to Reutlingen
+
+#+NAME: outline-5
+1. Requirements of a networked medical device
+2. Deep dive: SDC / IEEE 11073
+3. Automotive lens --- what transfers
+4. Where this fits in the wider e-health stack
+5. *→ Research directions I would bring to Reutlingen*

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>Cadence mini</title>
+<style>
+  html,body{margin:0;padding:0;height:100%;
+    font-family:Inter,system-ui,sans-serif;background:#ffffff;color:#0f172a;}
+  .box{box-sizing:border-box;height:100%;padding:10px 14px;
+    display:flex;flex-direction:column;justify-content:center;gap:4px;
+    border:1px solid #cbd5e1;border-radius:6px;position:relative;}
+  .clock{position:absolute;top:4px;right:8px;font-size:0.75em;
+    color:#64748b;font-variant-numeric:tabular-nums;}
+  .label{font-size:0.72em;color:#475569;text-transform:uppercase;
+    letter-spacing:0.06em;}
+  .cadence{font-size:1.9em;font-weight:600;line-height:1;}
+  .cadence .unit{font-size:0.45em;color:#475569;margin-left:0.35em;
+    font-weight:400;}
+  .activity{display:flex;align-items:center;gap:0.5em;font-size:1em;
+    font-weight:500;text-transform:capitalize;}
+  .dot{width:0.7em;height:0.7em;border-radius:50%;background:#94a3b8;}
+  .standing .dot{background:#94a3b8;}
+  .walking  .dot{background:#0e7490;}
+  .walking  .name{color:#0e7490;}
+  .running  .dot{background:#ea580c;}
+  .running  .name{color:#ea580c;}
+  .offline .dot{background:#e11d48;}
+  .offline .name{color:#e11d48;}
+  .offline .cadence{color:#94a3b8;}
+</style>
+</head>
+<body>
+<div class="box" id="box">
+  <div class="clock" id="clock">--:--:--</div>
+  <div class="label">Step cadence</div>
+  <div class="cadence"><span id="cad">--</span><span class="unit">spm</span></div>
+  <div class="activity"><span class="dot"></span><span class="name" id="act">--</span></div>
+</div>
+<script>
+  const box = document.getElementById("box");
+  const cadEl = document.getElementById("cad");
+  const actEl = document.getElementById("act");
+  const clockEl = document.getElementById("clock");
+
+  function setClock(tsec) {
+    if (!tsec) { clockEl.textContent = "--:--:--"; return; }
+    const d = new Date(tsec * 1000);
+    const p = n => String(n).padStart(2, "0");
+    clockEl.textContent = p(d.getHours()) + ":" + p(d.getMinutes()) + ":" + p(d.getSeconds());
+  }
+
+  function classify(v) {
+    if (v === null || v === undefined || v < 5)  return "standing";
+    if (v < 140)                                 return "walking";
+    return "running";
+  }
+
+  async function tick() {
+    try {
+      const [cr, sr] = await Promise.all([
+        fetch("/api/cadence", {cache: "no-store"}),
+        fetch("/api/status",  {cache: "no-store"}),
+      ]);
+      if (!cr.ok || !sr.ok) throw new Error("http");
+      const d = await cr.json();
+      const s = await sr.json();
+      const v = d.latest;
+      const cls = classify(v);
+      cadEl.textContent = (v === null || v === undefined) ? "0" : Math.round(v);
+      actEl.textContent = cls;
+      box.className = "box " + cls;
+      const tsrc = (d.t && d.t.length) ? d.t[d.t.length - 1] : s.last_update;
+      setClock(tsrc);
+    } catch (e) {
+      cadEl.textContent = "--";
+      actEl.textContent = "offline";
+      box.className = "box offline";
+      setClock(null);
+    }
+  }
+  tick();
+  setInterval(tick, 1000);
+</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+#+TITLE: Vernetzte Systeme in der Medizin
+#+AUTHOR: Fabian Franzelin
+#+OPTIONS: toc:nil num:nil
+
+Companion repository for two trial lectures at Hochschule Reutlingen
+(W2 Professorship /Vernetzte Systeme in der Medizin/).
+
+* Talks
+
+- [[file:talks/de-telematikinfrastruktur.html][/Digitale Gesundheitsplattformen und APIs/ (Deutsch)]]
+- [[file:talks/en-digital-twins.org][/Digital Twins/]]
+- [[file:talks/en-service-oriented-communication.org][/Service Oriented Communication/]]
+- [[file:talks/en-safe-engineering.org][/Safe Engineering/]]
+
+* Documentation
+
+- [[file:architecture.html][Architecture]]
+- [[file:specs.html][Specifications (use case & requirements)]]
+- [[file:automotive-vs-medical.html][Automotive vs. Medical]]
+- [[file:device-layer-vs-platform-layer.html][Device layer vs. platform layer]]
+- [[file:further-reading.html][Further reading]]
+
+* Source
+
+[[https://github.com/fabianfranzelin/vernetzte-systeme-in-der-medizin][github.com/fabianfranzelin/vernetzte-systeme-in-der-medizin]] · CC0-1.0

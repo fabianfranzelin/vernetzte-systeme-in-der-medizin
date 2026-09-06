@@ -1,0 +1,65 @@
+<mxfile host="Electron">
+  <diagram name="Page-1" id="wesMPFHxy6D7Jlqcw-Sj">
+    <mxGraphModel dx="1207" dy="1232" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="620" pageHeight="250" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Fq9-yeF6QTa9sK6WpIB_-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=18;" value="Vehicle" vertex="1">
+          <mxGeometry height="60" width="120" x="10" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="Fq9-yeF6QTa9sK6WpIB_-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=18;" value="Embedded Device" vertex="1">
+          <mxGeometry height="60" width="120" x="250" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="Fq9-yeF6QTa9sK6WpIB_-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=18;" value="Host Device" vertex="1">
+          <mxGeometry height="60" width="120" x="490" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="Fq9-yeF6QTa9sK6WpIB_-14" parent="0" value="Step 1" />
+        <mxCell id="Fq9-yeF6QTa9sK6WpIB_-28" edge="1" parent="Fq9-yeF6QTa9sK6WpIB_-14" source="Fq9-yeF6QTa9sK6WpIB_-3" style="endArrow=classic;html=1;rounded=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;curved=0;strokeWidth=3;" target="Fq9-yeF6QTa9sK6WpIB_-4" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="70" y="200" />
+              <mxPoint x="310" y="200" />
+            </Array>
+            <mxPoint x="420" y="360" as="sourcePoint" />
+            <mxPoint x="670" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Fq9-yeF6QTa9sK6WpIB_-29" edge="1" parent="Fq9-yeF6QTa9sK6WpIB_-14" source="Fq9-yeF6QTa9sK6WpIB_-3" style="endArrow=classic;html=1;rounded=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;curved=0;strokeWidth=3;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="Fq9-yeF6QTa9sK6WpIB_-5" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="70" y="200" />
+              <mxPoint x="550" y="200" />
+            </Array>
+            <mxPoint x="310" y="160" as="sourcePoint" />
+            <mxPoint x="600" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Fq9-yeF6QTa9sK6WpIB_-30" parent="Fq9-yeF6QTa9sK6WpIB_-14" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=19;" value="Sensor data" vertex="1">
+          <mxGeometry height="30" width="200" x="210" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="Fq9-yeF6QTa9sK6WpIB_-15" parent="0" value="Step 2" />
+        <mxCell id="Fq9-yeF6QTa9sK6WpIB_-34" edge="1" parent="Fq9-yeF6QTa9sK6WpIB_-15" source="Fq9-yeF6QTa9sK6WpIB_-4" style="endArrow=classic;html=1;rounded=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;curved=0;strokeWidth=3;" target="Fq9-yeF6QTa9sK6WpIB_-5" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="310" y="60" />
+              <mxPoint x="550" y="60" />
+            </Array>
+            <mxPoint x="310" y="90" as="sourcePoint" />
+            <mxPoint x="550" y="90" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Fq9-yeF6QTa9sK6WpIB_-36" parent="Fq9-yeF6QTa9sK6WpIB_-15" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=19;" value="Hardware abstraction" vertex="1">
+          <mxGeometry height="30" width="200" x="330" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Fq9-yeF6QTa9sK6WpIB_-16" parent="0" value="Step 3" />
+        <mxCell id="Fq9-yeF6QTa9sK6WpIB_-33" parent="Fq9-yeF6QTa9sK6WpIB_-16" style="ellipse;whiteSpace=wrap;html=1;shapeInside=1;aspect=fixed;fontSize=19;" value="=" vertex="1">
+          <mxGeometry height="40" width="40" x="170" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="Fq9-yeF6QTa9sK6WpIB_-17" parent="0" value="Step 4" />
+        <mxCell id="Fq9-yeF6QTa9sK6WpIB_-32" parent="Fq9-yeF6QTa9sK6WpIB_-17" style="ellipse;whiteSpace=wrap;html=1;shapeInside=1;aspect=fixed;fontSize=19;" value="=" vertex="1">
+          <mxGeometry height="40" width="40" x="410" y="110" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

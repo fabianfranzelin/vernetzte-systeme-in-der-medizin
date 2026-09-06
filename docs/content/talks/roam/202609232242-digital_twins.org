@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       87407397-045b-4833-a253-57ec7ef6ea0a
+:END:
+#+title: Digital Twins
+
+- *Original challenge:* How can we validate fleet software across
+  thousands of changing vehicle configurations before deployment on
+  the road? [[id:257c50d8-9090-46d7-8a86-ca0daa2f08cd][Cars]]
+
+- *My experience:* Led a Bosch/ETH digital-twin platform from research
+  funding to series-ready development; two patents on distributed test
+  infrastructure.
+
+- *Clinical direction:* Apply virtual integration and reproducible
+  regression tests to networked medical-device configurations before
+  patient use. [[id:0ff3a909-702d-45ee-896b-cbcc4c9d17cd][Clinics]]
+
+\to [[http://localhost:8080/talks/en-digital-twins.html][Link]] to the presentation

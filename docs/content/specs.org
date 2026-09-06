@@ -1,0 +1,145 @@
+#+TITLE: Specifications --- Use Case and Requirements
+#+AUTHOR: Fabian Franzelin
+#+OPTIONS: toc:2 num:nil
+
+This document specifies /what/ the demo has to do.  The [[file:architecture.org][architecture]]
+document specifies /how/ it is built.  Every requirement below has a stable
+ID (=REQ-xxx=); every component in the architecture document declares which
+requirements it implements via an =:implements:= property, in the spirit of
+[[https://sphinx-needs.readthedocs.io/][sphinx-needs]].
+
+* Use Case
+  :PROPERTIES:
+  :CUSTOM_ID: UC-GAIT-01
+  :END:
+
+*Title:* Continuous gait monitoring of an ambulatory patient.
+
+*Actors:*
+- /Patient/ wearing an IMU-based wearable ("gait band").
+- /Clinician/ observing a live dashboard from a browser inside the clinic.
+
+*Preconditions:*
+- The wearable has been paired with the clinical network.
+- The patient identity, location and workflow context are established.
+
+*Main flow:*
+1. The wearable (SDC /Provider/) publishes its device model (MDIB) and
+   starts streaming 3D-accelerometer samples at 100 Hz and a derived step
+   cadence at 1 Hz.
+2. The clinic dashboard (SDC /Consumer/) discovers the provider, fetches
+   the MDIB and subscribes to episodic reports.
+3. Reports are delivered continuously; the dashboard renders a live
+   waveform of the vertical acceleration axis and the current cadence.
+4. When the patient stops walking, cadence drops to zero within a few
+   seconds and the waveform amplitude collapses to noise level; the
+   dashboard reflects both without gaps or stale data.
+
+*Postconditions:*
+- No sample is delivered above its Nyquist rate; no report references an
+  unknown descriptor; the consumer view converges to the provider state.
+
+The use case decomposes into the requirements below.
+
+* Requirements
+
+** REQ-001 --- Static device model (MDIB)
+   :PROPERTIES:
+   :CUSTOM_ID: REQ-001
+   :status:   implemented
+   :verified_by: manual demo
+   :END:
+
+The provider MUST expose a BICEPS-style Medical Device Information Base
+containing at least one =MDS → VMD → Channel → Metric= hierarchy, with
+each metric carrying =handle=, =unit=, nomenclature =code= and a human
+=description=.
+
+** REQ-002 --- Waveform metric with declared sample rate
+   :PROPERTIES:
+   :CUSTOM_ID: REQ-002
+   :status:   implemented
+   :END:
+
+The provider MUST expose the 3D acceleration as a
+=RealTimeSampleArrayMetric= carrying a declared =sample_rate_hz= and its
+component axes (=ax=, =ay=, =az=).
+
+** REQ-003 --- Nyquist-safe batched transport
+   :PROPERTIES:
+   :CUSTOM_ID: REQ-003
+   :status:   implemented
+   :END:
+
+The provider MUST NOT decimate samples for transport.  Waveform reports
+MUST batch /all/ samples produced within the report interval into a
+single =RealTimeSampleArrayReport= so the underlying sample rate is
+preserved end-to-end even when the report rate is lower than the sample
+rate.
+
+** REQ-004 --- Derived numeric metric (step cadence)
+   :PROPERTIES:
+   :CUSTOM_ID: REQ-004
+   :status:   implemented
+   :END:
+
+The provider MUST compute a step cadence in steps/min from a sliding
+window of the vertical acceleration axis and publish it as a
+=NumericMetric=.  When the signal is at noise level the cadence MUST be
+reported as =0.0= rather than omitted, so the consumer can distinguish
+"standing" from "no data".
+
+** REQ-005 --- Subscription for episodic reports
+   :PROPERTIES:
+   :CUSTOM_ID: REQ-005
+   :status:   implemented
+   :END:
+
+The consumer MUST be able to subscribe to the provider's episodic reports
+and receive each report exactly once, in order, identified by a
+monotonically increasing sequence number.
+
+** REQ-006 --- Automatic reconnect
+   :PROPERTIES:
+   :CUSTOM_ID: REQ-006
+   :status:   implemented
+   :END:
+
+If the provider becomes unreachable, the consumer MUST retry the
+subscription until it succeeds, without operator intervention, and expose
+its current connection status.
+
+** REQ-007 --- Live dashboard
+   :PROPERTIES:
+   :CUSTOM_ID: REQ-007
+   :status:   implemented
+   :END:
+
+The consumer MUST render a live view showing (a) the current cadence,
+(b) a rolling waveform of the vertical acceleration axis, and (c) the
+connection status and last-seen sequence number.
+
+** REQ-008 --- Bounded staleness
+   :PROPERTIES:
+   :CUSTOM_ID: REQ-008
+   :status:   implemented
+   :END:
+
+The dashboard views MUST evict samples older than a fixed window (10 s)
+against wall-clock time, so that a paused stream visibly empties instead
+of freezing the last frame.
+
+** REQ-009 --- Descriptor/state separation
+   :PROPERTIES:
+   :CUSTOM_ID: REQ-009
+   :status:   implemented
+   :END:
+
+Static structure (descriptors) and current values (states) MUST be
+retrievable independently, matching the BICEPS split.
+
+* Traceability
+
+The reverse mapping (component → requirements) is maintained in
+[[file:architecture.org::*Components][architecture.org → Components]].  Each component's =:implements:= property
+lists the =REQ-xxx= IDs it satisfies.

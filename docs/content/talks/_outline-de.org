@@ -1,0 +1,35 @@
+# Shared outline fragment for de-telematikinfrastruktur.org
+# Included via:  #+INCLUDE: "_outline-de.org::outline-N" :only-contents t
+# outline-0 = plain roadmap (used under * Einführung)
+# outline-1..5 = same list with the N-th item marked "→ ..." in bold
+
+#+NAME: outline-0
+1. Die elektronische Arbeitsunfähigkeitsbescheinigung
+2. Architekturprinzipien der TI
+4. Verfügbarkeit & Skalierbarkeit
+5. Zusammenfassung
+
+#+NAME: outline-1
+1. *\to Die elektronische Arbeitsunfähigkeitsbescheinigung*
+2. Architekturprinzipien der TI
+4. Verfügbarkeit & Skalierbarkeit
+5. Zusammenfassung
+
+#+NAME: outline-2
+1. Die elektronische Arbeitsunfähigkeitsbescheinigung
+2. *\to Architekturprinzipien der TI*
+4. Verfügbarkeit & Skalierbarkeit
+5. Zusammenfassung
+
+#+NAME: outline-3
+1. Die elektronische Arbeitsunfähigkeitsbescheinigung
+2. Architekturprinzipien der TI
+4. *\to Verfügbarkeit & Skalierbarkeit*
+5. Zusammenfassung
+
+#+NAME: outline-4
+1. Die elektronische Arbeitsunfähigkeitsbescheinigung
+2. Architekturprinzipien der TI
+4. Verfügbarkeit & Skalierbarkeit
+5. *\to Zusammenfassung*
+
