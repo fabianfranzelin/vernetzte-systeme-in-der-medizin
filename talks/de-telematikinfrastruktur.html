@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<title>Digitale Gesundheitsplattformen und APIs</title>
+<meta name="author" content="Fabian Franzelin"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/white.css" id="theme"/>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-pointer@0.1.4/dist/pointer.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h2>Digitale Gesundheitsplattformen und APIs</h2><h4>Architekturansätze für skalierbare e-Health Vernetzung am Beispiel der Telematikinfrastruktur</h4><p>Fabian Franzelin · 2026-09-24</p><p style="font-size:0.6em;">Probevortrag · W2 Vernetzte Systeme in der Medizin · Hochschule Reutlingen</p>
+</section>
+<section>
+<section id="slide-org3795b4f" data-background="#f8f4f0">
+<h2 id="org3795b4f">Einführung</h2>
+</section>
+<section id="slide-org3270c5f" data-background="#f8f4f0">
+<h3 id="org3270c5f">Was ist die Telematikinfrastruktur?</h3>
+<p>
+TODO: Motivation, Historie, gematik, Akteure.
+</p>
+</section>
+<section id="slide-org62560a7" data-background="#f8f4f0">
+<h3 id="org62560a7">Voraussetzungen</h3>
+<p>
+TODO: Bezug auf Vorlesungen "Verteilte Systeme", "Kommunikationsnetze",
+"Standards und Prozesse".
+</p>
+</section>
+</section>
+<section>
+<section id="slide-org577e1c3" data-background="#ffffff">
+<h2 id="org577e1c3">Architekturprinzipien der TI</h2>
+</section>
+<section id="slide-orge881e74" data-background="#ffffff">
+<h3 id="orge881e74">Zentrale Komponenten</h3>
+<p>
+TODO: Konnektor, VPN, TSL, Fachdienste (ePA, eRezept, KIM, TI-Messenger).
+</p>
+</section>
+<section id="slide-org7542efc" data-background="#ffffff">
+<h3 id="org7542efc">Zero-Trust-Ansatz</h3>
+<p>
+TODO: TI 2.0, Wegfall des Konnektors, Identitätsföderation.
+</p>
+</section>
+</section>
+<section>
+<section id="slide-orgce2b5a5" data-background="#ffffff">
+<h2 id="orgce2b5a5">APIs und Standards</h2>
+</section>
+<section id="slide-org1953544" data-background="#ffffff">
+<h3 id="org1953544">FHIR als Datenaustauschstandard</h3>
+<p>
+TODO: FHIR-Ressourcen, Profile (MII, ISiK), REST-API-Muster.
+</p>
+</section>
+<section id="slide-org0d45681" data-background="#ffffff">
+<h3 id="org0d45681">IHE-Profile</h3>
+<p>
+TODO: XDS, XCA, PIX, Zusammenspiel mit FHIR.
+</p>
+</section>
+</section>
+<section>
+<section id="slide-orgdb98d66" data-background="#ffffff">
+<h2 id="orgdb98d66">Skalierbarkeit</h2>
+</section>
+<section id="slide-org5d53914" data-background="#ffffff">
+<h3 id="org5d53914">Herausforderungen</h3>
+<p>
+TODO: Millionen Endpunkte, Verfügbarkeit, Rückwärtskompatibilität.
+</p>
+</section>
+<section id="slide-org016f836" data-background="#ffffff">
+<h3 id="org016f836">Muster</h3>
+<p>
+TODO: Föderation, API-Gateways, Event-Driven Architecture.
+</p>
+</section>
+</section>
+<section>
+<section id="slide-org9c004e1" data-background="#eef5fa">
+<h2 id="org9c004e1">Brücke zum englischen Vortrag</h2>
+</section>
+<section id="slide-org224aca1" data-background="#eef5fa">
+<h3 id="org224aca1">Zwei Ebenen desselben Stacks</h3>
+<ul>
+<li><b>Diese Ebene:</b> System-zu-System, Klinik-zu-Klinik, Sekunden bis Minuten.
+→ FHIR, KIM, TI-Messenger, ePA.</li>
+<li><b>Ebene darunter:</b> Gerät-zu-Gerät, im OP oder am Patienten, Millisekunden.
+→ SDC / IEEE 11073 &#x2014; Thema des englischen Vortrags.</li>
+
+</ul>
+
+<p>
+<i>Ein "vernetztes System in der Medizin" ist nicht ein Protokoll,
+sondern eine kohärente Architekturhaltung über mehrere Ebenen.</i>
+</p>
+</section>
+</section>
+<section>
+<section id="slide-org9b7807a" data-background="#f5f0f8">
+<h2 id="org9b7807a">Ausblick</h2>
+</section>
+<section id="slide-org04128c3" data-background="#f5f0f8">
+<h3 id="org04128c3">Forschungsrichtungen für die HS Reutlingen</h3>
+<p>
+TODO: Interoperabilitätstests, Digital Twins für TI-Komponenten,
+Konformitätstests von FHIR-Profilen.
+</p>
+</section>
+<section id="slide-orga0b8724" data-background="#f5f0f8">
+<h3 id="orga0b8724">Abschluss</h3>
+<p>
+TODO: Zusammenfassung, Fragen.
+</p>
+</section>
+</section>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/highlight/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js-pointer@0.1.4/dist/pointer.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight, RevealPointer]
+});
+
+</script>
+<style>#ff-reveal-footer{position:fixed;bottom:10px;left:10px;right:10px;display:flex;justify-content:space-between;align-items:center;font-size:18px;color:#666;z-index:1000;pointer-events:none;font-family:sans-serif;}.reveal .slide-number{display:none!important;}</style><div id="ff-reveal-footer"><span>Public — CC0-1.0 · Fabian Franzelin · 2026</span><span id="ff-reveal-footer-page"></span></div><script>document.addEventListener('DOMContentLoaded',function(){if(typeof Reveal!=='undefined'){function u(){var el=document.getElementById('ff-reveal-footer-page');if(el){el.textContent=Reveal.getIndices().h+1;}}Reveal.on('slidechanged',u);Reveal.on('ready',u);}});</script></body>
+</html>

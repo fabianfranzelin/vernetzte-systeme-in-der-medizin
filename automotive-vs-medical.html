@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2026-09-06 Sun 21:11 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Automotive vs. Medical Standards</title>
+<meta name="author" content="Fabian Franzelin" />
+<meta name="generator" content="Org Mode" />
+<style>body{max-width:960px;margin:2em auto;padding:0 1em;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.55;color:#222;}h1,h2,h3{font-weight:600;line-height:1.2;}h1{border-bottom:2px solid #444;padding-bottom:.3em;}h2{border-bottom:1px solid #ddd;padding-bottom:.2em;margin-top:2em;}a{color:#0645ad;text-decoration:none;}a:hover{text-decoration:underline;}pre,code{font-family:'SF Mono',Menlo,Consolas,monospace;font-size:.92em;}pre{background:#f6f8fa;padding:1em;border-radius:6px;overflow-x:auto;}code{background:#f6f8fa;padding:.15em .35em;border-radius:3px;}pre code{background:none;padding:0;}table{border-collapse:collapse;margin:1em 0;}th,td{border:1px solid #ccc;padding:.4em .7em;}th{background:#f0f0f0;}blockquote{border-left:4px solid #ccc;margin:1em 0;padding:.3em 1em;color:#555;}footer{margin-top:3em;padding-top:1em;border-top:1px solid #ddd;font-size:.9em;color:#666;}</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Automotive vs. Medical Standards</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org927feb4">Motivation</a></li>
+<li><a href="#org9a39658">Standard-by-standard comparison</a></li>
+<li><a href="#orgd88789d">What transfers</a></li>
+<li><a href="#orgd5e4042">What does <i>not</i> transfer</a></li>
+<li><a href="#orgdf9bd35">The core insight</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org927feb4" class="outline-2">
+<h2 id="org927feb4">Motivation</h2>
+<div class="outline-text-2" id="text-org927feb4">
+<p>
+The development of safety-critical networked software follows the same
+principles in automotive and medical devices, but codifies them in
+different standards.  This document maps the two worlds concept-by-concept.
+</p>
+</div>
+</div>
+<div id="outline-container-org9a39658" class="outline-2">
+<h2 id="org9a39658">Standard-by-standard comparison</h2>
+<div class="outline-text-2" id="text-org9a39658">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Concern</th>
+<th scope="col" class="org-left">Automotive</th>
+<th scope="col" class="org-left">Medical</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Service-oriented comms</td>
+<td class="org-left">SOME/IP (AUTOSAR AP)</td>
+<td class="org-left">SDC (IEEE 11073-20701)</td>
+</tr>
+
+<tr>
+<td class="org-left">Real-time streaming</td>
+<td class="org-left">DDS, iceoryx (zero-copy)</td>
+<td class="org-left">DDS, SDC waveform states</td>
+</tr>
+
+<tr>
+<td class="org-left">Software safety</td>
+<td class="org-left">ISO 26262 (part 6, ASIL A-D)</td>
+<td class="org-left">IEC 62304 (Class A/B/C)</td>
+</tr>
+
+<tr>
+<td class="org-left">System safety</td>
+<td class="org-left">ISO 26262 (full)</td>
+<td class="org-left">IEC 60601-1 + IEC 62304 + ISO 14971</td>
+</tr>
+
+<tr>
+<td class="org-left">Risk management</td>
+<td class="org-left">ISO 26262 part 3 (HARA)</td>
+<td class="org-left">ISO 14971 (standalone)</td>
+</tr>
+
+<tr>
+<td class="org-left">Cybersecurity</td>
+<td class="org-left">ISO/SAE 21434</td>
+<td class="org-left">IEC 62443 + MDR + FDA guidance</td>
+</tr>
+
+<tr>
+<td class="org-left">Process maturity</td>
+<td class="org-left">Automotive SPICE</td>
+<td class="org-left">ISO 13485 + IEC 62304</td>
+</tr>
+
+<tr>
+<td class="org-left">Interoperability testing</td>
+<td class="org-left">AUTOSAR conformance</td>
+<td class="org-left">IHE Connectathons, OR.NET testevents</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-orgd88789d" class="outline-2">
+<h2 id="orgd88789d">What transfers</h2>
+<div class="outline-text-2" id="text-orgd88789d">
+<ul class="org-ul">
+<li><b>Architectural patterns:</b> service-oriented communication, publish/subscribe,
+QoS-driven streaming, safety cases, hazard-analysis discipline.</li>
+<li><b>Process discipline:</b> traceability from stakeholder requirement to test
+case; independent verification and validation; configuration management.</li>
+<li><b>Test infrastructure:</b> cloud-based V&amp;V farms, digital twins, MIL/SIL/HIL.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgd5e4042" class="outline-2">
+<h2 id="orgd5e4042">What does <i>not</i> transfer</h2>
+<div class="outline-text-2" id="text-orgd5e4042">
+<ul class="org-ul">
+<li><b>Domain semantics.</b>  BICEPS models patients and clinical workflows;
+CAN/Ethernet frames do not.  The information model <i>is</i> the problem.</li>
+<li><b>Clinical benefit in the risk equation.</b>  ISO 14971 explicitly weighs
+residual risk against clinical benefit.  Automotive does not.</li>
+<li><b>Human factors emphasis.</b>  IEC 62366 (usability) has no direct
+automotive analogue at the same regulatory weight.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgdf9bd35" class="outline-2">
+<h2 id="orgdf9bd35">The core insight</h2>
+<div class="outline-text-2" id="text-orgdf9bd35">
+<blockquote>
+<p>
+Architectural patterns are transferable across safety-critical domains.
+Domain semantics &#x2014; and the way they enter the safety case &#x2014; are not.
+</p>
+</blockquote>
+
+<p>
+This is where the interesting engineering happens, and why cross-domain
+expertise is undervalued and underused.
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<footer>Public — CC0-1.0 · Fabian Franzelin · 2026</footer>
+</div>
+</body>
+</html>

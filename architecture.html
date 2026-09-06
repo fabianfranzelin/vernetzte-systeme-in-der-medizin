@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2026-09-06 Sun 21:11 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Architecture &#x2014; SDC / IEEE 11073</title>
+<meta name="author" content="Fabian Franzelin" />
+<meta name="generator" content="Org Mode" />
+<style>body{max-width:960px;margin:2em auto;padding:0 1em;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.55;color:#222;}h1,h2,h3{font-weight:600;line-height:1.2;}h1{border-bottom:2px solid #444;padding-bottom:.3em;}h2{border-bottom:1px solid #ddd;padding-bottom:.2em;margin-top:2em;}a{color:#0645ad;text-decoration:none;}a:hover{text-decoration:underline;}pre,code{font-family:'SF Mono',Menlo,Consolas,monospace;font-size:.92em;}pre{background:#f6f8fa;padding:1em;border-radius:6px;overflow-x:auto;}code{background:#f6f8fa;padding:.15em .35em;border-radius:3px;}pre code{background:none;padding:0;}table{border-collapse:collapse;margin:1em 0;}th,td{border:1px solid #ccc;padding:.4em .7em;}th{background:#f0f0f0;}blockquote{border-left:4px solid #ccc;margin:1em 0;padding:.3em 1em;color:#555;}footer{margin-top:3em;padding-top:1em;border-top:1px solid #ddd;font-size:.9em;color:#666;}</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Architecture &#x2014; SDC / IEEE 11073</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org792e992">Overview</a></li>
+<li><a href="#org13fc70f">IEEE 11073 &#x2014; family map</a></li>
+<li><a href="#orgcacf710">BICEPS</a></li>
+<li><a href="#org1e7d0f2">Sequence</a></li>
+<li><a href="#org10245a6">Safety Contexts</a></li>
+<li><a href="#orgc1bf87d">Transport &#x2014; Medical DPWS</a></li>
+<li><a href="#org9d0228e">Related documents</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org792e992" class="outline-2">
+<h2 id="org792e992">Overview</h2>
+<div class="outline-text-2" id="text-org792e992">
+<p>
+The demo in this repository implements a minimal <i>provider</i> and <i>consumer</i>
+following the <b>Service-Oriented Device Connectivity</b> (SDC) family of standards
+under IEEE 11073.  This document explains the model in enough depth to read
+the source code without prior SDC background.
+</p>
+</div>
+</div>
+<div id="outline-container-org13fc70f" class="outline-2">
+<h2 id="org13fc70f">IEEE 11073 &#x2014; family map</h2>
+<div class="outline-text-2" id="text-org13fc70f">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">Part</th>
+<th scope="col" class="org-left">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">11073-10207</td>
+<td class="org-left">Domain Information &amp; Service Model (BICEPS)</td>
+</tr>
+
+<tr>
+<td class="org-right">11073-20701</td>
+<td class="org-left">Service-Oriented Device Connectivity</td>
+</tr>
+
+<tr>
+<td class="org-right">11073-20702</td>
+<td class="org-left">Medical Devices Profile for Web Services</td>
+</tr>
+
+<tr>
+<td class="org-right">11073-10101(nu)</td>
+<td class="org-left">Nomenclature codes</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-orgcacf710" class="outline-2">
+<h2 id="orgcacf710">BICEPS</h2>
+<div class="outline-text-2" id="text-orgcacf710">
+<p>
+BICEPS = <i>Basic Integrated Clinical Environment Protocol Specification</i>.
+</p>
+
+<p>
+Every provider hosts an <b>MDIB</b> (Medical Device Information Base) which is
+split into:
+</p>
+
+<ul class="org-ul">
+<li><b>Descriptors</b> &#x2014; the static structure: what does this device even <i>have</i>?</li>
+<li><b>States</b> &#x2014; the current value of everything the descriptors describe.</li>
+</ul>
+
+<p>
+The hierarchy is roughly:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-text">MDS (Medical Device System)
+&#9492;&#9472;&#9472; VMD (Virtual Medical Device)
+    &#9492;&#9472;&#9472; Channel
+        &#9492;&#9472;&#9472; Metric  &#8592; the actual measurement point
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org1e7d0f2" class="outline-2">
+<h2 id="org1e7d0f2">Sequence</h2>
+<div class="outline-text-2" id="text-org1e7d0f2">
+<p>
+A minimal interaction looks like this:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-text">Consumer                       Provider (wearable)
+   |                                 |
+   |--- Probe (WS-Discovery) -------&gt;|
+   |&lt;-- ProbeMatch ------------------|
+   |                                 |
+   |--- GetMdib --------------------&gt;|
+   |&lt;-- MDIB (descriptors + states)--|
+   |                                 |
+   |--- Subscribe (State Events) ---&gt;|
+   |&lt;-- SubscribeResponse -----------|
+   |                                 |
+   |&lt;== EpisodicMetricReport ========|
+   |&lt;== EpisodicMetricReport ========|
+   |&lt;== EpisodicAlertReport =========|
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org10245a6" class="outline-2">
+<h2 id="org10245a6">Safety Contexts</h2>
+<div class="outline-text-2" id="text-org10245a6">
+<p>
+A <code>Set</code> operation in SDC is never just a remote procedure call.  It carries
+a <b>Safety Context</b> proving the operation is:
+</p>
+
+<ul class="org-ul">
+<li>targeting the correct <b>patient</b> (<code>PatientContext</code>),</li>
+<li>in the correct <b>location</b> (<code>LocationContext</code>),</li>
+<li>during a valid <b>workflow</b> (<code>WorkflowContext</code>),</li>
+<li>and by a party currently <b>permitted</b> to issue it (<code>ParticipantKey</code>).</li>
+</ul>
+
+<p>
+This is the single most important concept that separates SDC from a naïve
+service bus over TLS.
+</p>
+</div>
+</div>
+<div id="outline-container-orgc1bf87d" class="outline-2">
+<h2 id="orgc1bf87d">Transport &#x2014; Medical DPWS</h2>
+<div class="outline-text-2" id="text-orgc1bf87d">
+<ul class="org-ul">
+<li><b>WS-Discovery</b> over UDP multicast (device discovery)</li>
+<li><b>SOAP over HTTP(S)/TCP</b> (messages)</li>
+<li><b>WS-Eventing</b> (subscriptions)</li>
+<li><b>TLS</b> (transport security)</li>
+<li><b>WS-Security</b> + <b>XML Signature</b> (message-level integrity above TLS)</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org9d0228e" class="outline-2">
+<h2 id="org9d0228e">Related documents</h2>
+<div class="outline-text-2" id="text-org9d0228e">
+<ul class="org-ul">
+<li><a href="automotive-vs-medical.html">Automotive vs. Medical Standards</a></li>
+<li><a href="device-layer-vs-platform-layer.html">Device Layer vs. Platform Layer</a></li>
+<li><a href="further-reading.html">Further Reading</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<footer>Public — CC0-1.0 · Fabian Franzelin · 2026</footer>
+</div>
+</body>
+</html>
