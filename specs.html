@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2026-09-07 Mon 21:54 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Specifications &#x2014; Use Case and Requirements</title>
+<meta name="author" content="Fabian Franzelin" />
+<meta name="generator" content="Org Mode" />
+<style>body{max-width:960px;margin:2em auto;padding:0 1em;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.55;color:#222;}h1,h2,h3{font-weight:600;line-height:1.2;}h1{border-bottom:2px solid #444;padding-bottom:.3em;}h2{border-bottom:1px solid #ddd;padding-bottom:.2em;margin-top:2em;}a{color:#0645ad;text-decoration:none;}a:hover{text-decoration:underline;}pre,code{font-family:'SF Mono',Menlo,Consolas,monospace;font-size:.92em;}pre{background:#f6f8fa;padding:1em;border-radius:6px;overflow-x:auto;}code{background:#f6f8fa;padding:.15em .35em;border-radius:3px;}pre code{background:none;padding:0;}table{border-collapse:collapse;margin:1em 0;}th,td{border:1px solid #ccc;padding:.4em .7em;}th{background:#f0f0f0;}blockquote{border-left:4px solid #ccc;margin:1em 0;padding:.3em 1em;color:#555;}footer{margin-top:3em;padding-top:1em;border-top:1px solid #ddd;font-size:.9em;color:#666;}</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Specifications &#x2014; Use Case and Requirements</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#UC-GAIT-01">Use Case</a></li>
+<li><a href="#orgbfafb3a">Requirements</a>
+<ul>
+<li><a href="#REQ-001">REQ-001 &#x2014; Static device model (MDIB)</a></li>
+<li><a href="#REQ-002">REQ-002 &#x2014; Waveform metric with declared sample rate</a></li>
+<li><a href="#REQ-003">REQ-003 &#x2014; Nyquist-safe batched transport</a></li>
+<li><a href="#REQ-004">REQ-004 &#x2014; Derived numeric metric (step cadence)</a></li>
+<li><a href="#REQ-005">REQ-005 &#x2014; Subscription for episodic reports</a></li>
+<li><a href="#REQ-006">REQ-006 &#x2014; Automatic reconnect</a></li>
+<li><a href="#REQ-007">REQ-007 &#x2014; Live dashboard</a></li>
+<li><a href="#REQ-008">REQ-008 &#x2014; Bounded staleness</a></li>
+<li><a href="#REQ-009">REQ-009 &#x2014; Descriptor/state separation</a></li>
+</ul>
+</li>
+<li><a href="#org07ae51a">Traceability</a></li>
+</ul>
+</div>
+</div>
+<p>
+This document specifies <i>what</i> the demo has to do.  The <a href="architecture.html">architecture</a>
+document specifies <i>how</i> it is built.  Every requirement below has a stable
+ID (<code>REQ-xxx</code>); every component in the architecture document declares which
+requirements it implements via an <code>:implements:</code> property, in the spirit of
+<a href="https://sphinx-needs.readthedocs.io/">sphinx-needs</a>.
+</p>
+<div id="outline-container-UC-GAIT-01" class="outline-2">
+<h2 id="UC-GAIT-01">Use Case</h2>
+<div class="outline-text-2" id="text-UC-GAIT-01">
+<p>
+<b>Title:</b> Continuous gait monitoring of an ambulatory patient.
+</p>
+
+<p>
+<b>Actors:</b>
+</p>
+<ul class="org-ul">
+<li><i>Patient</i> wearing an IMU-based wearable ("gait band").</li>
+<li><i>Clinician</i> observing a live dashboard from a browser inside the clinic.</li>
+</ul>
+
+<p>
+<b>Preconditions:</b>
+</p>
+<ul class="org-ul">
+<li>The wearable has been paired with the clinical network.</li>
+<li>The patient identity, location and workflow context are established.</li>
+</ul>
+
+<p>
+<b>Main flow:</b>
+</p>
+<ol class="org-ol">
+<li>The wearable (SDC <i>Provider</i>) publishes its device model (MDIB) and
+starts streaming 3D-accelerometer samples at 100 Hz and a derived step
+cadence at 1 Hz.</li>
+<li>The clinic dashboard (SDC <i>Consumer</i>) discovers the provider, fetches
+the MDIB and subscribes to episodic reports.</li>
+<li>Reports are delivered continuously; the dashboard renders a live
+waveform of the vertical acceleration axis and the current cadence.</li>
+<li>When the patient stops walking, cadence drops to zero within a few
+seconds and the waveform amplitude collapses to noise level; the
+dashboard reflects both without gaps or stale data.</li>
+</ol>
+
+<p>
+<b>Postconditions:</b>
+</p>
+<ul class="org-ul">
+<li>No sample is delivered above its Nyquist rate; no report references an
+unknown descriptor; the consumer view converges to the provider state.</li>
+</ul>
+
+<p>
+The use case decomposes into the requirements below.
+</p>
+</div>
+</div>
+<div id="outline-container-orgbfafb3a" class="outline-2">
+<h2 id="orgbfafb3a">Requirements</h2>
+<div class="outline-text-2" id="text-orgbfafb3a">
+</div>
+<div id="outline-container-REQ-001" class="outline-3">
+<h3 id="REQ-001">REQ-001 &#x2014; Static device model (MDIB)</h3>
+<div class="outline-text-3" id="text-REQ-001">
+<p>
+The provider MUST expose a BICEPS-style Medical Device Information Base
+containing at least one <code>MDS → VMD → Channel → Metric</code> hierarchy, with
+each metric carrying <code>handle</code>, <code>unit</code>, nomenclature <code>code</code> and a human
+<code>description</code>.
+</p>
+</div>
+</div>
+<div id="outline-container-REQ-002" class="outline-3">
+<h3 id="REQ-002">REQ-002 &#x2014; Waveform metric with declared sample rate</h3>
+<div class="outline-text-3" id="text-REQ-002">
+<p>
+The provider MUST expose the 3D acceleration as a
+<code>RealTimeSampleArrayMetric</code> carrying a declared <code>sample_rate_hz</code> and its
+component axes (<code>ax</code>, <code>ay</code>, <code>az</code>).
+</p>
+</div>
+</div>
+<div id="outline-container-REQ-003" class="outline-3">
+<h3 id="REQ-003">REQ-003 &#x2014; Nyquist-safe batched transport</h3>
+<div class="outline-text-3" id="text-REQ-003">
+<p>
+The provider MUST NOT decimate samples for transport.  Waveform reports
+MUST batch <i>all</i> samples produced within the report interval into a
+single <code>RealTimeSampleArrayReport</code> so the underlying sample rate is
+preserved end-to-end even when the report rate is lower than the sample
+rate.
+</p>
+</div>
+</div>
+<div id="outline-container-REQ-004" class="outline-3">
+<h3 id="REQ-004">REQ-004 &#x2014; Derived numeric metric (step cadence)</h3>
+<div class="outline-text-3" id="text-REQ-004">
+<p>
+The provider MUST compute a step cadence in steps/min from a sliding
+window of the vertical acceleration axis and publish it as a
+<code>NumericMetric</code>.  When the signal is at noise level the cadence MUST be
+reported as <code>0.0</code> rather than omitted, so the consumer can distinguish
+"standing" from "no data".
+</p>
+</div>
+</div>
+<div id="outline-container-REQ-005" class="outline-3">
+<h3 id="REQ-005">REQ-005 &#x2014; Subscription for episodic reports</h3>
+<div class="outline-text-3" id="text-REQ-005">
+<p>
+The consumer MUST be able to subscribe to the provider's episodic reports
+and receive each report exactly once, in order, identified by a
+monotonically increasing sequence number.
+</p>
+</div>
+</div>
+<div id="outline-container-REQ-006" class="outline-3">
+<h3 id="REQ-006">REQ-006 &#x2014; Automatic reconnect</h3>
+<div class="outline-text-3" id="text-REQ-006">
+<p>
+If the provider becomes unreachable, the consumer MUST retry the
+subscription until it succeeds, without operator intervention, and expose
+its current connection status.
+</p>
+</div>
+</div>
+<div id="outline-container-REQ-007" class="outline-3">
+<h3 id="REQ-007">REQ-007 &#x2014; Live dashboard</h3>
+<div class="outline-text-3" id="text-REQ-007">
+<p>
+The consumer MUST render a live view showing (a) the current cadence,
+(b) a rolling waveform of the vertical acceleration axis, and (c) the
+connection status and last-seen sequence number.
+</p>
+</div>
+</div>
+<div id="outline-container-REQ-008" class="outline-3">
+<h3 id="REQ-008">REQ-008 &#x2014; Bounded staleness</h3>
+<div class="outline-text-3" id="text-REQ-008">
+<p>
+The dashboard views MUST evict samples older than a fixed window (10 s)
+against wall-clock time, so that a paused stream visibly empties instead
+of freezing the last frame.
+</p>
+</div>
+</div>
+<div id="outline-container-REQ-009" class="outline-3">
+<h3 id="REQ-009">REQ-009 &#x2014; Descriptor/state separation</h3>
+<div class="outline-text-3" id="text-REQ-009">
+<p>
+Static structure (descriptors) and current values (states) MUST be
+retrievable independently, matching the BICEPS split.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org07ae51a" class="outline-2">
+<h2 id="org07ae51a">Traceability</h2>
+<div class="outline-text-2" id="text-org07ae51a">
+<p>
+The reverse mapping (component → requirements) is maintained in
+<a href="architecture.html#orgcea9e06">architecture.org → Components</a>.  Each component's <code>:implements:</code> property
+lists the <code>REQ-xxx</code> IDs it satisfies.
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<footer>Public — CC0-1.0 · Fabian Franzelin · 2026</footer>
+</div>
+</body>
+</html>

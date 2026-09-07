@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-09-07 Mon 21:41 -->
+<!-- 2026-09-07 Mon 21:54 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Architecture &#x2014; SDC / IEEE 11073</title>
@@ -18,19 +18,31 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org0b45579">Overview</a></li>
-<li><a href="#org1be26cf">IEEE 11073 &#x2014; family map</a></li>
-<li><a href="#org769b5cf">BICEPS</a></li>
-<li><a href="#org659cc5d">Sequence</a></li>
-<li><a href="#org30f3806">Safety Contexts</a></li>
-<li><a href="#org5323e99">Transport &#x2014; Medical DPWS</a></li>
-<li><a href="#orgcacd648">Related documents</a></li>
+<li><a href="#org1e837c1">Overview</a></li>
+<li><a href="#org1572e0f">IEEE 11073 &#x2014; family map</a></li>
+<li><a href="#org5816f10">BICEPS</a></li>
+<li><a href="#org4bdc97b">Sequence</a></li>
+<li><a href="#org86c2ab1">Safety Contexts</a></li>
+<li><a href="#orgd75f94c">Transport &#x2014; Medical DPWS</a></li>
+<li><a href="#orgcea9e06">Components</a>
+<ul>
+<li><a href="#COMP-MDIB">COMP-MDIB &#x2014; Information Model</a></li>
+<li><a href="#COMP-GAIT">COMP-GAIT &#x2014; Gait Analysis</a></li>
+<li><a href="#COMP-STREAM">COMP-STREAM &#x2014; Sample Pump &amp; Report Batcher</a></li>
+<li><a href="#COMP-EVENTS">COMP-EVENTS &#x2014; Episodic Report Delivery</a></li>
+<li><a href="#COMP-SUB">COMP-SUB &#x2014; Consumer Subscription Client</a></li>
+<li><a href="#COMP-VIEW">COMP-VIEW &#x2014; Rolling In-Memory Views</a></li>
+<li><a href="#COMP-DASH">COMP-DASH &#x2014; Dashboard UI + JSON API</a></li>
+</ul>
+</li>
+<li><a href="#orge9ff298">Traceability matrix</a></li>
+<li><a href="#orgbe834e3">Related documents</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org0b45579" class="outline-2">
-<h2 id="org0b45579">Overview</h2>
-<div class="outline-text-2" id="text-org0b45579">
+<div id="outline-container-org1e837c1" class="outline-2">
+<h2 id="org1e837c1">Overview</h2>
+<div class="outline-text-2" id="text-org1e837c1">
 <p>
 The demo in this repository implements a minimal <i>provider</i> and <i>consumer</i>
 following the <b>Service-Oriented Device Connectivity</b> (SDC) family of standards
@@ -39,9 +51,9 @@ the source code without prior SDC background.
 </p>
 </div>
 </div>
-<div id="outline-container-org1be26cf" class="outline-2">
-<h2 id="org1be26cf">IEEE 11073 &#x2014; family map</h2>
-<div class="outline-text-2" id="text-org1be26cf">
+<div id="outline-container-org1572e0f" class="outline-2">
+<h2 id="org1572e0f">IEEE 11073 &#x2014; family map</h2>
+<div class="outline-text-2" id="text-org1572e0f">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -80,9 +92,9 @@ the source code without prior SDC background.
 </table>
 </div>
 </div>
-<div id="outline-container-org769b5cf" class="outline-2">
-<h2 id="org769b5cf">BICEPS</h2>
-<div class="outline-text-2" id="text-org769b5cf">
+<div id="outline-container-org5816f10" class="outline-2">
+<h2 id="org5816f10">BICEPS</h2>
+<div class="outline-text-2" id="text-org5816f10">
 <p>
 BICEPS = <i>Basic Integrated Clinical Environment Protocol Specification</i>.
 </p>
@@ -118,9 +130,9 @@ per-sample data) &#x2014; Nyquist-safe by construction.
 </p>
 </div>
 </div>
-<div id="outline-container-org659cc5d" class="outline-2">
-<h2 id="org659cc5d">Sequence</h2>
-<div class="outline-text-2" id="text-org659cc5d">
+<div id="outline-container-org4bdc97b" class="outline-2">
+<h2 id="org4bdc97b">Sequence</h2>
+<div class="outline-text-2" id="text-org4bdc97b">
 <p>
 A minimal interaction looks like this:
 </p>
@@ -144,9 +156,9 @@ A minimal interaction looks like this:
 </div>
 </div>
 </div>
-<div id="outline-container-org30f3806" class="outline-2">
-<h2 id="org30f3806">Safety Contexts</h2>
-<div class="outline-text-2" id="text-org30f3806">
+<div id="outline-container-org86c2ab1" class="outline-2">
+<h2 id="org86c2ab1">Safety Contexts</h2>
+<div class="outline-text-2" id="text-org86c2ab1">
 <p>
 A <code>Set</code> operation in SDC is never just a remote procedure call.  It carries
 a <b>Safety Context</b> proving the operation is:
@@ -165,9 +177,9 @@ service bus over TLS.
 </p>
 </div>
 </div>
-<div id="outline-container-org5323e99" class="outline-2">
-<h2 id="org5323e99">Transport &#x2014; Medical DPWS</h2>
-<div class="outline-text-2" id="text-org5323e99">
+<div id="outline-container-orgd75f94c" class="outline-2">
+<h2 id="orgd75f94c">Transport &#x2014; Medical DPWS</h2>
+<div class="outline-text-2" id="text-orgd75f94c">
 <ul class="org-ul">
 <li><b>WS-Discovery</b> over UDP multicast (device discovery)</li>
 <li><b>SOAP over HTTP(S)/TCP</b> (messages)</li>
@@ -177,10 +189,161 @@ service bus over TLS.
 </ul>
 </div>
 </div>
-<div id="outline-container-orgcacd648" class="outline-2">
-<h2 id="orgcacd648">Related documents</h2>
-<div class="outline-text-2" id="text-orgcacd648">
+<div id="outline-container-orgcea9e06" class="outline-2">
+<h2 id="orgcea9e06">Components</h2>
+<div class="outline-text-2" id="text-orgcea9e06">
+<p>
+The demo splits into the components below.  Each component declares which
+requirements from <a href="specs.html">specs.org</a> it implements (<code>:implements:</code> property), in
+the spirit of <a href="https://sphinx-needs.readthedocs.io/">sphinx-needs</a>: the specification carries the <i>what</i>, the
+architecture carries the <i>how</i>, and the <code>REQ-xxx</code> IDs bind them.
+</p>
+</div>
+<div id="outline-container-COMP-MDIB" class="outline-3">
+<h3 id="COMP-MDIB">COMP-MDIB &#x2014; Information Model</h3>
+<div class="outline-text-3" id="text-COMP-MDIB">
+<p>
+The static BICEPS descriptor tree (<code>MDS → VMD → Channel → Metric</code>) plus
+the mutable state snapshot.  The waveform metric declares its own
+<code>sample_rate_hz</code>, which the transport layer relies on to reconstruct
+per-sample timestamps at the consumer.
+</p>
+</div>
+</div>
+<div id="outline-container-COMP-GAIT" class="outline-3">
+<h3 id="COMP-GAIT">COMP-GAIT &#x2014; Gait Analysis</h3>
+<div class="outline-text-3" id="text-COMP-GAIT">
+<p>
+Windowed FFT with parabolic peak interpolation over the plausible gait
+band (0.5&#x2013;3.5 Hz).  Includes an energy gate that forces <code>0.0</code> (rather
+than <code>NaN</code>) when the signal is at noise level, so "standing" is a
+first-class state on the wire.
+</p>
+</div>
+</div>
+<div id="outline-container-COMP-STREAM" class="outline-3">
+<h3 id="COMP-STREAM">COMP-STREAM &#x2014; Sample Pump &amp; Report Batcher</h3>
+<div class="outline-text-3" id="text-COMP-STREAM">
+<p>
+Reads CSV samples at the nominal rate and buffers <i>every</i> sample into a
+<code>RealTimeSampleArrayReport</code>, flushed on a fixed report interval
+(100 ms).  Report rate and sample rate are decoupled; Nyquist is
+preserved by construction.
+</p>
+</div>
+</div>
+<div id="outline-container-COMP-EVENTS" class="outline-3">
+<h3 id="COMP-EVENTS">COMP-EVENTS &#x2014; Episodic Report Delivery</h3>
+<div class="outline-text-3" id="text-COMP-EVENTS">
+<p>
+Long-poll HTTP facade with monotonically increasing <code>seq</code> numbers,
+mirroring WS-Eventing semantics.  <code>/mdib</code> and <code>/state</code> are served
+independently so descriptors and states can be fetched separately.
+</p>
+</div>
+</div>
+<div id="outline-container-COMP-SUB" class="outline-3">
+<h3 id="COMP-SUB">COMP-SUB &#x2014; Consumer Subscription Client</h3>
+<div class="outline-text-3" id="text-COMP-SUB">
+<p>
+Performs <code>GetMdib</code>, then loops on <code>/events?after=seq</code>.  On any error it
+flips the connection status and retries every 2 s.  Reconstructs
+per-sample timestamps from <code>t_start + i / sample_rate_hz</code> for waveform
+reports.
+</p>
+</div>
+</div>
+<div id="outline-container-COMP-VIEW" class="outline-3">
+<h3 id="COMP-VIEW">COMP-VIEW &#x2014; Rolling In-Memory Views</h3>
+<div class="outline-text-3" id="text-COMP-VIEW">
+<p>
+Time-bounded deques that evict against wall-clock time (not just on
+insert), so a paused stream empties visibly on the dashboard.
+</p>
+</div>
+</div>
+<div id="outline-container-COMP-DASH" class="outline-3">
+<h3 id="COMP-DASH">COMP-DASH &#x2014; Dashboard UI + JSON API</h3>
+<div class="outline-text-3" id="text-COMP-DASH">
+<p>
+Serves <code>index.html</code> plus <code>/api/status</code>, <code>/api/cadence</code>, <code>/api/accel</code> for
+the browser to poll.  Renders cadence, vertical-axis waveform and
+connection state.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orge9ff298" class="outline-2">
+<h2 id="orge9ff298">Traceability matrix</h2>
+<div class="outline-text-2" id="text-orge9ff298">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Requirement</th>
+<th scope="col" class="org-left">Component(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><a href="specs.html#REQ-001">REQ-001</a> MDIB descriptors</td>
+<td class="org-left"><a href="#COMP-MDIB">COMP-MDIB</a></td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="specs.html#REQ-002">REQ-002</a> Waveform metric</td>
+<td class="org-left"><a href="#COMP-MDIB">COMP-MDIB</a>, <a href="#COMP-STREAM">COMP-STREAM</a></td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="specs.html#REQ-003">REQ-003</a> Nyquist-safe batching</td>
+<td class="org-left"><a href="#COMP-STREAM">COMP-STREAM</a></td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="specs.html#REQ-004">REQ-004</a> Cadence estimation</td>
+<td class="org-left"><a href="#COMP-GAIT">COMP-GAIT</a></td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="specs.html#REQ-005">REQ-005</a> Episodic subscription</td>
+<td class="org-left"><a href="#COMP-EVENTS">COMP-EVENTS</a>, <a href="#COMP-SUB">COMP-SUB</a></td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="specs.html#REQ-006">REQ-006</a> Auto-reconnect</td>
+<td class="org-left"><a href="#COMP-SUB">COMP-SUB</a></td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="specs.html#REQ-007">REQ-007</a> Live dashboard</td>
+<td class="org-left"><a href="#COMP-DASH">COMP-DASH</a></td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="specs.html#REQ-008">REQ-008</a> Bounded staleness</td>
+<td class="org-left"><a href="#COMP-VIEW">COMP-VIEW</a></td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="specs.html#REQ-009">REQ-009</a> Descriptor/state split</td>
+<td class="org-left"><a href="#COMP-MDIB">COMP-MDIB</a>, <a href="#COMP-EVENTS">COMP-EVENTS</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-orgbe834e3" class="outline-2">
+<h2 id="orgbe834e3">Related documents</h2>
+<div class="outline-text-2" id="text-orgbe834e3">
 <ul class="org-ul">
+<li><a href="specs.html">Specifications &#x2014; Use Case and Requirements</a></li>
 <li><a href="automotive-vs-medical.html">Automotive vs. Medical Standards</a></li>
 <li><a href="device-layer-vs-platform-layer.html">Device Layer vs. Platform Layer</a></li>
 <li><a href="further-reading.html">Further Reading</a></li>
