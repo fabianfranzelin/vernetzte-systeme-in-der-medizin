@@ -256,6 +256,36 @@ body,
   transition: opacity 250ms ease;
 }
 
+/* ---------- slide footnotes ---------- */
+
+.reveal a.footref {
+  color: var(--vsm-accent);
+  font-size: 0.62em;
+  vertical-align: super;
+}
+
+.reveal .footdef {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  left: 1rem;
+  margin: 0 !important;
+  color: var(--vsm-ink-soft) !important;
+  font-size: 0.24em !important;
+  line-height: 1.25 !important;
+}
+
+.reveal .footdef p {
+  margin: 0 !important;
+  color: var(--vsm-ink-soft) !important;
+  font-size: inherit !important;
+  line-height: inherit !important;
+}
+
+.reveal .footdef sup {
+  color: var(--vsm-accent);
+}
+
 /* ---------- footer coordination ---------- */
 
 /* Keep our ff-reveal-footer palette-consistent (overrides ff-presentations.el

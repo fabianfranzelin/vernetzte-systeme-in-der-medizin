@@ -24,32 +24,81 @@
 <section id="sec-title-slide"><h2>Digitale Gesundheitsplattformen und APIs</h2><h4>Architekturansätze für skalierbare e-Health Vernetzung am Beispiel der Telematikinfrastruktur</h4><p>Dr. Fabian Franzelin · 2026-09-24</p><p style="font-size:0.6em;">Probevortrag · W2 Vernetzte Systeme in der Medizin · Hochschule Reutlingen</p>
 </section>
 <section>
-<section id="slide-orgea70d83">
-<h2 id="orgea70d83">Einführung</h2>
-<div class="outline-text-2" id="text-orgea70d83">
+<section id="slide-orge13b3cc">
+<h2 id="orge13b3cc">Einführung</h2>
+<div class="outline-text-2" id="text-orge13b3cc">
 </div>
 </section>
 </section>
 <section>
-<section id="slide-orgc520127">
-<h3 id="orgc520127">Was ist die Telematikinfrastruktur?</h3>
+<section id="slide-orgba98c59">
+<h3 id="orgba98c59">Voraussetzungen und Lernziele</h3>
 <p>
-TODO: Motivation, Historie, gematik, Akteure.
+<b>Voraussetzungen:</b> HTTP und JSON/XML, Grundlagen verteilter Systeme sowie
+medizinische Informationssysteme.
 </p>
+
+<p>
+Nach dieser Vorlesung können Sie
+</p>
+
+<ul>
+<li>aus einem Versorgungsprozess Anforderungen an eine digitale
+Gesundheitsplattform ableiten,</li>
+<li>erklären, weshalb sichere Identitäten, APIs und semantische Standards
+gemeinsam erforderlich sind,</li>
+<li>begründen, warum Skalierung im Gesundheitswesen mehr als eine hohe
+mittlere Nachrichtenrate bedeutet.</li>
+
+</ul>
 </section>
 </section>
 <section>
-<section id="slide-org2cbeea1">
-<h3 id="org2cbeea1">Voraussetzungen</h3>
+<section id="slide-orgde8d8b3">
+<h3 id="orgde8d8b3">Eine Nachricht, drei Perspektiven</h3>
+<blockquote >
 <p>
-TODO: Bezug auf Vorlesungen "Verteilte Systeme", "Kommunikationsnetze",
-"Standards und Prozesse".
+"Deutschland wird immer häufiger krankgeschrieben."<sup><a id="fnr.wdr" class="footref" href="#fn.wdr" role="doc-backlink">1</a></sup>
 </p>
+</blockquote>
+
+<ul>
+<li><b>Als Politiker:</b> Was kann ich dagegen tun?</li>
+<li><b>Als Vater:</b> Zum Glück sind meine aus dem Gröbsten raus.</li>
+<li><b>Als Informatiker:</b> Wie skaliert das?</li>
+
+</ul>
+
+<aside class="notes">
+<p>
+Die zugespitzte Schlagzeile dient als Einstieg. Sie wird auf der nächsten
+Folie eingeordnet: Der Anstieg seit 2022 bedeutet nicht zwingend, dass die
+Bevölkerung plötzlich kränker ist.
+</p>
+
+</aside>
+
+<div class="footnotes"><div class="footdef"><sup><a id="fn.wdr" href="#fnr.wdr" class="footnum" role="doc-backlink">1</a></sup> <span class="footpara">WDR, „Merz kritisiert den Krankenstand. Sind wir wirklich zu oft krank?“, 20.07.2026. <a href="https://www1.wdr.de/politik/krankentage-merz-nrw-100.html">https://www1.wdr.de/politik/krankentage-merz-nrw-100.html</a></span></div></div>
 </section>
 </section>
 <section>
-<section id="slide-org2b0eda5">
-<h3 id="org2b0eda5">Überblick</h3>
+<section id="slide-orgb1e8789">
+<h3 id="orgb1e8789">Einordnung: Mehr Daten, nicht nur mehr Krankheit</h3>
+<ul>
+<li>Für 2024 berichtet die BKK <b>22,3 Arbeitsunfähigkeitstage</b> je
+Beschäftigtem.<sup><a id="fnr.zdf" class="footref" href="#fn.zdf" role="doc-backlink">2</a></sup></li>
+<li>Der sichtbare Sprung seit 2022 hat mehrere Ursachen.</li>
+<li>Eine davon: Arbeitsunfähigkeitsdaten werden seit der elektronischen
+Krankmeldung vollständiger an die Krankenkassen übermittelt.</li>
+
+</ul>
+
+<div class="footnotes"><div class="footdef"><sup><a id="fn.zdf" href="#fnr.zdf" class="footnum" role="doc-backlink">2</a></sup> <span class="footpara">ZDFheute, „Erkältung, Rücken, Psyche: Welche Krankheiten die meisten Fehltage verursachen“, 02.12.2025; Daten: BKK Gesundheitsreport 2025. <a href="https://www.zdfheute.de/ratgeber/gesundheit/bkk-report-haeufigste-krankheiten-deutschland-100.html">https://www.zdfheute.de/ratgeber/gesundheit/bkk-report-haeufigste-krankheiten-deutschland-100.html</a></span></div></div>
+</section>
+</section>
+<section>
+<section id="slide-orgaca3622">
+<h3 id="orgaca3622">Überblick</h3>
 <ol>
 <li>Architekturprinzipien der TI</li>
 <li>APIs und Standards</li>
@@ -61,8 +110,8 @@ TODO: Bezug auf Vorlesungen "Verteilte Systeme", "Kommunikationsnetze",
 </section>
 </section>
 <section>
-<section id="slide-org8f0027f">
-<h2 id="org8f0027f">Architekturprinzipien der TI</h2>
+<section id="slide-orgd3677bf">
+<h2 id="orgd3677bf">Architekturprinzipien der TI</h2>
 <ol>
 <li><b>→ Architekturprinzipien der TI</b></li>
 <li>APIs und Standards</li>
@@ -74,24 +123,57 @@ TODO: Bezug auf Vorlesungen "Verteilte Systeme", "Kommunikationsnetze",
 </section>
 </section>
 <section>
-<section id="slide-org6526cb9">
-<h3 id="org6526cb9">Zentrale Komponenten</h3>
+<section id="slide-org8cf6e4d">
+<h3 id="org8cf6e4d">Zentrale Komponenten</h3>
 <p>
-TODO: Konnektor, VPN, TSL, Fachdienste (ePA, eRezept, KIM, TI-Messenger).
+<b>Leitfall: elektronische Arbeitsunfähigkeitsbescheinigung (eAU)</b>
+</p>
+
+<pre class="example" id="org208b0fd">
+Patientin -&gt; Arztpraxis -&gt; Krankenkasse -&gt; Arbeitgeber
+                   \-&gt; Telematikinfrastruktur
+</pre>
+
+<p>
+Eine eAU ist kein einzelnes Dokument, sondern ein verteilter Prozess:
+</p>
+
+<ul>
+<li>Praxissoftware erfasst und signiert die Bescheinigung.</li>
+<li>Die Krankenkasse erhält die für sie bestimmten Daten.</li>
+<li>Der Arbeitgeber ruft die für ihn erforderlichen Daten ab.</li>
+<li>Jede Rolle erhält nur die Daten, die sie für ihren Zweck benötigt.<sup><a id="fnr.zdf-eau" class="footref" href="#fn.zdf-eau" role="doc-backlink">3</a></sup></li>
+
+</ul>
+
+<div class="footnotes"><div class="footdef"><sup><a id="fn.zdf-eau" href="#fnr.zdf-eau" class="footnum" role="doc-backlink">3</a></sup> <span class="footpara">ZDFheute, „Krankmeldung: Das müssen Sie wissen“, 11.10.2024. <a href="https://www.zdfheute.de/ratgeber/krankmeldung-arbeitgeber-elektronische-krankmeldung-faq-100.html">https://www.zdfheute.de/ratgeber/krankmeldung-arbeitgeber-elektronische-krankmeldung-faq-100.html</a> Eigene Darstellung.</span></div></div>
+</section>
+</section>
+<section>
+<section id="slide-org6fcec37">
+<h3 id="org6fcec37">Zero-Trust-Ansatz</h3>
+<p>
+Die entscheidende Sicherheitsfrage lautet nicht nur: <i>Ist die Verbindung
+verschlüsselt?</i> Sondern auch:
+</p>
+
+<ul>
+<li>Wer stellt eine eAU aus?</li>
+<li>Wer darf welche Information abrufen?</li>
+<li>Welche Berechtigung gilt für genau diesen Zweck?</li>
+<li>Wie wird ein Zugriff nachvollziehbar?</li>
+
+</ul>
+
+<p>
+<b>Architekturprinzip:</b> Vertrauen entsteht durch überprüfbare Identitäten,
+kontextbezogene Berechtigungen und minimale Datenweitergabe.
 </p>
 </section>
 </section>
 <section>
-<section id="slide-orgd21bc1a">
-<h3 id="orgd21bc1a">Zero-Trust-Ansatz</h3>
-<p>
-TODO: TI 2.0, Wegfall des Konnektors, Identitätsföderation.
-</p>
-</section>
-</section>
-<section>
-<section id="slide-org2aecea9">
-<h2 id="org2aecea9">APIs und Standards</h2>
+<section id="slide-org91deb2a">
+<h2 id="org91deb2a">APIs und Standards</h2>
 <ol>
 <li>Architekturprinzipien der TI</li>
 <li><b>→ APIs und Standards</b></li>
@@ -103,24 +185,82 @@ TODO: TI 2.0, Wegfall des Konnektors, Identitätsföderation.
 </section>
 </section>
 <section>
-<section id="slide-org26ef184">
-<h3 id="org26ef184">FHIR als Datenaustauschstandard</h3>
+<section id="slide-orgb08cd96">
+<h3 id="orgb08cd96">FHIR als Datenaustauschstandard</h3>
 <p>
-TODO: FHIR-Ressourcen, Profile (MII, ISiK), REST-API-Muster.
+<b>APIs schaffen Erreichbarkeit. Standards schaffen Bedeutung.</b>
+</p>
+
+<ul>
+<li>Eine API legt fest, wie Systeme Anfragen und Antworten austauschen.</li>
+<li>FHIR modelliert Gesundheitsdaten als Ressourcen.<sup><a id="fnr.fhir" class="footref" href="#fn.fhir" role="doc-backlink">4</a></sup></li>
+<li>Ein Profil präzisiert, welche Daten in einem konkreten
+Versorgungskontext verpflichtend, optional oder zulässig sind.</li>
+
+</ul>
+
+<p>
+JSON allein beantwortet nicht: Bedeutet dieses Datum Beginn, Ende oder
+Ausstellungsdatum einer Arbeitsunfähigkeit?
+</p>
+
+<div class="footnotes"><div class="footdef"><sup><a id="fn.fhir" href="#fnr.fhir" class="footnum" role="doc-backlink">4</a></sup> <span class="footpara">HL7 International, FHIR R4. <a href="https://hl7.org/fhir/R4/">https://hl7.org/fhir/R4/</a> Eigene Darstellung.</span></div></div>
+</section>
+</section>
+<section>
+<section id="slide-org2ba36e6">
+<h3 id="org2ba36e6">IHE-Profile</h3>
+<p>
+Interoperabilität braucht drei Vereinbarungen:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Ebene</th>
+<th scope="col" class="org-left">Vereinbarung</th>
+<th scope="col" class="org-left">Beispiel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Technik</td>
+<td class="org-left">Wie wird kommuniziert?</td>
+<td class="org-left">HTTPS, REST</td>
+</tr>
+
+<tr>
+<td class="org-left">Semantik</td>
+<td class="org-left">Was bedeuten die Daten?</td>
+<td class="org-left">FHIR-Ressourcen, Profile</td>
+</tr>
+
+<tr>
+<td class="org-left">Prozess</td>
+<td class="org-left">Wer tut wann was?</td>
+<td class="org-left">ausstellen, übermitteln, abrufen</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Erst das Zusammenspiel aller drei Ebenen macht aus vielen Einzelsystemen
+eine Gesundheitsplattform.
 </p>
 </section>
 </section>
 <section>
-<section id="slide-org4a978c1">
-<h3 id="org4a978c1">IHE-Profile</h3>
-<p>
-TODO: XDS, XCA, PIX, Zusammenspiel mit FHIR.
-</p>
-</section>
-</section>
-<section>
-<section id="slide-org47d65aa">
-<h2 id="org47d65aa">Skalierbarkeit</h2>
+<section id="slide-org870e779">
+<h2 id="org870e779">Skalierbarkeit</h2>
 <ol>
 <li>Architekturprinzipien der TI</li>
 <li>APIs und Standards</li>
@@ -132,24 +272,89 @@ TODO: XDS, XCA, PIX, Zusammenspiel mit FHIR.
 </section>
 </section>
 <section>
-<section id="slide-org40f14e7">
-<h3 id="org40f14e7">Herausforderungen</h3>
+<section id="slide-org6633dec">
+<h3 id="org6633dec">Herausforderungen</h3>
 <p>
-TODO: Millionen Endpunkte, Verfügbarkeit, Rückwärtskompatibilität.
+<b>Wie viele eAU-Fälle muss das System verarbeiten?</b>
 </p>
+
+<p>
+<b>Annahmen für eine Größenordnungsabschätzung</b>
+</p>
+
+<ul>
+<li>46 Mio. Erwerbstätige in Deutschland im Jahr 2024<sup><a id="fnr.destatis" class="footref" href="#fn.destatis" role="doc-backlink">5</a></sup></li>
+<li>22,3 Arbeitsunfähigkeitstage je Beschäftigtem und Jahr<sup><a id="fnr.zdf.2" class="footref" href="#fn.zdf" role="doc-backlink">2</a></sup></li>
+<li>6,3 Tage durchschnittliche Dauer eines Atemwegsfalls<sup><a id="fnr.zdf.2" class="footref" href="#fn.zdf" role="doc-backlink">2</a></sup></li>
+
+</ul>
+
+<pre class="example" id="orgf5297a4">
+46 Mio. x 22,3 Tage/Jahr / 6,3 Tage/Fall
+  = ca. 163 Mio. eAU-Fälle/Jahr
+  = ca. 447.000 eAU-Fälle/Tag
+</pre>
+
+<p>
+Die 6,3 Tage ergeben eine konservative Obergrenze: Nicht jeder
+Arbeitsunfähigkeitsfall ist ein Atemwegsfall und längere Erkrankungen
+erzeugen weniger Fälle je Ausfalltag.
+</p>
+
+<div class="footnotes"><div class="footdef"><sup><a id="fn.destatis" href="#fnr.destatis" class="footnum" role="doc-backlink">5</a></sup> <span class="footpara">Statistisches Bundesamt, Erwerbstätige 2024. <a href="https://www.destatis.de/DE/Themen/Arbeit/Arbeitsmarkt/Erwerbstaetigkeit/_inhalt.html">https://www.destatis.de/DE/Themen/Arbeit/Arbeitsmarkt/Erwerbstaetigkeit/_inhalt.html</a></span></div><div class="footdef"><sup><a id="fn.zdf" href="#fnr.zdf" class="footnum" role="doc-backlink">2</a></sup> <span class="footpara">ZDFheute, „Erkältung, Rücken, Psyche: Welche Krankheiten die meisten Fehltage verursachen“, 02.12.2025; Daten: BKK Gesundheitsreport 2025. <a href="https://www.zdfheute.de/ratgeber/gesundheit/bkk-report-haeufigste-krankheiten-deutschland-100.html">https://www.zdfheute.de/ratgeber/gesundheit/bkk-report-haeufigste-krankheiten-deutschland-100.html</a></span></div></div>
 </section>
 </section>
 <section>
-<section id="slide-orgf0c288c">
-<h3 id="orgf0c288c">Muster</h3>
+<section id="slide-orgce3165a">
+<h3 id="orgce3165a">Muster</h3>
 <p>
-TODO: Föderation, API-Gateways, Event-Driven Architecture.
+<b>Der Mittelwert ist nicht die Auslegungslast.</b>
 </p>
+
+<p>
+Nehmen wir an, eAU-Fälle werden überwiegend zwischen 8:00 und 16:00 Uhr
+aufgenommen und übermittelt:
+</p>
+
+<pre class="example" id="org2b3c4e8">
+447.000 eAU-Fälle/Tag / 8 Stunden
+  = 55.875 eAU-Fälle/Stunde
+  = ca. 15,5 eAU-Fälle/Sekunde im Mittel
+</pre>
+
+<p>
+Die reale Spitzenlast liegt höher: Meldungen konzentrieren sich auf
+Vormittage, Montage und Infektwellen. Außerdem kann ein eAU-Fall mehrere
+technische Transaktionen auslösen.
+</p>
+
+<div class="footnotes" id="org790a8d2">
+
+</div>
 </section>
 </section>
 <section>
-<section id="slide-orge652d9d">
-<h2 id="orge652d9d">Brücke zum englischen Vortrag</h2>
+<section id="slide-org24e2fc0">
+<h3 id="org24e2fc0">Architekturfolgen</h3>
+<p>
+Aus dem eAU-Leitfall folgen konkrete Anforderungen:
+</p>
+
+<ul>
+<li><b>Skalierbarkeit:</b> Spitzenlasten statt nur Tagesmittel verarbeiten.</li>
+<li><b>Verfügbarkeit:</b> Teilstörungen dürfen den Prozess nicht dauerhaft
+blockieren.</li>
+<li><b>Fehlertoleranz:</b> sichere Wiederholung und idempotente Verarbeitung.</li>
+<li><b>Datensparsamkeit:</b> jede Rolle erhält nur zweckgebundene Daten.</li>
+<li><b>Evolvierbarkeit:</b> versionierte APIs und kompatible Standards für
+heterogene Primärsysteme.</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org0652f2e">
+<h2 id="org0652f2e">Brücke zum englischen Vortrag</h2>
 <ol>
 <li>Architekturprinzipien der TI</li>
 <li>APIs und Standards</li>
@@ -161,25 +366,25 @@ TODO: Föderation, API-Gateways, Event-Driven Architecture.
 </section>
 </section>
 <section>
-<section id="slide-org41543ba">
-<h3 id="org41543ba">Zwei Ebenen desselben Stacks</h3>
+<section id="slide-org5009aeb">
+<h3 id="org5009aeb">Zwei Ebenen desselben Stacks</h3>
 <ul>
-<li><b>Diese Ebene:</b> System-zu-System, Klinik-zu-Klinik, Sekunden bis Minuten.
-→ FHIR, KIM, TI-Messenger, ePA.</li>
-<li><b>Ebene darunter:</b> Gerät-zu-Gerät, im OP oder am Patienten, Millisekunden.
-→ SDC / IEEE 11073 &#x2014; Thema des englischen Vortrags.</li>
+<li><b>Diese Vorlesung:</b> organisationsübergreifende Prozesse, Sekunden bis
+Minuten. Beispiel: eAU, eRezept, ePA.</li>
+<li><b>Ebene darunter:</b> Gerät-zu-Gerät, im OP oder am Patienten,
+Millisekunden. Beispiel: SDC / IEEE 11073.</li>
 
 </ul>
 
 <p>
-<i>Ein "vernetztes System in der Medizin" ist nicht ein Protokoll,
-sondern eine kohärente Architekturhaltung über mehrere Ebenen.</i>
+<i>Ein vernetztes System in der Medizin ist nicht ein Protokoll, sondern
+eine kohärente Architekturhaltung über mehrere Ebenen.</i>
 </p>
 </section>
 </section>
 <section>
-<section id="slide-orge8995b8">
-<h2 id="orge8995b8">Ausblick</h2>
+<section id="slide-orgf10312e">
+<h2 id="orgf10312e">Ausblick</h2>
 <ol>
 <li>Architekturprinzipien der TI</li>
 <li>APIs und Standards</li>
@@ -191,19 +396,44 @@ sondern eine kohärente Architekturhaltung über mehrere Ebenen.</i>
 </section>
 </section>
 <section>
-<section id="slide-orgf09db74">
-<h3 id="orgf09db74">Forschungsrichtungen für die HS Reutlingen</h3>
+<section id="slide-orgb6e8460">
+<h3 id="orgb6e8460">Forschungsrichtungen für die HS Reutlingen</h3>
 <p>
-TODO: Interoperabilitätstests, Digital Twins für TI-Komponenten,
-Konformitätstests von FHIR-Profilen.
+Aus solchen Leitfällen ergeben sich praxisnahe Themen für Studium und
+Forschung:
 </p>
+
+<ul>
+<li>Interoperabilitäts- und Konformitätstests für FHIR-Profile,</li>
+<li>digitale Zwillinge zur Untersuchung von Last- und Fehlerszenarien,</li>
+<li>sichere, nachvollziehbare Kommunikation heterogener medizinischer
+Systeme.</li>
+
+</ul>
 </section>
 </section>
 <section>
-<section id="slide-orge180ca0">
-<h3 id="orge180ca0">Abschluss</h3>
+<section id="slide-orgdea1cf5">
+<h3 id="orgdea1cf5">Abschluss</h3>
 <p>
-TODO: Zusammenfassung, Fragen.
+<b>Take-away Messages</b>
+</p>
+
+<ol>
+<li>Eine eAU ist ein verteilter, organisationsübergreifender Prozess.</li>
+<li>Digitalisierung verbessert auch die Sichtbarkeit von Versorgungsdaten.</li>
+<li>Rund 447.000 eAU-Fälle pro Tag sind eine relevante, aber nur mittlere
+Größenordnung.</li>
+<li>Für die Architektur zählen Spitzenlast, Ausfallverhalten und mehrere
+Transaktionen pro Fall.</li>
+<li>APIs, Standards, Identitäten und Berechtigungen müssen gemeinsam
+entworfen werden.</li>
+
+</ol>
+
+<p>
+<b>Diskussion:</b> Welche dieser Anforderungen ist bei einer digitalen
+Gesundheitsplattform am schwierigsten zu erfüllen und warum?
 </p>
 </section>
 </section>
@@ -219,7 +449,7 @@ TODO: Zusammenfassung, Fragen.
 // https://github.com/hakimel/reveal.js#configuration
 Reveal.initialize({
 plugins: [RevealHighlight, RevealPointer],
-center: false, margin: 0.02, transition: 'slide', width: 1200, height: 760
+center: false, margin: 0.02, transition: 'slide', width: 1200, height: 760, hash: true
 });
 
 </script>
