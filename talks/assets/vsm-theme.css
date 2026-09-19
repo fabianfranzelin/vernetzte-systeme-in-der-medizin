@@ -316,6 +316,41 @@ body,
   margin-bottom: 0.5em;
 }
 
+/* ---------- centered figures (e.g. PlantUML diagrams) ---------- */
+
+/* Reveal.js gives every `.slides > section` `position: absolute` and sizes
+   it by content, which makes normal flex-centering impossible.  For slides
+   whose body is a single .figure we (a) force the section to fill the whole
+   slide viewport and (b) absolutely-center the figure inside it.  The
+   heading stays anchored at the top. */
+.reveal .slides > section:has(> .figure),
+.reveal .slides > section > section:has(> .figure) {
+  height: 100% !important;
+}
+.reveal .slides > section:has(> .figure) > .figure,
+.reveal .slides > section > section:has(> .figure) > .figure {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  margin: 0 auto;
+}
+.reveal .figure {
+  text-align: center;
+}
+.reveal .figure p {
+  text-align: center;
+  margin: 0 auto;
+}
+.reveal .figure img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  max-height: 75vh;
+  height: auto;
+}
+
 /* ---------- misc reveal cleanup ---------- */
 
 .reveal .slide-number { display: none !important; }

@@ -24,8 +24,8 @@
 <section id="sec-title-slide"><h2>Digitale Gesundheitsplattformen und APIs</h2><h4>Architekturansätze für skalierbare e-Health Vernetzung am Beispiel der Telematikinfrastruktur</h4><p>Dr. Fabian Franzelin · 2026-09-24</p><p style="font-size:0.6em;">Probevortrag · W2 Vernetzte Systeme in der Medizin · Hochschule Reutlingen</p>
 </section>
 <section>
-<section id="slide-org0e3a5ff">
-<h2 id="org0e3a5ff">Eine Nachricht, drei Perspektiven</h2>
+<section id="slide-org2c4401f">
+<h2 id="org2c4401f">Eine Nachricht, vier Perspektiven</h2>
 <blockquote >
 <p>
 "Deutschland wird immer häufiger krankgeschrieben."<sup><a id="fnr.wdr" class="footref" href="#fn.wdr" role="doc-backlink">1</a></sup>
@@ -33,7 +33,8 @@
 </blockquote>
 
 <ul>
-<li><b>Als Politiker:</b> Was kann ich dagegen tun?</li>
+<li><b>Als Politiker:</b> Was kann ich strukturell ändern?</li>
+<li><b>Als Arzt</b>: Wie kann ich den Menschen helfen?</li>
 <li><b>Als Vater:</b> Zum Glück sind meine aus dem Gröbsten raus.</li>
 <li><b>Als Informatiker:</b> Wie skaliert das?</li>
 
@@ -52,8 +53,8 @@ Bevölkerung plötzlich kränker ist.
 </section>
 </section>
 <section>
-<section id="slide-orgcb9c766">
-<h2 id="orgcb9c766">Einordnung: Mehr Daten, nicht nur mehr Krankheit</h2>
+<section id="slide-org1f01ba5">
+<h2 id="org1f01ba5">Einordnung: Mehr Daten, nicht nur mehr Krankheit</h2>
 <ul>
 <li>Für 2024 berichtet die BKK <b>22,3 Arbeitsunfähigkeitstage</b> je
 Beschäftigtem.<sup><a id="fnr.zdf" class="footref" href="#fn.zdf" role="doc-backlink">2</a></sup></li>
@@ -67,9 +68,10 @@ Krankmeldung vollständiger an die Krankenkassen übermittelt.</li>
 </section>
 </section>
 <section>
-<section id="slide-orgad6e740">
-<h2 id="orgad6e740">Überblick</h2>
+<section id="slide-orgb64fb25">
+<h2 id="orgb64fb25">Überblick</h2>
 <ol>
+<li>Die elektronische Arbeitsunfähigkeitsbescheinigung</li>
 <li>Architekturprinzipien der TI und TI 2.0</li>
 <li>APIs und Standards</li>
 <li>Skalierbarkeit</li>
@@ -80,52 +82,8 @@ Krankmeldung vollständiger an die Krankenkassen übermittelt.</li>
 </section>
 </section>
 <section>
-<section id="slide-org5d82a95">
-<h2 id="org5d82a95">Voraussetzungen und Lernziele</h2>
-<p>
-<b>Voraussetzungen:</b> HTTP und JSON/XML, Grundlagen verteilter Systeme sowie
-medizinische Informationssysteme.
-</p>
-
-<p>
-Nach dieser Vorlesung können Sie
-</p>
-
-<ul>
-<li>aus einem Versorgungsprozess Anforderungen an eine digitale
-Gesundheitsplattform ableiten,</li>
-<li>erklären, weshalb sichere Identitäten, APIs und semantische Standards
-gemeinsam erforderlich sind,</li>
-<li>begründen, warum Skalierung im Gesundheitswesen mehr als eine hohe
-mittlere Nachrichtenrate bedeutet.</li>
-
-</ul>
-</section>
-</section>
-<section>
-<section id="slide-org4b73101">
-<h2 id="org4b73101">Architekturprinzipien der TI</h2>
-<ol>
-<li><b>→ Architekturprinzipien der TI und TI 2.0</b></li>
-<li>APIs und Standards</li>
-<li>Skalierbarkeit</li>
-<li>Brücke zum englischen Vortrag</li>
-<li>Ausblick für die HS Reutlingen</li>
-
-</ol>
-</section>
-</section>
-<section>
-<section id="slide-orgc45f2a1">
-<h3 id="orgc45f2a1">Zentrale Komponenten</h3>
-<p>
-<b>Leitfall: elektronische Arbeitsunfähigkeitsbescheinigung (eAU)</b>
-</p>
-
-<pre class="example" id="org7033644">
-Patientin -&gt; Arztpraxis &lt;-TI-&gt; Krankenkasse &lt;-TI-&gt; Arbeitgeber
-</pre>
-
+<section id="slide-orgd06d760">
+<h2 id="orgd06d760">Die elektronische Arbeitsunfähigkeitsbescheinigung</h2>
 <p>
 Eine eAU ist kein einzelnes Dokument, sondern ein verteilter Prozess:
 </p>
@@ -138,79 +96,94 @@ Eine eAU ist kein einzelnes Dokument, sondern ein verteilter Prozess:
 
 </ul>
 
+<p>
+Als Informatiker würde ich schreiben&#x2026;
+</p>
+
 <div class="footnotes"><div class="footdef"><sup><a id="fn.gematik-eau" href="#fnr.gematik-eau" class="footnum" role="doc-backlink">3</a></sup> <span class="footpara">gematik, „Krankmeldung an Krankenkasse jetzt digital“, Pressemitteilung. <a href="https://www.gematik.de/newsroom/news-detail/pressemitteilung-krankmeldung-an-krankenkasse-jetzt-digital">https://www.gematik.de/newsroom/news-detail/pressemitteilung-krankmeldung-an-krankenkasse-jetzt-digital</a></span></div></div>
 </section>
-</section>
-<section>
-<section id="slide-org8e7ae61">
-<h3 id="org8e7ae61">UML</h3>
-<div class="org-src-container">
+<section id="slide-orgdb74ea3">
+<h4 id="orgdb74ea3">Phase 1: Datenerhebung &amp; Kassenmeldung</h4>
 
-<pre   ><code class="plantuml" >@startuml
-autonumber
-skinparam BoxPadding 10
-skinparam ParticipantPadding 10
-
-actor "Mitarbeiter (Bosch)" as MA
-actor "Arztpraxis" as Arzt
-
-box "Telematikinfrastruktur" #LightBlue
-participant "KIM-Dienst (TI)" as TI
-end box
-
-box "Gesetzliche Krankenversicherung" #LightGreen
-participant "Krankenkasse\n(z.B. Techniker)" as KK
-end box
-
-box "Bosch IT-Infrastruktur" #LightGray
-participant "Bosch SAM App" as SAM
-participant "Bosch HR-System\n(Backend)" as HR
-end box
-
-== Phase 1: Datenerhebung &amp; Kassenmeldung ==
-
-MA -&gt; Arzt: Untersuchung &amp; Feststellung der AU
-Arzt -&gt; Arzt: eAU im Praxisverwaltungssystem (PVS) erstellen
-Arzt -&gt; Arzt: KIM-Adresse über Institutionskennzeichen der Kasse ermitteln
-Arzt -&gt; Arzt: eAU mit qualifizierter elektronischer Signatur (QES) signieren
-note right of Arzt
-  Signaturvarianten:
-  Einzel-, Stapel- oder Komfortsignatur
-end note
-Arzt -&gt; TI: eAU über KIM versenden
-TI -&gt; KK: eAU an die ermittelte KIM-Adresse weiterleiten
-note over Arzt, KK
-  Seit 01.10.2021: eAU-Versand an die Krankenkasse digital;
-  Ausdrucke für Versicherte und Arbeitgeber damals weiterhin vorgesehen.
-end note
-
-== Phase 2: Krankmeldung via Bosch SAM App ==
-
-MA -&gt; SAM: App öffnen (Authentifizierung)
-MA -&gt; SAM: AU-Dauer (von/bis) &amp; Betriebsstätte eingeben
-SAM -&gt; HR: Übermittlung der Krankmeldungs-Metadaten
-note over HR: Fehlzeit wird im HR-System\n(z.B. SAP SuccessFactors) erfasst.
-
-== Phase 3: Automatisierter eAU-Abruf durch den Arbeitgeber ==
-
-HR -&gt; KK: Anfrage eAU (Name, Geburtsdatum, AU-Zeitraum)
-
-alt eAU bereits bei Krankenkasse vorliegend
-    KK -&gt; HR: Rückmeldung eAU-Daten (Bestätigung &amp; gesetzliche Daten)
-    note over HR: Automatischer Abgleich der Zeiten\n&amp; finale Freigabe der Fehlzeit.
-else eAU noch nicht verarbeitet (Warteschleife)
-    KK -&gt; HR: Status: "Noch nicht verfügbar"
-    note over HR: Erneuter automatischer Abruf\nnach X Stunden.
-end
-
-@enduml
-</code></pre>
+<div id="orgdff0e76" class="figure">
+<p><img src="images/de-telematikinfrastruktur_eau_ablauf_p1.png" alt="de-telematikinfrastruktur_eau_ablauf_p1.png" />
+</p>
 </div>
 </section>
+<section id="slide-org2a68c00">
+<h4 id="org2a68c00">Phase 2: Krankmeldung via Bosch SAM App</h4>
+
+<div id="orgf71830a" class="figure">
+<p><img src="images/de-telematikinfrastruktur_eau_ablauf_p2.png" alt="de-telematikinfrastruktur_eau_ablauf_p2.png" />
+</p>
+</div>
+</section>
+<section id="slide-org79f0b9d">
+<h4 id="org79f0b9d">Phase 3: Automatisierter eAU-Abruf durch den Arbeitgeber</h4>
+
+<div id="org5a47347" class="figure">
+<p><img src="images/de-telematikinfrastruktur_eau_ablauf_p3.png" alt="de-telematikinfrastruktur_eau_ablauf_p3.png" />
+</p>
+</div>
+</section>
+<section id="slide-org2db46dc">
+<h4 id="org2db46dc">Beobachtungen</h4>
+<ol>
+<li>Mehrere Organisationen, eine Fachaufgabe</li>
+<li>Unterschiedliche Rollen, unterschiedliche Datensichten</li>
+<li>Identität vor Zugriff</li>
+<li>Versorgungskontext ist Teil der Berechtigung</li>
+<li>Asynchrone Übermittlung</li>
+<li>Heterogene Primärsysteme</li>
+<li>Kommunikation über offene Netze</li>
+
+</ol>
+
+<aside class="notes">
+<ul>
+<li><b>Mehrere Organisationen, eine Fachaufgabe:</b> Praxis, TI, Krankenkasse und
+Arbeitgeber wirken zusammen, ohne einer gemeinsamen IT-Domäne anzugehören.</li>
+<li><b>Unterschiedliche Rollen, unterschiedliche Datensichten:</b> Kasse und
+Arbeitgeber erhalten jeweils nur die für ihren Zweck erforderlichen Felder.</li>
+<li><b>Identität vor Zugriff:</b> Jeder Schritt setzt eine überprüfbare Identität
+voraus — Arzt (Signatur), Mitarbeiter (App-Login), HR-System (Abrufberechtigung).</li>
+<li><b>Versorgungskontext ist Teil der Berechtigung:</b> Der Abruf ist an Person,
+Zeitraum und Zweck gebunden, nicht an einen pauschalen Netzzugang.</li>
+<li><b>Asynchrone Übermittlung:</b> Die eAU liegt bei der Kasse nicht garantiert
+sofort vor; das HR-System muss mit Warteschleife und Wiederholung umgehen.</li>
+<li><b>Heterogene Primärsysteme:</b> PVS, KIM-Dienst, Kassen-Backend und HR-System
+stammen von unterschiedlichen Herstellern und müssen über Standards
+zusammenspielen.</li>
+<li><b>Kommunikation über offene Netze:</b> Der Austausch erfolgt nicht in einem
+einzigen geschlossenen Netz, sondern über TI und Internet hinweg.</li>
+
+</ul>
+
+</aside>
+</section>
 </section>
 <section>
-<section id="slide-orga787bd6">
-<h3 id="orga787bd6">Zero-Trust-Ansatz</h3>
+<section id="slide-org2d4d839">
+<h2 id="org2d4d839">Architekturprinzipien der TI</h2>
+<ol>
+<li>Die elektronische Arbeitsunfähigkeitsbescheinigung</li>
+<li><b>→ Architekturprinzipien der TI und TI 2.0</b></li>
+<li>APIs und Standards</li>
+<li>Skalierbarkeit</li>
+<li>Brücke zum englischen Vortrag</li>
+<li>Ausblick für die HS Reutlingen</li>
+
+</ol>
+</section>
+</section>
+<section>
+<section id="slide-orgbe3e81d">
+<h3 id="orgbe3e81d">Zero-Trust-Ansatz</h3>
+<p>
+<b>Architekturprinzip:</b> Vertrauen entsteht durch überprüfbare Identitäten,
+kontextbezogene Berechtigungen und minimale Datenweitergabe.
+</p>
+
 <blockquote >
 <p>
 Zero Trust beschreibt ein aus dem "Assume Breach"-Ansatz entwickeltes
@@ -219,6 +192,10 @@ Rechte aller Entitäten in der Gesamtinfrastruktur basiert.<sup><a id="fnr.bsi-z
 </p>
 </blockquote>
 
+<div class="footnotes"><div class="footdef"><sup><a id="fn.bsi-zero-trust" href="#fnr.bsi-zero-trust" class="footnum" role="doc-backlink">4</a></sup> <span class="footpara">Bundesamt für Sicherheit in der Informationstechnik (BSI),
+„Zero Trust“. <a href="https://www.bsi.bund.de/dok/zero-trust">https://www.bsi.bund.de/dok/zero-trust</a></span></div></div>
+
+<aside class="notes">
 <p>
 Die entscheidende Sicherheitsfrage lautet nicht nur: <i>Ist die Verbindung
 verschlüsselt?</i> Sondern auch:
@@ -232,18 +209,12 @@ verschlüsselt?</i> Sondern auch:
 
 </ul>
 
-<p>
-<b>Architekturprinzip:</b> Vertrauen entsteht durch überprüfbare Identitäten,
-kontextbezogene Berechtigungen und minimale Datenweitergabe.
-</p>
-
-<div class="footnotes"><div class="footdef"><sup><a id="fn.bsi-zero-trust" href="#fnr.bsi-zero-trust" class="footnum" role="doc-backlink">4</a></sup> <span class="footpara">Bundesamt für Sicherheit in der Informationstechnik (BSI),
-„Zero Trust“. <a href="https://www.bsi.bund.de/dok/zero-trust">https://www.bsi.bund.de/dok/zero-trust</a></span></div></div>
+</aside>
 </section>
 </section>
 <section>
-<section id="slide-orgfd1987a">
-<h3 id="orgfd1987a">Zero-Trust-Ansatz (cont)</h3>
+<section id="slide-orgbf4b4f3">
+<h3 id="orgbf4b4f3">Zero-Trust-Ansatz (cont)</h3>
 <p>
 Das Bundesamt für Sicherheit in der Informationstechnik definiert den Ansatz als
 </p>
@@ -266,8 +237,8 @@ kontextbezogene Berechtigungen und minimale Datenweitergabe.
 </section>
 </section>
 <section>
-<section id="slide-org0a812fa">
-<h3 id="org0a812fa">TI 2.0: identitäts- und kontextbasierter Zugang</h3>
+<section id="slide-org519d584">
+<h3 id="org519d584">TI 2.0: identitäts- und kontextbasierter Zugang</h3>
 <p>
 TI 2.0 entwickelt die Telematikinfrastruktur schrittweise von einem überwiegend
 standort- und hardwaregebundenen Zugang zu einer identitäts-, kontext- und
@@ -308,9 +279,10 @@ TI 2.0 weiterentwickelt wird.
 </section>
 </section>
 <section>
-<section id="slide-orgaafc543">
-<h2 id="orgaafc543">APIs und Standards</h2>
+<section id="slide-orgf171456">
+<h2 id="orgf171456">APIs und Standards</h2>
 <ol>
+<li>Die elektronische Arbeitsunfähigkeitsbescheinigung</li>
 <li>Architekturprinzipien der TI und TI 2.0</li>
 <li><b>→ APIs und Standards</b></li>
 <li>Skalierbarkeit</li>
@@ -321,8 +293,8 @@ TI 2.0 weiterentwickelt wird.
 </section>
 </section>
 <section>
-<section id="slide-org711d2b2">
-<h3 id="org711d2b2">FHIR als Datenaustauschstandard</h3>
+<section id="slide-orgedf9914">
+<h3 id="orgedf9914">FHIR als Datenaustauschstandard</h3>
 <p>
 <b>APIs schaffen Erreichbarkeit. Standards schaffen Bedeutung.</b>
 </p>
@@ -344,8 +316,8 @@ Ausstellungsdatum einer Arbeitsunfähigkeit?
 </section>
 </section>
 <section>
-<section id="slide-org2d366f4">
-<h3 id="org2d366f4">IHE-Profile</h3>
+<section id="slide-org8fdf507">
+<h3 id="org8fdf507">IHE-Profile</h3>
 <p>
 Interoperabilität braucht drei Vereinbarungen:
 </p>
@@ -395,9 +367,10 @@ eine Gesundheitsplattform.
 </section>
 </section>
 <section>
-<section id="slide-orga026fd8">
-<h2 id="orga026fd8">Skalierbarkeit</h2>
+<section id="slide-org5d012e9">
+<h2 id="org5d012e9">Skalierbarkeit</h2>
 <ol>
+<li>Die elektronische Arbeitsunfähigkeitsbescheinigung</li>
 <li>Architekturprinzipien der TI und TI 2.0</li>
 <li>APIs und Standards</li>
 <li><b>→ Skalierbarkeit</b></li>
@@ -408,8 +381,8 @@ eine Gesundheitsplattform.
 </section>
 </section>
 <section>
-<section id="slide-org713bfe9">
-<h3 id="org713bfe9">Herausforderungen</h3>
+<section id="slide-orgab88a24">
+<h3 id="orgab88a24">Herausforderungen</h3>
 <p>
 <b>Wie viele eAU-Fälle muss das System verarbeiten?</b>
 </p>
@@ -425,7 +398,7 @@ eine Gesundheitsplattform.
 
 </ul>
 
-<pre class="example" id="org7a62dbe">
+<pre class="example" id="orgb2672bc">
 46 Mio. x 22,3 Tage/Jahr / 6,3 Tage/Fall
   = ca. 163 Mio. eAU-Fälle/Jahr
   = ca. 447.000 eAU-Fälle/Tag
@@ -441,8 +414,8 @@ erzeugen weniger Fälle je Ausfalltag.
 </section>
 </section>
 <section>
-<section id="slide-orgaf7648e">
-<h3 id="orgaf7648e">Muster</h3>
+<section id="slide-orgb9a9efe">
+<h3 id="orgb9a9efe">Muster</h3>
 <p>
 <b>Der Mittelwert ist nicht die Auslegungslast.</b>
 </p>
@@ -452,7 +425,7 @@ Nehmen wir an, eAU-Fälle werden überwiegend zwischen 8:00 und 16:00 Uhr
 aufgenommen und übermittelt:
 </p>
 
-<pre class="example" id="org6f3a24f">
+<pre class="example" id="org85ab8c1">
 447.000 eAU-Fälle/Tag / 8 Stunden
   = 55.875 eAU-Fälle/Stunde
   = ca. 15,5 eAU-Fälle/Sekunde im Mittel
@@ -464,14 +437,75 @@ Vormittage, Montage und Infektwellen. Außerdem kann ein eAU-Fall mehrere
 technische Transaktionen auslösen.
 </p>
 
-<div class="footnotes" id="orgbbf8835">
+<div class="footnotes" id="org655abe8">
 
 </div>
 </section>
 </section>
 <section>
-<section id="slide-orgb181d1d">
-<h3 id="orgb181d1d">Architekturfolgen</h3>
+<section id="slide-org951bb2e">
+<h3 id="org951bb2e">Größenordnungsvergleich: eAU ist die untere Schranke</h3>
+<p>
+<b>Die eAU zeigt den Prozess — nicht die volle Last der Plattform.</b>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Anwendung</th>
+<th scope="col" class="org-left">Volumen (Größenordnung)</th>
+<th scope="col" class="org-left">Charakter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">eAU</td>
+<td class="org-left">ca. 163 Mio. Fälle/Jahr<sup><a id="fnr.zdf.2" class="footref" href="#fn.zdf" role="doc-backlink">2</a></sup></td>
+<td class="org-left">asynchron, wenige Transaktionen/Fall</td>
+</tr>
+
+<tr>
+<td class="org-left">E-Rezept</td>
+<td class="org-left">ca. 500 Mio. Verordnungen/Jahr<sup><a id="fnr.erezept" class="footref" href="#fn.erezept" role="doc-backlink">9</a></sup></td>
+<td class="org-left">synchron, Peak in Apotheken</td>
+</tr>
+
+<tr>
+<td class="org-left">ePA</td>
+<td class="org-left">74 Mio. Versicherte, mehrere Zugriffe je Versorgungskontakt<sup><a id="fnr.epa" class="footref" href="#fn.epa" role="doc-backlink">10</a></sup></td>
+<td class="org-left">häufige, feingranulare Zugriffe</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Ein einzelner Leitfall unterschätzt die Last, die eine gemeinsame
+Infrastruktur tragen muss: E-Rezept liegt um den Faktor 3 höher, ePA-Zugriffe
+skalieren mit der Zahl der Behandlungskontakte, nicht der Fälle.
+</p>
+
+<p>
+<b>Konsequenz:</b> Architekturprinzipien müssen für den nächstgrößeren Fall
+tragen, nicht für den didaktischen Leitfall.
+</p>
+
+<div class="footnotes"><div class="footdef"><sup><a id="fn.zdf" href="#fnr.zdf" class="footnum" role="doc-backlink">2</a></sup> <span class="footpara">ZDFheute, „Erkältung, Rücken, Psyche: Welche Krankheiten die meisten Fehltage verursachen“, 02.12.2025; Daten: BKK Gesundheitsreport 2025. <a href="https://www.zdfheute.de/ratgeber/gesundheit/bkk-report-haeufigste-krankheiten-deutschland-100.html">https://www.zdfheute.de/ratgeber/gesundheit/bkk-report-haeufigste-krankheiten-deutschland-100.html</a></span></div><div class="footdef"><sup><a id="fn.erezept" href="#fnr.erezept" class="footnum" role="doc-backlink">9</a></sup> <span class="footpara">gematik, „E-Rezept — Zahlen und Fakten“.
+<a href="https://www.gematik.de/anwendungen/e-rezept">https://www.gematik.de/anwendungen/e-rezept</a></span></div><div class="footdef"><sup><a id="fn.epa" href="#fnr.epa" class="footnum" role="doc-backlink">10</a></sup> <span class="footpara">gematik, „elektronische Patientenakte (ePA)“.
+<a href="https://www.gematik.de/anwendungen/epa">https://www.gematik.de/anwendungen/epa</a></span></div></div>
+</section>
+</section>
+<section>
+<section id="slide-org4fab63a">
+<h3 id="org4fab63a">Architekturfolgen</h3>
 <p>
 Aus dem eAU-Leitfall folgen konkrete Anforderungen:
 </p>
@@ -489,9 +523,10 @@ heterogene Primärsysteme.</li>
 </section>
 </section>
 <section>
-<section id="slide-orge963512">
-<h2 id="orge963512">Brücke zum englischen Vortrag</h2>
+<section id="slide-org705ada5">
+<h2 id="org705ada5">Brücke zum englischen Vortrag</h2>
 <ol>
+<li>Die elektronische Arbeitsunfähigkeitsbescheinigung</li>
 <li>Architekturprinzipien der TI und TI 2.0</li>
 <li>APIs und Standards</li>
 <li>Skalierbarkeit</li>
@@ -502,8 +537,8 @@ heterogene Primärsysteme.</li>
 </section>
 </section>
 <section>
-<section id="slide-org730eb9f">
-<h3 id="org730eb9f">Zwei Ebenen desselben Stacks</h3>
+<section id="slide-org6856a91">
+<h3 id="org6856a91">Zwei Ebenen desselben Stacks</h3>
 <ul>
 <li><b>Diese Vorlesung:</b> organisationsübergreifende Prozesse, Sekunden bis
 Minuten. Beispiel: eAU, eRezept, ePA.</li>
@@ -519,9 +554,10 @@ eine kohärente Architekturhaltung über mehrere Ebenen.</i>
 </section>
 </section>
 <section>
-<section id="slide-orgbc15034">
-<h2 id="orgbc15034">Ausblick</h2>
+<section id="slide-org0b32ad5">
+<h2 id="org0b32ad5">Ausblick</h2>
 <ol>
+<li>Die elektronische Arbeitsunfähigkeitsbescheinigung</li>
 <li>Architekturprinzipien der TI und TI 2.0</li>
 <li>APIs und Standards</li>
 <li>Skalierbarkeit</li>
@@ -532,8 +568,8 @@ eine kohärente Architekturhaltung über mehrere Ebenen.</i>
 </section>
 </section>
 <section>
-<section id="slide-org5af1d3b">
-<h3 id="org5af1d3b">Forschungsrichtungen für die HS Reutlingen</h3>
+<section id="slide-orgdda44ed">
+<h3 id="orgdda44ed">Forschungsrichtungen für die HS Reutlingen</h3>
 <p>
 Aus solchen Leitfällen ergeben sich praxisnahe Themen für Studium und
 Forschung:
@@ -549,8 +585,8 @@ Systeme.</li>
 </section>
 </section>
 <section>
-<section id="slide-org5839855">
-<h3 id="org5839855">Abschluss</h3>
+<section id="slide-orga2f926c">
+<h3 id="orga2f926c">Abschluss</h3>
 <p>
 <b>Take-away Messages</b>
 </p>
@@ -573,6 +609,118 @@ Gesundheitsplattform am schwierigsten zu erfüllen und warum?
 </p>
 </section>
 </section>
+<section>
+<section id="slide-orgfa444f9">
+<h2 id="orgfa444f9">Backup slides</h2>
+<div class="outline-text-2" id="text-orgfa444f9">
+</div>
+</section>
+</section>
+<section>
+<section id="slide-org8db12d3">
+<h3 id="org8db12d3">TI vs. Internet — ein Vergleich</h3>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Dimension</th>
+<th scope="col" class="org-left">Internet</th>
+<th scope="col" class="org-left">TI 1.x</th>
+<th scope="col" class="org-left">TI 2.0 (Zielbild)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Grundannahme</td>
+<td class="org-left">Offenes Netz, "assume hostile"</td>
+<td class="org-left">Geschlossenes Netz, Vertrauen durch Abschottung</td>
+<td class="org-left">Offenes Netz, Vertrauen durch Identität (Zero Trust)</td>
+</tr>
+
+<tr>
+<td class="org-left">Zugang</td>
+<td class="org-left">Jeder mit IP-Adresse</td>
+<td class="org-left">Nur über zugelassene Hardware (Konnektor, SMC-B, eHBA)</td>
+<td class="org-left">Digitale Identitäten, TI-Gateway als Dienst</td>
+</tr>
+
+<tr>
+<td class="org-left">Adressierung</td>
+<td class="org-left">DNS, IP, URL</td>
+<td class="org-left">KIM-Adressen, VPN-Tunnel in TI-Netz</td>
+<td class="org-left">Föderierte Identitäten, dienstorientiert</td>
+</tr>
+
+<tr>
+<td class="org-left">Identität</td>
+<td class="org-left">Optional (TLS-Zertifikat, Login je Dienst)</td>
+<td class="org-left">An Karte/Konnektor gebunden (Standort + Hardware)</td>
+<td class="org-left">An Person/Rolle gebunden, kontextbezogen</td>
+</tr>
+
+<tr>
+<td class="org-left">Sicherheit</td>
+<td class="org-left">Ende-zu-Ende auf Anwendungsebene (TLS, OAuth)</td>
+<td class="org-left">Netzwerksegmentierung + kryptographische Karten</td>
+<td class="org-left">Wechselseitige Authentifizierung je Request</td>
+</tr>
+
+<tr>
+<td class="org-left">Governance</td>
+<td class="org-left">IETF/W3C, dezentral, konsensbasiert</td>
+<td class="org-left">gematik, staatlich reguliert, Zulassungspflicht</td>
+<td class="org-left">gematik, offener für Standards (FHIR, OAuth/OIDC)</td>
+</tr>
+
+<tr>
+<td class="org-left">Standards</td>
+<td class="org-left">HTTP, TLS, JSON, OAuth</td>
+<td class="org-left">Eigene TI-Fachdienste + KIM, teils proprietär</td>
+<td class="org-left">HL7 FHIR, OAuth 2.0, OpenID Connect</td>
+</tr>
+
+<tr>
+<td class="org-left">Skalierung</td>
+<td class="org-left">Horizontal, global, CDN</td>
+<td class="org-left">Begrenzt durch Konnektor-Hardware pro Standort</td>
+<td class="org-left">Cloud-fähig, dienstorientiert</td>
+</tr>
+
+<tr>
+<td class="org-left">Ausfallverhalten</td>
+<td class="org-left">Best effort, redundante Pfade</td>
+<td class="org-left">Einzelner Konnektor = Single Point of Failure</td>
+<td class="org-left">Redundante Dienste, Direktkommunikation</td>
+</tr>
+
+<tr>
+<td class="org-left">Datenmodell</td>
+<td class="org-left">Anwendungsspezifisch</td>
+<td class="org-left">FHIR/CDA + Spezifika</td>
+<td class="org-left">FHIR-first</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+<b>Kernaussage:</b> TI 1.x drehte das Internet-Paradigma um — Vertrauen durch ein
+abgeschottetes Parallelnetz mit Hardware-Ankern. TI 2.0 nähert sich wieder dem
+Internet-Modell an: offenes Netz, aber jede Anfrage wird über Identität, Rolle
+und Versorgungskontext geprüft. <i>Das Netz ist offen wie das Internet, die
+Zugriffe sind streng wie in einem Fachnetz.</i>
+</p>
+</section>
+</section>
 </div>
 </div>
 <script src="../assets/vendor/reveal.js/dist/reveal.js"></script>
@@ -585,9 +733,9 @@ Gesundheitsplattform am schwierigsten zu erfüllen und warum?
 // https://github.com/hakimel/reveal.js#configuration
 Reveal.initialize({
 plugins: [RevealHighlight, RevealPointer],
-center: false, margin: 0.02, transition: 'slide', width: 1200, height: 760, hash: true
+center: false, margin: 0.02, transition: 'slide', width: 1200, height: 760, hash: true, history: true, hashOneBasedIndex: true
 });
 
 </script>
-<style>#ff-reveal-footer{position:fixed;bottom:10px;left:10px;right:10px;display:flex;justify-content:space-between;align-items:center;font-size:18px;color:#666;z-index:1000;pointer-events:none;font-family:sans-serif;}.reveal .slide-number{display:none!important;}</style><div id="ff-reveal-footer"><span>Public — CC0-1.0 · Fabian Franzelin · 2026</span><span id="ff-reveal-footer-page"></span></div><script>document.addEventListener('DOMContentLoaded',function(){if(typeof Reveal!=='undefined'){function u(){var el=document.getElementById('ff-reveal-footer-page');if(el){el.textContent=Reveal.getIndices().h+1;}}Reveal.on('slidechanged',u);Reveal.on('ready',u);}});</script></body>
+<style>#ff-reveal-footer{position:fixed;bottom:10px;left:10px;right:10px;display:flex;justify-content:space-between;align-items:center;font-size:18px;color:#666;z-index:1000;pointer-events:none;font-family:sans-serif;}.reveal .slide-number{display:none!important;}</style><div id="ff-reveal-footer"><span>Public — CC0-1.0 · Fabian Franzelin · 2026</span><span id="ff-reveal-footer-page"></span></div><script>document.addEventListener('DOMContentLoaded',function(){if(typeof Reveal!=='undefined'){var K='ff-reveal-pos:'+location.pathname;function u(){var el=document.getElementById('ff-reveal-footer-page');if(el){el.textContent=Reveal.getIndices().h+1;}try{var i=Reveal.getIndices();sessionStorage.setItem(K,JSON.stringify([i.h,i.v,i.f]));}catch(e){}}function restore(){try{var s=sessionStorage.getItem(K);if(!s)return;var a=JSON.parse(s);var sh=a[0]||0,sv=a[1]||0,sf=(typeof a[2]==='number'&&!isNaN(a[2]))?a[2]:undefined;if(!sh&&!sv&&sf===undefined)return;var i=Reveal.getIndices();var hasHash=location.hash&&location.hash!=='#'&&location.hash!=='#/';var landedZero=(i.h===0&&i.v===0);if(!hasHash||landedZero){Reveal.slide(sh,sv,sf);}}catch(e){}}Reveal.on('slidechanged',u);Reveal.on('fragmentshown',u);Reveal.on('fragmenthidden',u);Reveal.on('ready',function(){restore();u();});}});</script></body>
 </html>
