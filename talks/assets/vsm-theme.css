@@ -264,15 +264,25 @@ body,
   vertical-align: super;
 }
 
-.reveal .footdef {
+.reveal .footnotes {
   position: absolute;
   right: 1rem;
   bottom: 1rem;
   left: 1rem;
-  margin: 0 !important;
+  color: var(--vsm-ink-soft);
+  font-size: 0.24em;
+  line-height: 1.25;
+}
+
+.reveal .footdef {
+  margin: 0 0 0.35em 0 !important;
   color: var(--vsm-ink-soft) !important;
-  font-size: 0.24em !important;
-  line-height: 1.25 !important;
+  font-size: inherit !important;
+  line-height: inherit !important;
+}
+
+.reveal .footdef:last-child {
+  margin-bottom: 0 !important;
 }
 
 .reveal .footdef p {
@@ -318,24 +328,6 @@ body,
 
 /* ---------- centered figures (e.g. PlantUML diagrams) ---------- */
 
-/* Reveal.js gives every `.slides > section` `position: absolute` and sizes
-   it by content, which makes normal flex-centering impossible.  For slides
-   whose body is a single .figure we (a) force the section to fill the whole
-   slide viewport and (b) absolutely-center the figure inside it.  The
-   heading stays anchored at the top. */
-.reveal .slides > section:has(> .figure),
-.reveal .slides > section > section:has(> .figure) {
-  height: 100% !important;
-}
-.reveal .slides > section:has(> .figure) > .figure,
-.reveal .slides > section > section:has(> .figure) > .figure {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  transform: translateY(-50%);
-  margin: 0 auto;
-}
 .reveal .figure {
   text-align: center;
 }
