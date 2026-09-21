@@ -88,8 +88,8 @@ body,
 .reveal .slides section > h2,
 .reveal .slides section > h3 {
   border-bottom: 2px solid var(--vsm-accent) !important;
-  padding-bottom: 0.35em !important;
-  margin-bottom: 1em !important;
+  padding-bottom: 0.2em !important;
+  margin-bottom: 0.4em !important;
 }
 
 .reveal p, .reveal li, .reveal dd, .reveal dt {
