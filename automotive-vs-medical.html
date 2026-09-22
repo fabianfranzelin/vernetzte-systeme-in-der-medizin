@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-09-22 Tue 20:13 -->
+<!-- 2026-09-22 Tue 20:23 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Automotive vs. Medical Standards</title>
@@ -18,17 +18,17 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org7ba22ed">Motivation</a></li>
-<li><a href="#orgc72ecd6">Standard-by-standard comparison</a></li>
-<li><a href="#orgbb805e0">What transfers</a></li>
-<li><a href="#orgc2f1fac">What does <i>not</i> transfer</a></li>
-<li><a href="#org7381234">The core insight</a></li>
+<li><a href="#org9da65db">Motivation</a></li>
+<li><a href="#org5ee60c8">Standard-by-standard comparison</a></li>
+<li><a href="#orgff24fb8">What transfers</a></li>
+<li><a href="#org49d9324">What does <i>not</i> transfer</a></li>
+<li><a href="#orgdfc24aa">The core insight</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org7ba22ed" class="outline-2">
-<h2 id="org7ba22ed">Motivation</h2>
-<div class="outline-text-2" id="text-org7ba22ed">
+<div id="outline-container-org9da65db" class="outline-2">
+<h2 id="org9da65db">Motivation</h2>
+<div class="outline-text-2" id="text-org9da65db">
 <p>
 The development of safety-critical networked software follows the same
 principles in automotive and medical devices, but codifies them in
@@ -36,9 +36,9 @@ different standards.  This document maps the two worlds concept-by-concept.
 </p>
 </div>
 </div>
-<div id="outline-container-orgc72ecd6" class="outline-2">
-<h2 id="orgc72ecd6">Standard-by-standard comparison</h2>
-<div class="outline-text-2" id="text-orgc72ecd6">
+<div id="outline-container-org5ee60c8" class="outline-2">
+<h2 id="org5ee60c8">Standard-by-standard comparison</h2>
+<div class="outline-text-2" id="text-org5ee60c8">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -108,9 +108,9 @@ different standards.  This document maps the two worlds concept-by-concept.
 </table>
 </div>
 </div>
-<div id="outline-container-orgbb805e0" class="outline-2">
-<h2 id="orgbb805e0">What transfers</h2>
-<div class="outline-text-2" id="text-orgbb805e0">
+<div id="outline-container-orgff24fb8" class="outline-2">
+<h2 id="orgff24fb8">What transfers</h2>
+<div class="outline-text-2" id="text-orgff24fb8">
 <ul class="org-ul">
 <li><b>Architectural patterns:</b> service-oriented communication, publish/subscribe,
 QoS-driven streaming, safety cases, hazard-analysis discipline.</li>
@@ -120,9 +120,9 @@ case; independent verification and validation; configuration management.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgc2f1fac" class="outline-2">
-<h2 id="orgc2f1fac">What does <i>not</i> transfer</h2>
-<div class="outline-text-2" id="text-orgc2f1fac">
+<div id="outline-container-org49d9324" class="outline-2">
+<h2 id="org49d9324">What does <i>not</i> transfer</h2>
+<div class="outline-text-2" id="text-org49d9324">
 <ul class="org-ul">
 <li><b>Domain semantics.</b>  BICEPS models patients and clinical workflows;
 CAN/Ethernet frames do not.  The information model <i>is</i> the problem.</li>
@@ -133,9 +133,9 @@ automotive analogue at the same regulatory weight.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org7381234" class="outline-2">
-<h2 id="org7381234">The core insight</h2>
-<div class="outline-text-2" id="text-org7381234">
+<div id="outline-container-orgdfc24aa" class="outline-2">
+<h2 id="orgdfc24aa">The core insight</h2>
+<div class="outline-text-2" id="text-orgdfc24aa">
 <blockquote>
 <p>
 Architectural patterns are transferable across safety-critical domains.
