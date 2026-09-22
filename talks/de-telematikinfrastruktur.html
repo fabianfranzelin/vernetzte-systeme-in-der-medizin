@@ -25,8 +25,8 @@
 <section id="sec-title-slide"><h2>Digitale Gesundheitsplattformen und APIs</h2><h4>Architekturansätze für skalierbare e-Health Vernetzung am Beispiel der Telematikinfrastruktur</h4><p>Dr. Fabian Franzelin · 2026-09-24</p><p style="font-size:0.6em;">Probevortrag · W2 Vernetzte Systeme in der Medizin · Hochschule Reutlingen</p>
 </section>
 <section>
-<section id="slide-orgb122430">
-<h2 id="orgb122430">Eine Nachricht, vier Perspektiven</h2>
+<section id="slide-org387e773">
+<h2 id="org387e773">Eine Nachricht, vier Perspektiven</h2>
 <blockquote >
 <p>
 "Deutschland wird immer häufiger krankgeschrieben."<sup><a id="fnr.wdr" class="footref" href="#fn.wdr" role="doc-backlink">1</a></sup>
@@ -34,9 +34,9 @@
 </blockquote>
 
 <ul>
-<li><b>Als Politiker:</b> Was kann ich strukturell ändern?</li>
-<li><b>Als Arzt</b>: Wie kann ich den Menschen helfen?</li>
-<li><b>Als Vater:</b> Zum Glück sind meine aus dem Gröbsten raus.</li>
+<li><b>Als Karl Lauterbach bei Markus Lanz</b>: Vorsorge, Vorsorge, Vorsorge.</li>
+<li><b>Als Politiker:</b> Telefonische Krankschreibung abschaffen.</li>
+<li><b>Als Vater:</b> Hat die Kita heute wieder zu?</li>
 <li><b>Als Informatiker:</b> Wie skaliert das?</li>
 
 </ul>
@@ -54,8 +54,8 @@ Bevölkerung plötzlich kränker ist.
 </section>
 </section>
 <section>
-<section id="slide-orgc19d568">
-<h2 id="orgc19d568">Einordnung: Mehr Daten, nicht nur mehr Krankheit</h2>
+<section id="slide-orgdd8bf0f">
+<h2 id="orgdd8bf0f">Einordnung: Mehr Daten, nicht nur mehr Krankheit</h2>
 <ul>
 <li>Für 2024 berichtet die BKK <b>22,3 Arbeitsunfähigkeitstage</b> je
 Beschäftigtem.<sup><a id="fnr.zdf" class="footref" href="#fn.zdf" role="doc-backlink">2</a></sup></li>
@@ -69,8 +69,8 @@ Krankmeldung vollständiger an die Krankenkassen übermittelt.</li>
 </section>
 </section>
 <section>
-<section id="slide-orga2a0a06">
-<h2 id="orga2a0a06">Überblick</h2>
+<section id="slide-org27822e0">
+<h2 id="org27822e0">Überblick</h2>
 <ol>
 <li>Die elektronische Arbeitsunfähigkeitsbescheinigung</li>
 <li>Architekturprinzipien der TI</li>
@@ -81,8 +81,8 @@ Krankmeldung vollständiger an die Krankenkassen übermittelt.</li>
 </section>
 </section>
 <section>
-<section id="slide-orgca06cca">
-<h2 id="orgca06cca">Die elektronische Arbeitsunfähigkeitsbescheinigung</h2>
+<section id="slide-org389d4e6">
+<h2 id="org389d4e6">Die elektronische Arbeitsunfähigkeitsbescheinigung</h2>
 <ol>
 <li><b>&rarr; Die elektronische Arbeitsunfähigkeitsbescheinigung</b></li>
 <li>Architekturprinzipien der TI</li>
@@ -93,8 +93,8 @@ Krankmeldung vollständiger an die Krankenkassen übermittelt.</li>
 </section>
 </section>
 <section>
-<section id="slide-org1507b83">
-<h3 id="org1507b83">Was ist die eAU?</h3>
+<section id="slide-orgb43163c">
+<h3 id="orgb43163c">Was ist die eAU?</h3>
 <p>
 Eine eAU ist kein einzelnes Dokument, sondern ein <b>verteilter Prozess</b>:
 </p>
@@ -113,10 +113,10 @@ Als Informatiker würde ich schreiben&#x2026;
 
 <div class="footnotes"><div class="footdef"><sup><a id="fn.gematik-eau" href="#fnr.gematik-eau" class="footnum" role="doc-backlink">3</a></sup> <span class="footpara">gematik, „Krankmeldung an Krankenkasse jetzt digital“, Pressemitteilung. <a href="https://www.gematik.de/newsroom/news-detail/pressemitteilung-krankmeldung-an-krankenkasse-jetzt-digital">Link</a></span></div></div>
 </section>
-<section id="slide-orgb518273">
-<h4 id="orgb518273">Phase 1: Datenerhebung &amp; Kassenmeldung</h4>
+<section id="slide-org130e2ce">
+<h4 id="org130e2ce">Phase 1: Datenerhebung &amp; Kassenmeldung</h4>
 
-<div id="org676a383" class="figure">
+<div id="org5bd4808" class="figure">
 <p><img src="images/de-telematikinfrastruktur_eau_ablauf_p1.png" alt="de-telematikinfrastruktur_eau_ablauf_p1.png" style="max-height:35vh;width:auto;" />
 </p>
 </div>
@@ -141,10 +141,10 @@ von unterschiedlichen Herstellern</li>
 
 </aside>
 </section>
-<section id="slide-orgce0207f">
-<h4 id="orgce0207f">Phase 2: Krankmeldung via Bosch SAM App</h4>
+<section id="slide-org021aaab">
+<h4 id="org021aaab">Phase 2: Krankmeldung via Bosch SAM App</h4>
 
-<div id="orgdeb689c" class="figure">
+<div id="org8f6b2d1" class="figure">
 <p><img src="images/de-telematikinfrastruktur_eau_ablauf_p2.png" alt="de-telematikinfrastruktur_eau_ablauf_p2.png" style="max-height:45vh;width:auto;" />
 </p>
 </div>
@@ -166,10 +166,10 @@ erhält nur AU-Zeitraum und Betriebsstätte — keine medizinischen Details.</li
 
 </aside>
 </section>
-<section id="slide-orgcafdd34">
-<h4 id="orgcafdd34">Phase 3: eAU-Abruf durch den Arbeitgeber</h4>
+<section id="slide-org389ef2a">
+<h4 id="org389ef2a">Phase 3: eAU-Abruf durch den Arbeitgeber</h4>
 
-<div id="org5ccd493" class="figure">
+<div id="orgdbfaa7a" class="figure">
 <p><img src="images/de-telematikinfrastruktur_eau_ablauf_p3.png" alt="de-telematikinfrastruktur_eau_ablauf_p3.png" style="max-height:40vh;width:auto;" />
 </p>
 </div>
@@ -196,8 +196,8 @@ Arbeitgeber wirken zusammen, ohne einer gemeinsamen IT-Domäne anzugehören.</li
 </section>
 </section>
 <section>
-<section id="slide-org6f14afa">
-<h2 id="org6f14afa">Architekturprinzipien der TI</h2>
+<section id="slide-org822569f">
+<h2 id="org822569f">Architekturprinzipien der TI</h2>
 <ol>
 <li>Die elektronische Arbeitsunfähigkeitsbescheinigung</li>
 <li><b>&rarr; Architekturprinzipien der TI</b></li>
@@ -208,8 +208,8 @@ Arbeitgeber wirken zusammen, ohne einer gemeinsamen IT-Domäne anzugehören.</li
 </section>
 </section>
 <section>
-<section id="slide-org39ee590">
-<h3 id="org39ee590">Architekturprinzipien</h3>
+<section id="slide-org40e0695">
+<h3 id="org40e0695">Architekturprinzipien</h3>
 <p>
 Nehmen wir die Beobachtungen aus unserem Leitfall:
 </p>
@@ -283,8 +283,8 @@ fehlerfreier an die TI andocken.</li>
 </section>
 </section>
 <section>
-<section id="slide-org831da33">
-<h3 id="org831da33">Prinzip 1: Zero Trust</h3>
+<section id="slide-org112c235">
+<h3 id="org112c235">Prinzip 1: Zero Trust</h3>
 <blockquote >
 <p>
 Zero Trust beschreibt ein aus dem "Assume Breach"-Ansatz entwickeltes
@@ -326,8 +326,8 @@ verschlüsselt?</i> Sondern auch:
 </section>
 </section>
 <section>
-<section id="slide-org1e937c1">
-<h3 id="org1e937c1">Prinzip 2: HW-Abstraktion &amp; Cloud</h3>
+<section id="slide-org9e43f5c">
+<h3 id="org9e43f5c">Prinzip 2: HW-Abstraktion &amp; Cloud</h3>
 <blockquote >
 <p>
 Welche kryptografischen Maßnahmen zum Schutz der
@@ -356,8 +356,8 @@ für die Post-Quanten-Kryptografie".
 </section>
 </section>
 <section>
-<section id="slide-orgc84e000">
-<h2 id="orgc84e000">Verfügbarkeit &amp; Skalierbarkeit</h2>
+<section id="slide-org553df67">
+<h2 id="org553df67">Verfügbarkeit &amp; Skalierbarkeit</h2>
 <ol>
 <li>Die elektronische Arbeitsunfähigkeitsbescheinigung</li>
 <li>Architekturprinzipien der TI</li>
@@ -368,10 +368,10 @@ für die Post-Quanten-Kryptografie".
 </section>
 </section>
 <section>
-<section id="slide-orgdc09200">
-<h3 id="orgdc09200">Schauen wir uns die eAU wieder an&#x2026;</h3>
+<section id="slide-orge13df04">
+<h3 id="orge13df04">Schauen wir uns die eAU wieder an&#x2026;</h3>
 
-<div id="org1b8597b" class="figure">
+<div id="orge86d922" class="figure">
 <p><img src="data/62/66ba15-03b4-49fd-aab0-dd169ba77486/screenshot_20260921_230614.png" alt="screenshot_20260921_230614.png" width="60%" style="display:block;margin-left:auto;margin-right:auto;" />
 </p>
 </div>
@@ -392,8 +392,8 @@ Im Mittel bei einem Zugriff pro eAU auf einen Arbeitstag (8h)<sup><a id="fnr.ti-
 </section>
 </section>
 <section>
-<section id="slide-org200c485">
-<h3 id="org200c485">Schranken für die Auslegungslast (eAU)</h3>
+<section id="slide-org9b2033b">
+<h3 id="org9b2033b">Schranken für die Auslegungslast (eAU)</h3>
 <p>
 <b>Auslegung nach oberer Schranke, Kostenoptimierung nach unterer.</b>
 </p>
@@ -464,8 +464,8 @@ gegenüber dediziertem Rechenzentrum.
 </section>
 </section>
 <section>
-<section id="slide-org8122b54">
-<h3 id="org8122b54">eAU ist die untere Schranke</h3>
+<section id="slide-orge30fb76">
+<h3 id="orge30fb76">eAU ist die untere Schranke</h3>
 <p>
 <b>Die eAU zeigt den Prozess — nicht die volle Last der Plattform.</b>
 </p>
@@ -516,10 +516,10 @@ gegenüber dediziertem Rechenzentrum.
 </section>
 </section>
 <section>
-<section id="slide-org7266ccd">
-<h3 id="org7266ccd">TI-2.0-Deployment: eAU</h3>
+<section id="slide-org5cc54d7">
+<h3 id="org5cc54d7">TI-2.0-Deployment: eAU</h3>
 
-<div id="org7565a00" class="figure">
+<div id="orgeb2fe58" class="figure">
 <p><img src="images/de-telematikinfrastruktur_ti2_overview.png" alt="de-telematikinfrastruktur_ti2_overview.png" style="max-height:55vh;width:auto;" />
 </p>
 </div>
@@ -533,8 +533,8 @@ gegenüber dediziertem Rechenzentrum.
 </section>
 </section>
 <section>
-<section id="slide-org6d95f8d">
-<h2 id="org6d95f8d">Zusammenfassung &amp; Ausblick</h2>
+<section id="slide-org1fed399">
+<h2 id="org1fed399">Zusammenfassung &amp; Ausblick</h2>
 <ol>
 <li>Die elektronische Arbeitsunfähigkeitsbescheinigung</li>
 <li>Architekturprinzipien der TI</li>
@@ -545,8 +545,8 @@ gegenüber dediziertem Rechenzentrum.
 </section>
 </section>
 <section>
-<section id="slide-org066c5ad">
-<h3 id="org066c5ad">Zusammenfassung</h3>
+<section id="slide-org919481c">
+<h3 id="org919481c">Zusammenfassung</h3>
 <ol>
 <li><b>Architekturansätze</b> leiten sich von den Anforderungen und den
 Qualitätsmerkmalen ab</li>
@@ -564,15 +564,15 @@ der Version 2.0</li>
 </section>
 </section>
 <section>
-<section id="slide-org4cf75de">
-<h2 id="org4cf75de">Backup slides</h2>
-<div class="outline-text-2" id="text-org4cf75de">
+<section id="slide-orgff11877">
+<h2 id="orgff11877">Backup slides</h2>
+<div class="outline-text-2" id="text-orgff11877">
 </div>
 </section>
 </section>
 <section>
-<section id="slide-org9e66ddc">
-<h3 id="org9e66ddc">TI vs. Internet — ein Vergleich</h3>
+<section id="slide-org8976f7c">
+<h3 id="org8976f7c">TI vs. Internet — ein Vergleich</h3>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -676,8 +676,8 @@ Zugriffe sind streng wie in einem Fachnetz.</i>
 </section>
 </section>
 <section>
-<section id="slide-org9185e58">
-<h3 id="org9185e58">Forschungsrichtungen für die HS Reutlingen</h3>
+<section id="slide-orgf8b5da1">
+<h3 id="orgf8b5da1">Forschungsrichtungen für die HS Reutlingen</h3>
 <p>
 Aus solchen Leitfällen ergeben sich praxisnahe Themen für Studium und
 Forschung:
