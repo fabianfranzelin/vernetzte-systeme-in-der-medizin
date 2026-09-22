@@ -25,8 +25,8 @@
 <section id="sec-title-slide"><h2>Digitale Gesundheitsplattformen und APIs</h2><h4>Architekturansätze für skalierbare e-Health Vernetzung am Beispiel der Telematikinfrastruktur</h4><p>Dr. Fabian Franzelin · 2026-09-24</p><p style="font-size:0.6em;">Probevortrag · W2-Professur Informatik · Hochschule Reutlingen</p>
 </section>
 <section>
-<section id="slide-org1c8cf8e">
-<h2 id="org1c8cf8e">Willkommen zur Vorlesung</h2>
+<section id="slide-orgb9dbfa6">
+<h2 id="orgb9dbfa6">Willkommen zur Vorlesung</h2>
 <p>
 Schön, dass ich heute bei Ihnen sein darf.
 </p>
@@ -77,8 +77,8 @@ Medizininformatik), warum das Thema.</li>
 </section>
 </section>
 <section>
-<section id="slide-org79a20ee">
-<h2 id="org79a20ee">Eine Nachricht, fünf Perspektiven</h2>
+<section id="slide-org86de254">
+<h2 id="org86de254">Eine Nachricht, fünf Perspektiven</h2>
 <blockquote >
 <p>
 "Ein solches System konnte bisher noch nie gehackt werden."
@@ -116,8 +116,8 @@ alle!", 38C3, Chaos Computer Club, 27.12.2024. <a href="https://media.ccc.de/v/3
 </section>
 </section>
 <section>
-<section id="slide-orgedd21b2">
-<h2 id="orgedd21b2">Überblick</h2>
+<section id="slide-orgcdcc657">
+<h2 id="orgcdcc657">Überblick</h2>
 <ol>
 <li>Die elektronische Arbeitsunfähigkeitsbescheinigung</li>
 <li>Architekturprinzipien der TI</li>
@@ -128,8 +128,8 @@ alle!", 38C3, Chaos Computer Club, 27.12.2024. <a href="https://media.ccc.de/v/3
 </section>
 </section>
 <section>
-<section id="slide-org79f78f9">
-<h2 id="org79f78f9">Die elektronische Arbeitsunfähigkeitsbescheinigung</h2>
+<section id="slide-org68d2eb5">
+<h2 id="org68d2eb5">Die elektronische Arbeitsunfähigkeitsbescheinigung</h2>
 <ol>
 <li><b>&rarr; Die elektronische Arbeitsunfähigkeitsbescheinigung</b></li>
 <li>Architekturprinzipien der TI</li>
@@ -140,8 +140,8 @@ alle!", 38C3, Chaos Computer Club, 27.12.2024. <a href="https://media.ccc.de/v/3
 </section>
 </section>
 <section>
-<section id="slide-orga4a9cb6">
-<h3 id="orga4a9cb6">Was ist die eAU?</h3>
+<section id="slide-orgee64aff">
+<h3 id="orgee64aff">Was ist die eAU?</h3>
 <p>
 Eine eAU ist kein einzelnes Dokument, sondern ein <b>verteilter Prozess</b>:
 </p>
@@ -162,10 +162,10 @@ dem <b>Sequenzdiagramm</b>.
 
 <div class="footnotes"><div class="footdef"><sup><a id="fn.gematik-eau" href="#fnr.gematik-eau" class="footnum" role="doc-backlink">2</a></sup> <span class="footpara">gematik, „Krankmeldung an Krankenkasse jetzt digital“, Pressemitteilung. <a href="https://www.gematik.de/newsroom/news-detail/pressemitteilung-krankmeldung-an-krankenkasse-jetzt-digital">Link</a></span></div></div>
 </section>
-<section id="slide-orgc22e635">
-<h4 id="orgc22e635">Phase 1: Datenerhebung &amp; Kassenmeldung</h4>
+<section id="slide-org8cc93fc">
+<h4 id="org8cc93fc">Phase 1: Datenerhebung &amp; Kassenmeldung</h4>
 
-<div id="org6ae7693" class="figure">
+<div id="orgfc9a59a" class="figure">
 <p><img src="images/de-telematikinfrastruktur_eau_ablauf_p1.png" alt="de-telematikinfrastruktur_eau_ablauf_p1.png" style="max-height:30vh;width:auto;" />
 </p>
 </div>
@@ -190,10 +190,10 @@ von unterschiedlichen Herstellern</li>
 
 </aside>
 </section>
-<section id="slide-orgc09953c">
-<h4 id="orgc09953c">Phase 2: Krankmeldung via Bosch SAM App</h4>
+<section id="slide-orgabfb055">
+<h4 id="orgabfb055">Phase 2: Krankmeldung via Bosch SAM App</h4>
 
-<div id="orgbb01de1" class="figure">
+<div id="orgabd43bb" class="figure">
 <p><img src="images/de-telematikinfrastruktur_eau_ablauf_p2.png" alt="de-telematikinfrastruktur_eau_ablauf_p2.png" style="max-height:45vh;width:auto;" />
 </p>
 </div>
@@ -215,10 +215,10 @@ erhält nur AU-Zeitraum und Betriebsstätte — keine medizinischen Details.</li
 
 </aside>
 </section>
-<section id="slide-org0969827">
-<h4 id="org0969827">Phase 3: eAU-Abruf durch den Arbeitgeber</h4>
+<section id="slide-org5925ffd">
+<h4 id="org5925ffd">Phase 3: eAU-Abruf durch den Arbeitgeber</h4>
 
-<div id="org79d418a" class="figure">
+<div id="org8a7c43a" class="figure">
 <p><img src="images/de-telematikinfrastruktur_eau_ablauf_p3.png" alt="de-telematikinfrastruktur_eau_ablauf_p3.png" style="max-height:35vh;width:auto;" />
 </p>
 </div>
@@ -245,8 +245,8 @@ Arbeitgeber wirken zusammen, ohne einer gemeinsamen IT-Domäne anzugehören.</li
 </section>
 </section>
 <section>
-<section id="slide-org14d8d50">
-<h3 id="org14d8d50">Von der Beobachtung zum Prinzip</h3>
+<section id="slide-orgc7c8fcd">
+<h3 id="orgc7c8fcd">Von der Beobachtung zum Prinzip</h3>
 <div class="tight-cols" style="display:flex;gap:1em;">
 <style>.tight-cols p{margin:.15em 0!important;} .tight-cols ul{margin:.1em 0 .5em 0!important;} .tight-cols li{margin:.05em 0!important;}</style>
 <div style="flex:1;">
@@ -322,8 +322,8 @@ Falls Zeit bleibt, kurz erwähnen: digitale Identitäten
 </section>
 </section>
 <section>
-<section id="slide-orga23f4f7">
-<h2 id="orga23f4f7">Architekturprinzipien der TI</h2>
+<section id="slide-org66d0887">
+<h2 id="org66d0887">Architekturprinzipien der TI</h2>
 <ol>
 <li>Die elektronische Arbeitsunfähigkeitsbescheinigung</li>
 <li><b>&rarr; Architekturprinzipien der TI</b></li>
@@ -334,8 +334,8 @@ Falls Zeit bleibt, kurz erwähnen: digitale Identitäten
 </section>
 </section>
 <section>
-<section id="slide-org1edf17e">
-<h3 id="org1edf17e">Prinzip 1: Zero Trust</h3>
+<section id="slide-orgfc556d8">
+<h3 id="orgfc556d8">Prinzip 1: Zero Trust</h3>
 <blockquote >
 <p>
 Zero Trust beschreibt ein aus dem "Assume Breach"-Ansatz entwickeltes
@@ -377,8 +377,8 @@ verschlüsselt?</i> Sondern auch:
 </section>
 </section>
 <section>
-<section id="slide-org8df33b7">
-<h3 id="org8df33b7">Prinzip 2: HW-Abstraktion &amp; Cloud</h3>
+<section id="slide-org464851f">
+<h3 id="org464851f">Prinzip 2: HW-Abstraktion &amp; Cloud</h3>
 <blockquote >
 <p>
 Die Telematikinfrastruktur der Zukunft soll [&#x2026;] den Konnektor durch
@@ -419,8 +419,8 @@ Telematikinfrastruktur 2.0". <a href="https://www.gematik.de/telematikinfrastruk
 </section>
 </section>
 <section>
-<section id="slide-orgded1d05">
-<h2 id="orgded1d05">Verfügbarkeit &amp; Skalierbarkeit</h2>
+<section id="slide-org8376996">
+<h2 id="org8376996">Verfügbarkeit &amp; Skalierbarkeit</h2>
 <ol>
 <li>Die elektronische Arbeitsunfähigkeitsbescheinigung</li>
 <li>Architekturprinzipien der TI</li>
@@ -431,10 +431,10 @@ Telematikinfrastruktur 2.0". <a href="https://www.gematik.de/telematikinfrastruk
 </section>
 </section>
 <section>
-<section id="slide-orgc96035c">
-<h3 id="orgc96035c">Schauen wir uns die eAU wieder an&#x2026;</h3>
+<section id="slide-orge66e3c0">
+<h3 id="orge66e3c0">Schauen wir uns die eAU wieder an&#x2026;</h3>
 
-<div id="org206cabc" class="figure">
+<div id="org02bfc68" class="figure">
 <p><img src="data/62/66ba15-03b4-49fd-aab0-dd169ba77486/screenshot_20260921_230614.png" alt="screenshot_20260921_230614.png" width="60%" style="display:block;margin-left:auto;margin-right:auto;" />
 </p>
 </div>
@@ -455,8 +455,8 @@ Im Mittel bei einem Zugriff pro eAU auf einen Arbeitstag (8h)<sup><a id="fnr.ti-
 </section>
 </section>
 <section>
-<section id="slide-orgf549c97">
-<h3 id="orgf549c97">Schranken für die Auslegungslast</h3>
+<section id="slide-org834174c">
+<h3 id="org834174c">Schranken für die Auslegungslast</h3>
 <ul>
 <li class="fragment fade-in">eAU: ca. 9 Zugriffe/Sekunde<sup><a id="fnr.ti-dashboard.5" class="footref" href="#fn.ti-dashboard" role="doc-backlink">5</a></sup></li>
 <li class="fragment fade-in">E-Rezept: ca. 152 Verordnungen/Sekunde<sup><a id="fnr.ti-dashboard.5" class="footref" href="#fn.ti-dashboard" role="doc-backlink">5</a></sup></li>
@@ -590,10 +590,10 @@ Vergleich mit realen Systemen
 </section>
 </section>
 <section>
-<section id="slide-orgb4a2c09">
-<h3 id="orgb4a2c09">TI-2.0-Deployment: eAU</h3>
+<section id="slide-orgc076fde">
+<h3 id="orgc076fde">TI-2.0-Deployment: eAU</h3>
 
-<div id="org63692eb" class="figure">
+<div id="org01a0e04" class="figure">
 <p><img src="images/de-telematikinfrastruktur_ti2_overview.png" alt="de-telematikinfrastruktur_ti2_overview.png" style="max-height:30vh;width:auto;" />
 </p>
 </div>
@@ -668,8 +668,8 @@ gematik genau diese Zertifizierungswege geöffnet hat.
 </section>
 </section>
 <section>
-<section id="slide-orge035ee2">
-<h2 id="orge035ee2">Zusammenfassung &amp; Ausblick</h2>
+<section id="slide-org614d04d">
+<h2 id="org614d04d">Zusammenfassung &amp; Ausblick</h2>
 <ol>
 <li>Die elektronische Arbeitsunfähigkeitsbescheinigung</li>
 <li>Architekturprinzipien der TI</li>
@@ -680,8 +680,8 @@ gematik genau diese Zertifizierungswege geöffnet hat.
 </section>
 </section>
 <section>
-<section id="slide-orgb5499b7">
-<h3 id="orgb5499b7">Zusammenfassung</h3>
+<section id="slide-org2c4faaa">
+<h3 id="org2c4faaa">Zusammenfassung</h3>
 <ol>
 <li><b>Digitale Gesundheitsplattform</b>: Viele Rollen, eine Fachaufgabe</li>
 
@@ -699,7 +699,7 @@ Vertrauen an Identität und Kontext gebunden</li>
 <blockquote  class="fragment (fade-in)">
 <p>
 "Ein solches System konnte bisher noch nie gehackt werden."
-<i>Fabian Franzelin</i>
+<i>Zukünftiges Ich</i>
 </p>
 </blockquote>
 
@@ -714,15 +714,15 @@ verifiziert.</i>
 </section>
 </section>
 <section>
-<section id="slide-org993f010">
-<h2 id="org993f010">Backup slides</h2>
-<div class="outline-text-2" id="text-org993f010">
+<section id="slide-org4cda315">
+<h2 id="org4cda315">Backup slides</h2>
+<div class="outline-text-2" id="text-org4cda315">
 </div>
 </section>
 </section>
 <section>
-<section id="slide-org5d5f008">
-<h3 id="org5d5f008">TI vs. Internet — ein Vergleich</h3>
+<section id="slide-orgc7673c1">
+<h3 id="orgc7673c1">TI vs. Internet — ein Vergleich</h3>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -826,8 +826,8 @@ Zugriffe sind streng wie in einem Fachnetz.</i>
 </section>
 </section>
 <section>
-<section id="slide-org760a06b">
-<h3 id="org760a06b">Forschungsrichtungen für die HS Reutlingen</h3>
+<section id="slide-org1fc08aa">
+<h3 id="org1fc08aa">Forschungsrichtungen für die HS Reutlingen</h3>
 <p>
 Aus solchen Leitfällen ergeben sich praxisnahe Themen für Studium und
 Forschung:
