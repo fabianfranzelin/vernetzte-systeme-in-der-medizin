@@ -9,38 +9,6 @@
 <meta name="author" content="Dr. Fabian Franzelin" />
 <meta name="generator" content="Org Mode" />
 <style>body{max-width:960px;margin:2em auto;padding:0 1em;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.55;color:#222;}h1,h2,h3{font-weight:600;line-height:1.2;}h1{border-bottom:2px solid #444;padding-bottom:.3em;}h2{border-bottom:1px solid #ddd;padding-bottom:.2em;margin-top:2em;}a{color:#0645ad;text-decoration:none;}a:hover{text-decoration:underline;}pre,code{font-family:'SF Mono',Menlo,Consolas,monospace;font-size:.92em;}pre{background:#f6f8fa;padding:1em;border-radius:6px;overflow-x:auto;}code{background:#f6f8fa;padding:.15em .35em;border-radius:3px;}pre code{background:none;padding:0;}table{border-collapse:collapse;margin:1em 0;}th,td{border:1px solid #ccc;padding:.4em .7em;}th{background:#f0f0f0;}blockquote{border-left:4px solid #ccc;margin:1em 0;padding:.3em 1em;color:#555;}footer{margin-top:3em;padding-top:1em;border-top:1px solid #ddd;font-size:.9em;color:#666;}</style>
-<script>
-  window.MathJax = {
-    tex: {
-      ams: {
-        multlineWidth: '85%'
-      },
-      tags: 'ams',
-      tagSide: 'right',
-      tagIndent: '.8em'
-    },
-    chtml: {
-      scale: 1.0,
-      displayAlign: 'center',
-      displayIndent: '0em'
-    },
-    svg: {
-      scale: 1.0,
-      displayAlign: 'center',
-      displayIndent: '0em'
-    },
-    output: {
-      font: 'mathjax-modern',
-      displayOverflow: 'overflow'
-    }
-  };
-</script>
-
-<script
-  id="MathJax-script"
-  async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-</script>
 </head>
 <body>
 <div id="content" class="content">
@@ -48,58 +16,16 @@
 <br />
 <span class="subtitle">Digitale Gesundheitsplattformen und APIs — Glossar</span>
 </h1>
-<div id="outline-container-orgd46fb6e" class="outline-2">
-<h2 id="orgd46fb6e"><span class="section-number-2">1.</span> Der Kreis schließt sich</h2>
-<div class="outline-text-2" id="text-1">
-<p>
-Diese Handreichung begleitet den Vortrag <i>Digitale Gesundheitsplattformen
-und APIs — Architekturansätze für skalierbare e-Health Vernetzung am
-Beispiel der Telematikinfrastruktur</i>. Sie ist selbst ein kleines
-Beispiel für die Prinzipien, über die wir gesprochen haben:
-</p>
-
-<ul class="org-ul">
-<li>Die Vortragsfolien wurden in Org-Mode geschrieben, als reveal.js
-gerendert und in einem Git-Repository versioniert.</li>
-<li>Dieses Begleitdokument stammt aus derselben Quelle und wurde per
-Pandoc/LaTeX als PDF gebaut — in einer CI-Pipeline, ohne Handarbeit.</li>
-<li>Die eingebetteten Sequenzdiagramme sind PlantUML-Quelltext, kein Bild.</li>
-<li>Alle Inhalte stehen unter CC0-1.0 zur freien Nachnutzung.</li>
-</ul>
-
-<p>
-<i>Projektbasiert, end-to-end: Anforderungen → Architektur → Code →
-Verifikation → Dokumentation.</i> Alles als Code, alles reproduzierbar,
-alles nachvollziehbar. Diese Vorlesung ist das kleinstmögliche Beispiel
-dafür.
-</p>
-
 <p>
 <b>Repository:</b> <a href="https://github.com/fabianfranzelin/vernetzte-systeme-in-der-medizin">github.com/fabianfranzelin/vernetzte-systeme-in-der-medizin</a>
 </p>
-
-<p>
-\clearpage
-</p>
+<div id="outline-container-orge9b7373" class="outline-2">
+<h2 id="orge9b7373"><span class="section-number-2">1.</span> Glossar</h2>
+<div class="outline-text-2" id="text-1">
 </div>
-</div>
-<div id="outline-container-org3dcf541" class="outline-2">
-<h2 id="org3dcf541"><span class="section-number-2">2.</span> Glossar</h2>
-<div class="outline-text-2" id="text-2">
-<p>
-Die folgenden Begriffe sind auf der Folie <i>TI-2.0-Deployment: eAU</i>
-gefallen. Sie stammen alle aus der Welt der <i>Cloud-nativen</i>
-Softwarearchitektur — und begegnen Ihnen ab dem 5. Semester in
-Vorlesungen wie IoT, Cloud Computing und Softwaresystemtechnik wieder.
-</p>
-</div>
-<div id="outline-container-orgb29b83f" class="outline-3">
-<h3 id="orgb29b83f"><span class="section-number-3">2.1.</span> Kern-Begriffe der Folie</h3>
-<div class="outline-text-3" id="text-2-1">
-</div>
-<div id="outline-container-orgd2b9a97" class="outline-4">
-<h4 id="orgd2b9a97"><span class="section-number-4">2.1.1.</span> Container / Pod</h4>
-<div class="outline-text-4" id="text-2-1-1">
+<div id="outline-container-org7a70570" class="outline-3">
+<h3 id="org7a70570"><span class="section-number-3">1.1.</span> Container / Pod</h3>
+<div class="outline-text-3" id="text-1-1">
 <p>
 Eine <i>verpackte Anwendung</i> inklusive aller Abhängigkeiten
 (Betriebssystem-Bibliotheken, Laufzeitumgebung, Konfiguration). Ein
@@ -120,9 +46,9 @@ dass etwas herausfällt.
 </p>
 </div>
 </div>
-<div id="outline-container-org5f221ce" class="outline-4">
-<h4 id="org5f221ce"><span class="section-number-4">2.1.2.</span> mTLS (mutual TLS)</h4>
-<div class="outline-text-4" id="text-2-1-2">
+<div id="outline-container-orge5974bd" class="outline-3">
+<h3 id="orge5974bd"><span class="section-number-3">1.2.</span> mTLS (mutual TLS)</h3>
+<div class="outline-text-3" id="text-1-2">
 <p>
 Eine verschlüsselte Netzwerkverbindung, bei der <i>beide Seiten</i> ein
 gültiges digitales Zertifikat vorzeigen müssen. Das normale TLS
@@ -138,9 +64,9 @@ Ausweis zeigen.
 </p>
 </div>
 </div>
-<div id="outline-container-org2b9375a" class="outline-4">
-<h4 id="org2b9375a"><span class="section-number-4">2.1.3.</span> Ingress</h4>
-<div class="outline-text-4" id="text-2-1-3">
+<div id="outline-container-orgd5c765c" class="outline-3">
+<h3 id="orgd5c765c"><span class="section-number-3">1.3.</span> Ingress</h3>
+<div class="outline-text-3" id="text-1-3">
 <p>
 Der <i>Empfangstresen</i> eines Cloud-Systems. Anfragen aus dem offenen
 Internet treffen zuerst auf den Ingress, der sie authentifiziert,
@@ -153,9 +79,9 @@ Behandlungszimmer verteilt.
 </p>
 </div>
 </div>
-<div id="outline-container-org8573100" class="outline-4">
-<h4 id="org8573100"><span class="section-number-4">2.1.4.</span> Message Queue</h4>
-<div class="outline-text-4" id="text-2-1-4">
+<div id="outline-container-orgfc26d4c" class="outline-3">
+<h3 id="orgfc26d4c"><span class="section-number-3">1.4.</span> Message Queue</h3>
+<div class="outline-text-3" id="text-1-4">
 <p>
 Ein <i>Briefkasten</i> zwischen Diensten. Der Sender legt eine Nachricht
 ab und arbeitet sofort weiter — der Empfänger holt sie später ab,
@@ -176,9 +102,9 @@ bis jemand sie abholt.
 </p>
 </div>
 </div>
-<div id="outline-container-orgfebded4" class="outline-4">
-<h4 id="orgfebded4"><span class="section-number-4">2.1.5.</span> CI/CD (Continuous Integration / Continuous Delivery)</h4>
-<div class="outline-text-4" id="text-2-1-5">
+<div id="outline-container-orgba3cfbf" class="outline-3">
+<h3 id="orgba3cfbf"><span class="section-number-3">1.5.</span> CI/CD (Continuous Integration / Continuous Delivery)</h3>
+<div class="outline-text-3" id="text-1-5">
 <p>
 Eine <i>automatisierte Pipeline</i>, die bei jeder Code-Änderung folgende
 Schritte ausführt:
@@ -204,13 +130,13 @@ manuelles Zutun.
 </div>
 </div>
 </div>
-<div id="outline-container-org9ea440f" class="outline-3">
-<h3 id="org9ea440f"><span class="section-number-3">2.2.</span> Weitere Begriffe aus dem Vortrag</h3>
-<div class="outline-text-3" id="text-2-2">
+<div id="outline-container-orgaeceb94" class="outline-2">
+<h2 id="orgaeceb94"><span class="section-number-2">2.</span> Weitere Begriffe aus dem Vortrag</h2>
+<div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-orgba44249" class="outline-4">
-<h4 id="orgba44249"><span class="section-number-4">2.2.1.</span> eAU</h4>
-<div class="outline-text-4" id="text-2-2-1">
+<div id="outline-container-org21e874c" class="outline-3">
+<h3 id="org21e874c"><span class="section-number-3">2.1.</span> eAU</h3>
+<div class="outline-text-3" id="text-2-1">
 <p>
 Elektronische Arbeitsunfähigkeitsbescheinigung. Der digitale
 Nachfolger des gelben Zettels. Seit 2023 verpflichtend für gesetzlich
@@ -218,9 +144,9 @@ Versicherte in Deutschland.
 </p>
 </div>
 </div>
-<div id="outline-container-orgc5ea810" class="outline-4">
-<h4 id="orgc5ea810"><span class="section-number-4">2.2.2.</span> ePA</h4>
-<div class="outline-text-4" id="text-2-2-2">
+<div id="outline-container-org22a91dd" class="outline-3">
+<h3 id="org22a91dd"><span class="section-number-3">2.2.</span> ePA</h3>
+<div class="outline-text-3" id="text-2-2">
 <p>
 Elektronische Patientenakte. Zentrale Sammlung medizinischer
 Dokumente eines Versicherten, seit 2025 in der Ausbaustufe <i>ePA für
@@ -228,9 +154,9 @@ alle</i> (Opt-out-Verfahren).
 </p>
 </div>
 </div>
-<div id="outline-container-org5641d2c" class="outline-4">
-<h4 id="org5641d2c"><span class="section-number-4">2.2.3.</span> eHBA</h4>
-<div class="outline-text-4" id="text-2-2-3">
+<div id="outline-container-org9fd4ad4" class="outline-3">
+<h3 id="org9fd4ad4"><span class="section-number-3">2.3.</span> eHBA</h3>
+<div class="outline-text-3" id="text-2-3">
 <p>
 Elektronischer Heilberufsausweis. Chipkarte, mit der sich Ärztinnen,
 Ärzte und andere Heilberufler in der Telematikinfrastruktur
@@ -238,9 +164,9 @@ authentifizieren und Dokumente digital signieren.
 </p>
 </div>
 </div>
-<div id="outline-container-org6907d67" class="outline-4">
-<h4 id="org6907d67"><span class="section-number-4">2.2.4.</span> FHIR (Fast Healthcare Interoperability Resources)</h4>
-<div class="outline-text-4" id="text-2-2-4">
+<div id="outline-container-orgd5da3b3" class="outline-3">
+<h3 id="orgd5da3b3"><span class="section-number-3">2.4.</span> FHIR (Fast Healthcare Interoperability Resources)</h3>
+<div class="outline-text-3" id="text-2-4">
 <p>
 Offener Standard von HL7 für den Austausch medizinischer Daten über
 HTTPS-basierte APIs. Datenmodell auf Basis von JSON oder XML.
@@ -248,9 +174,9 @@ Zentraler Baustein von TI 2.0.
 </p>
 </div>
 </div>
-<div id="outline-container-orgb409b03" class="outline-4">
-<h4 id="orgb409b03"><span class="section-number-4">2.2.5.</span> gematik</h4>
-<div class="outline-text-4" id="text-2-2-5">
+<div id="outline-container-org59def93" class="outline-3">
+<h3 id="org59def93"><span class="section-number-3">2.5.</span> gematik</h3>
+<div class="outline-text-3" id="text-2-5">
 <p>
 Nationale Agentur für Digitale Medizin. Bundesbeteiligte Gesellschaft,
 die Spezifikation, Zulassung und Betrieb der Telematikinfrastruktur
@@ -258,17 +184,17 @@ verantwortet.
 </p>
 </div>
 </div>
-<div id="outline-container-org78cf233" class="outline-4">
-<h4 id="org78cf233"><span class="section-number-4">2.2.6.</span> HBA</h4>
-<div class="outline-text-4" id="text-2-2-6">
+<div id="outline-container-org4e23817" class="outline-3">
+<h3 id="org4e23817"><span class="section-number-3">2.6.</span> HBA</h3>
+<div class="outline-text-3" id="text-2-6">
 <p>
 Siehe <i>eHBA</i>.
 </p>
 </div>
 </div>
-<div id="outline-container-orge20cf6d" class="outline-4">
-<h4 id="orge20cf6d"><span class="section-number-4">2.2.7.</span> HSM (Hardware Security Module)</h4>
-<div class="outline-text-4" id="text-2-2-7">
+<div id="outline-container-orgedc9555" class="outline-3">
+<h3 id="orgedc9555"><span class="section-number-3">2.7.</span> HSM (Hardware Security Module)</h3>
+<div class="outline-text-3" id="text-2-7">
 <p>
 Spezielle Hardware, die kryptografische Schlüssel manipulationssicher
 speichert und Signatur-/Verschlüsselungs-Operationen ausführt, ohne
@@ -276,9 +202,9 @@ den Schlüssel selbst preiszugeben.
 </p>
 </div>
 </div>
-<div id="outline-container-org1eea034" class="outline-4">
-<h4 id="org1eea034"><span class="section-number-4">2.2.8.</span> KIM (Kommunikation im Medizinwesen)</h4>
-<div class="outline-text-4" id="text-2-2-8">
+<div id="outline-container-org40d3d81" class="outline-3">
+<h3 id="org40d3d81"><span class="section-number-3">2.8.</span> KIM (Kommunikation im Medizinwesen)</h3>
+<div class="outline-text-3" id="text-2-8">
 <p>
 E-Mail-ähnlicher Dienst innerhalb der Telematikinfrastruktur für den
 verschlüsselten Nachrichtenaustausch zwischen Leistungserbringern und
@@ -286,9 +212,9 @@ Kostenträgern. Basiert auf S/MIME.
 </p>
 </div>
 </div>
-<div id="outline-container-orgca73179" class="outline-4">
-<h4 id="orgca73179"><span class="section-number-4">2.2.9.</span> Konnektor</h4>
-<div class="outline-text-4" id="text-2-2-9">
+<div id="outline-container-orgd8c8a26" class="outline-3">
+<h3 id="orgd8c8a26"><span class="section-number-3">2.9.</span> Konnektor</h3>
+<div class="outline-text-3" id="text-2-9">
 <p>
 Hardware-Router, der eine Arztpraxis in TI 1.x mit der
 Telematikinfrastruktur verbindet. Wird in TI 2.0 durch das
@@ -296,36 +222,36 @@ Telematikinfrastruktur verbindet. Wird in TI 2.0 durch das
 </p>
 </div>
 </div>
-<div id="outline-container-org075be55" class="outline-4">
-<h4 id="org075be55"><span class="section-number-4">2.2.10.</span> OAuth 2.0 / OpenID Connect (OIDC)</h4>
-<div class="outline-text-4" id="text-2-2-10">
+<div id="outline-container-org40f56ee" class="outline-3">
+<h3 id="org40f56ee"><span class="section-number-3">2.10.</span> OAuth 2.0 / OpenID Connect (OIDC)</h3>
+<div class="outline-text-3" id="text-2-10">
 <p>
 Offene Standards für Autorisierung (OAuth) und Authentifizierung
 (OIDC) im Web. Grundlage föderierter Identitäten in TI 2.0.
 </p>
 </div>
 </div>
-<div id="outline-container-org70f6d6b" class="outline-4">
-<h4 id="org70f6d6b"><span class="section-number-4">2.2.11.</span> PVS (Praxisverwaltungssystem)</h4>
-<div class="outline-text-4" id="text-2-2-11">
+<div id="outline-container-orgdbd3896" class="outline-3">
+<h3 id="orgdbd3896"><span class="section-number-3">2.11.</span> PVS (Praxisverwaltungssystem)</h3>
+<div class="outline-text-3" id="text-2-11">
 <p>
 Software zur Verwaltung von Patientendaten, Terminen, Abrechnung und
 Dokumentation in einer Arztpraxis.
 </p>
 </div>
 </div>
-<div id="outline-container-org6ba2f11" class="outline-4">
-<h4 id="org6ba2f11"><span class="section-number-4">2.2.12.</span> S/MIME (Secure/Multipurpose Internet Mail Extensions)</h4>
-<div class="outline-text-4" id="text-2-2-12">
+<div id="outline-container-orgd16db0b" class="outline-3">
+<h3 id="orgd16db0b"><span class="section-number-3">2.12.</span> S/MIME (Secure/Multipurpose Internet Mail Extensions)</h3>
+<div class="outline-text-3" id="text-2-12">
 <p>
 Standard zur Ende-zu-Ende-Verschlüsselung und Signatur von
 E-Mail-Nachrichten. Wird von KIM verwendet.
 </p>
 </div>
 </div>
-<div id="outline-container-org3e5909a" class="outline-4">
-<h4 id="org3e5909a"><span class="section-number-4">2.2.13.</span> SMC-B (Security Module Card — Typ B)</h4>
-<div class="outline-text-4" id="text-2-2-13">
+<div id="outline-container-org60b64c6" class="outline-3">
+<h3 id="org60b64c6"><span class="section-number-3">2.13.</span> SMC-B (Security Module Card — Typ B)</h3>
+<div class="outline-text-3" id="text-2-13">
 <p>
 Institutionsausweis einer Arztpraxis oder eines Krankenhauses als
 Chipkarte. In TI 2.0 zunehmend als HSM-basierte Institutionsidentität
@@ -333,9 +259,9 @@ in der Cloud realisiert.
 </p>
 </div>
 </div>
-<div id="outline-container-org691e0a3" class="outline-4">
-<h4 id="org691e0a3"><span class="section-number-4">2.2.14.</span> SOME/IP</h4>
-<div class="outline-text-4" id="text-2-2-14">
+<div id="outline-container-orgf05e4c9" class="outline-3">
+<h3 id="orgf05e4c9"><span class="section-number-3">2.14.</span> SOME/IP</h3>
+<div class="outline-text-3" id="text-2-14">
 <p>
 Service-orientiertes Kommunikationsprotokoll aus der
 Automobilindustrie. Konzeptionell verwandt mit den service-orientierten
@@ -343,9 +269,9 @@ Ansätzen in TI 2.0 und im Medizingeräte-Standard IEEE 11073 SDC.
 </p>
 </div>
 </div>
-<div id="outline-container-org905ceee" class="outline-4">
-<h4 id="org905ceee"><span class="section-number-4">2.2.15.</span> TI-Gateway</h4>
-<div class="outline-text-4" id="text-2-2-15">
+<div id="outline-container-org1b99725" class="outline-3">
+<h3 id="org1b99725"><span class="section-number-3">2.15.</span> TI-Gateway</h3>
+<div class="outline-text-3" id="text-2-15">
 <p>
 Cloud-basierter Ersatz des lokalen Konnektors in TI 2.0. Übernimmt
 Authentifizierung, Verschlüsselung und Routing zwischen
@@ -353,36 +279,25 @@ Leistungserbringer und Fachdiensten der Telematikinfrastruktur.
 </p>
 </div>
 </div>
-<div id="outline-container-orga5a5e13" class="outline-4">
-<h4 id="orga5a5e13"><span class="section-number-4">2.2.16.</span> VZD (Verzeichnisdienst)</h4>
-<div class="outline-text-4" id="text-2-2-16">
+<div id="outline-container-org53ae289" class="outline-3">
+<h3 id="org53ae289"><span class="section-number-3">2.16.</span> VZD (Verzeichnisdienst)</h3>
+<div class="outline-text-3" id="text-2-16">
 <p>
 Zentrales Adressbuch der Telematikinfrastruktur. Enthält KIM-Adressen,
 Zertifikate und Rollen aller Teilnehmer.
 </p>
 </div>
 </div>
-<div id="outline-container-org18ea391" class="outline-4">
-<h4 id="org18ea391"><span class="section-number-4">2.2.17.</span> Zero Trust</h4>
-<div class="outline-text-4" id="text-2-2-17">
+<div id="outline-container-orgcaf94be" class="outline-3">
+<h3 id="orgcaf94be"><span class="section-number-3">2.17.</span> Zero Trust</h3>
+<div class="outline-text-3" id="text-2-17">
 <p>
 Sicherheitsparadigma, bei dem grundsätzlich keiner Verbindung, keiner
 Identität und keinem Netzsegment vertraut wird. Jede einzelne Anfrage
 wird authentifiziert, autorisiert und verschlüsselt — unabhängig
-davon, ob sie aus dem „internen" oder „externen" Netz kommt.
+davon, ob sie aus dem "internen" oder "externen" Netz kommt.
 </p>
 </div>
-</div>
-</div>
-</div>
-<div id="outline-container-org3b1f3bc" class="outline-2">
-<h2 id="org3b1f3bc"><span class="section-number-2">3.</span> Lizenz</h2>
-<div class="outline-text-2" id="text-3">
-<p>
-Dieses Dokument steht unter <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0-1.0</a> (Public Domain). Sie dürfen es
-frei kopieren, verändern und weitergeben — für Lehre, Studium und
-darüber hinaus.
-</p>
 </div>
 </div>
 </div>
