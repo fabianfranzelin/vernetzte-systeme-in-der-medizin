@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Safe Engineering</title>
+<meta name="author" content="Dr. Fabian Franzelin"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../assets/vendor/reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../assets/vendor/reveal.js/dist/theme/white.css" id="theme"/>
+
+<link rel="stylesheet" href="assets/vsm-theme.css"/>
+
+<link rel="stylesheet" href="../assets/vendor/reveal.js-pointer/dist/pointer.css"/>
+<link rel="stylesheet" href="../assets/vendor/reveal.js/plugin/highlight/zenburn.css"/><link href="../assets/vendor/fonts/fonts.css" rel="stylesheet">
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h2>Safe Engineering</h2><h4>From Cars to Clinics</h4><p>Dr. Fabian Franzelin · 2026-09-24</p><p style="font-size:0.6em;">Talk · W2-Professorship Computer Science · Reutlingen University</p>
+</section>
+<section>
+<section id="slide-org83999b4">
+<h2 id="org83999b4">Automotive Safety</h2>
+<div class="setup-diagram" style="position:relative; width:80%; max-width:900px; aspect-ratio: 620 / 250; margin:0 auto;">
+
+
+<div id="orgc242054" class="figure">
+<p><img src="images/en-safe-engineering-middleware-background.svg" alt="Vehicle, embedded device, and cloud device" class="org-svg" style="position:absolute; inset:0; width:100%; height:100%; object-fit:contain;" />
+</p>
+</div>
+
+
+<div id="org789abf8" class="figure">
+<p><img src="images/en-safe-engineering-middleware-step-1.svg" alt="Sensor data flows from the vehicle to embedded and cloud devices" class="fragment fade-in" data-fragment-index="1" style="position:absolute; inset:0; width:100%; height:100%; object-fit:contain;" />
+</p>
+</div>
+
+</div>
+
+<div class="fragment fade-in" data-fragment-index="2">
+<blockquote >
+<p>
+All deployed software from Start of Production (SoP) must be safe.
+</p>
+
+<p>
+Safety is the absence of unreasonable risk (ISO 26262).
+</p>
+</blockquote>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-org8217764">
+<h2 id="org8217764">The Setup</h2>
+<div class="tight-cols" style="display:grid; grid-template-columns:1fr 1fr; gap:1em; align-items:start;">
+<div>
+
+<div class="fragment fade-in">
+<p>
+<b>The middleware</b>
+</p>
+<ul>
+<li>~1M LOC in total</li>
+<li>Tooling (e.g., the digital twin core): ~560k LOC</li>
+<li>Includes the digital twin, which is safety-relevant</li>
+
+</ul>
+</div>
+
+<div class="fragment fade-in">
+<p>
+<b>Release Cadence</b>
+</p>
+<ul>
+<li>every three months</li>
+
+</ul>
+</div>
+
+<div class="fragment fade-in">
+<p>
+<b>Development</b>
+</p>
+<ul>
+<li>~100 engineers, continuously</li>
+
+</ul>
+</div>
+</div>
+
+<div>
+<div class="fragment fade-in">
+<p>
+<b>Required artifacts</b>
+</p>
+<ul>
+<li>Complete specification and test coverage reports</li>
+<li>Architecture documentation</li>
+<li>Safety and security manual</li>
+<li>Tool development plan</li>
+<li>Engineering process</li>
+<li>etc.</li>
+
+</ul>
+</div>
+
+<p class="fragment (fade-in)">
+→ <b>certification</b> through independent party
+</p>
+</div>
+
+</div>
+</section>
+</section>
+<section>
+<section id="slide-orgc225147">
+<h2 id="orgc225147">From Research to Transferable Product</h2>
+<div class="fragment fade-in" style="position:relative;">
+<p>
+<b>Processes are important</b>
+</p>
+<ol>
+<li><b>Repeatable</b> outcomes across teams and releases</li>
+<li><b>Traceable</b> evidence for safety and certification</li>
+<li><b>Auditable</b> by independent parties</li>
+
+</ol>
+</div>
+
+<div class="tight-cols" style="display:grid; grid-template-columns:1fr 1fr; gap:1em; align-items:start;">
+
+<div>
+<div class="fragment fade-in" style="position:relative;">
+<p>
+<b>Docs-as-Code</b>
+</p>
+<ol>
+<li>Version control</li>
+<li>Continuous integration</li>
+<li>Code reviews</li>
+<li>Plain text formats</li>
+
+</ol>
+
+<div id="org05a5502" class="figure">
+<p><img src="data/66/2ea14c-fd4a-4920-837f-10b19baf798a/Org-mode-unicorn.svg" alt="Org mode logo" class="org-svg" style="position:absolute; top:0; right:3.5em; width:3em; max-height:3em; object-fit:contain;" />
+</p>
+</div>
+
+<div id="org3794539" class="figure">
+<p><img src="data/66/2ea14c-fd4a-4920-837f-10b19baf798a/github.png" alt="GitHub logo" style="position:absolute; top:0; right:0; width:3em; max-height:3em; object-fit:contain;" />
+</p>
+</div>
+</div>
+</div>
+
+<div class="fragment fade-in" style="position:relative;">
+<p>
+<b>Safety is a mindset</b>
+</p>
+<ol>
+<li>Everyone's concern</li>
+<li>It affects every part of the product</li>
+
+</ol>
+
+<div id="org306510e" class="figure">
+<p><img src="data/66/2ea14c-fd4a-4920-837f-10b19baf798a/iso-26262.png" alt="ISO 26262 logo" style="position:absolute; top:0; right:0; width:4em; max-height:4em; object-fit:contain;" />
+</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-orge6f63dd">
+<h2 id="orge6f63dd">Conclusion - Cars to Clinics</h2>
+<div class="tight-cols" style="display:grid; grid-template-columns:1fr 1fr; gap:1em; align-items:start;">
+<div>
+<p>
+<b>Shared safety principles</b>
+</p>
+<ul>
+<li>Defined processes</li>
+<li>Change management</li>
+<li>Configuration management</li>
+<li>Risk-based development</li>
+<li>Traceability</li>
+<li>Safety evidence</li>
+
+</ul>
+</div>
+<div>
+<p>
+<b>Transferable practice</b>
+</p>
+<ul>
+<li>Processes (e.g., IEC 62304 ↔ ISO 26262 mapping)</li>
+<li>Tools (docs-as-code, CI, traceability)</li>
+<li>Digital twin concepts</li>
+
+</ul>
+</div>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-orgbdca853">
+<h2 id="orgbdca853">Colophon</h2>
+<blockquote >
+<p>
+The complete middleware is released and qualified according to ISO
+26262 since May 2026.
+</p>
+</blockquote>
+
+<ul>
+<li class="fragment fade-in">Slides in <b>Org</b>, diagrams via <b>PlantUML</b> and <b>draw.io</b>, rendered with
+<b>Reveal.js</b>, versioned on <b>GitHub</b>.</li>
+<li class="fragment fade-in">A <b>demo application</b> of a medical device sends data to a dashboard
+alongside these slides.</li>
+<li class="fragment fade-in">Everything runs in a <b>Docker</b> container.</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org0a6332c">
+<h2 id="org0a6332c">Repository &amp; Questions</h2>
+<div class="two-col">
+<div>
+<blockquote>These slides.  This demo.  Reproducible.  Public domain.</blockquote>
+<p><code>github.com/fabianfranzelin/vernetzte-systeme-in-der-medizin</code></p>
+<p>Thank you --- questions?</p>
+</div>
+<div style="text-align:center;">
+<img src="assets/qr-repo.svg" alt="QR code to the repository" style="width:280px;height:280px;"/>
+<p class="muted">Scan to open the repository</p>
+</div>
+</div>
+</section>
+</section>
+</div>
+</div>
+<script src="../assets/vendor/reveal.js/dist/reveal.js"></script>
+<script src="../assets/vendor/reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight],
+center: false, margin: 0.02, transition: 'slide', width: 1200, height: 760, hash: true, history: true, hashOneBasedIndex: true
+});
+
+</script>
+<style>#ff-reveal-footer{position:fixed;bottom:10px;left:10px;right:10px;display:flex;justify-content:space-between;align-items:center;font-size:18px;color:#666;z-index:1000;pointer-events:none;font-family:sans-serif;}.reveal .slide-number{display:none!important;}</style><div id="ff-reveal-footer"><span>Public — CC0-1.0 · Fabian Franzelin · 2026</span><span id="ff-reveal-footer-page"></span></div><script>document.addEventListener('DOMContentLoaded',function(){if(typeof Reveal!=='undefined'){var K='ff-reveal-pos:'+location.pathname;function u(){var el=document.getElementById('ff-reveal-footer-page');if(el){el.textContent=Reveal.getIndices().h+1;}try{var i=Reveal.getIndices();sessionStorage.setItem(K,JSON.stringify([i.h,i.v,i.f]));}catch(e){}}function restore(){try{var s=sessionStorage.getItem(K);if(!s)return;var a=JSON.parse(s);var sh=a[0]||0,sv=a[1]||0,sf=(typeof a[2]==='number'&&!isNaN(a[2]))?a[2]:undefined;if(!sh&&!sv&&sf===undefined)return;var i=Reveal.getIndices();var hasHash=location.hash&&location.hash!=='#'&&location.hash!=='#/';var landedZero=(i.h===0&&i.v===0);if(!hasHash||landedZero){Reveal.slide(sh,sv,sf);}}catch(e){}}Reveal.on('slidechanged',u);Reveal.on('fragmentshown',u);Reveal.on('fragmenthidden',u);Reveal.on('ready',function(){restore();u();});}});</script></body>
+</html>

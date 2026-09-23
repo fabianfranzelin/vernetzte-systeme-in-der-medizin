@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Digital Twins</title>
+<meta name="author" content="Dr. Fabian Franzelin"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../assets/vendor/reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../assets/vendor/reveal.js/dist/theme/white.css" id="theme"/>
+
+<link rel="stylesheet" href="assets/vsm-theme.css"/>
+
+<link rel="stylesheet" href="../assets/vendor/reveal.js-pointer/dist/pointer.css"/>
+<link rel="stylesheet" href="../assets/vendor/reveal.js/plugin/highlight/zenburn.css"/><link href="../assets/vendor/fonts/fonts.css" rel="stylesheet">
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h2>Digital Twins</h2><h4>Credible virtual models across domains</h4><p>Dr. Fabian Franzelin · 2026-09-24</p><p style="font-size:0.6em;">Talk · W2-Professorship Computer Science · Reutlingen University</p>
+</section>
+<section>
+<section id="slide-org13f1ec7">
+<h2 id="org13f1ec7">Introduction</h2>
+<blockquote >
+<p>
+<b>Reliable</b> testing of the application code of a <b>release</b> candidate of a
+robotaxi platform at high scale, with <b>13,500 h</b> of recomputed data
+within <b>7 days</b>.​
+</p>
+</blockquote>
+
+<div class="tight-cols" style="display:grid; grid-template-columns:2fr 1fr; gap:1.2em; align-items:center;">
+<div>
+<ol>
+<li>Applications are exposed to <b>uncontrollable uncertainties</b></li>
+<li>The digital twin is a <b>reliable, virtual model</b> of the vehicle</li>
+<li>Use <b>Uncertainty Quantification (UQ)</b> to close the reality gap</li>
+<li>Run representative test scenarios on the digital twin <b>at scale</b> in
+the cloud</li>
+
+</ol>
+
+</div>
+<div>
+
+
+<div id="orgd1ddc32" class="figure">
+<p><img src="data/59/45ce65-f992-4eb4-801c-5266100b71ff/daimler-bosch-robotaxi-560x600.jpg" alt="Daimler-Bosch robo taxi" style="width:100%; height:auto; display:block; margin:0 auto; border-radius:0.3em;" />
+</p>
+</div>
+
+</div>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-org1d3818e">
+<h2 id="org1d3818e">The Setup</h2>
+<div class="setup-diagram" style="position:relative; width:70%; max-width:900px; aspect-ratio: 620 / 250; margin:0 auto;">
+<style>.setup-diagram .figure, .setup-diagram .figure p { margin:0; padding:0; }</style>
+
+
+<div id="org9691137" class="figure">
+<p><img src="images/en-digital-twin-vehicle-hol-sol-background.svg" alt="Vehicle, embedded device, and host device" class="org-svg" style="position:absolute; inset:0; width:100%; height:100%; object-fit:contain;" />
+</p>
+</div>
+
+
+<div id="org4f26350" class="figure">
+<p><img src="images/en-digital-twin-vehicle-hol-sol-step-1.svg" alt="Sensor data flows from the vehicle to embedded and host devices" class="fragment fade-in-then-out" data-fragment-index="1" style="position:absolute; inset:0; width:100%; height:100%; object-fit:contain;" />
+</p>
+</div>
+
+
+<div id="org5b6d1fd" class="figure">
+<p><img src="images/en-digital-twin-vehicle-hol-sol-step-2.svg" alt="Hardware abstraction connects the embedded and host devices" class="fragment fade-in-then-out" data-fragment-index="2" style="position:absolute; inset:0; width:100%; height:100%; object-fit:contain;" />
+</p>
+</div>
+
+
+<div id="orgd77a3b7" class="figure">
+<p><img src="images/en-digital-twin-vehicle-hol-sol-step-3.svg" alt="First equality relationship in the setup" class="fragment fade-in-then-out" data-fragment-index="3" style="position:absolute; inset:0; width:100%; height:100%; object-fit:contain;" />
+</p>
+</div>
+
+
+<div id="orgbee62aa" class="figure">
+<p><img src="images/en-digital-twin-vehicle-hol-sol-step-4.svg" alt="Complete vehicle digital twin setup" class="fragment fade-in" data-fragment-index="4" style="position:absolute; inset:0; width:100%; height:100%; object-fit:contain;" />
+</p>
+</div>
+
+</div>
+
+<p class="fragment fade-in" data-fragment-index="3">
+Behavior on the <b>embedded device</b> <b>matches</b> the vehicle.
+</p>
+
+<p class="fragment fade-in" data-fragment-index="4">
+Behavior on the <b>host device</b> <b>matches</b> the vehicle.
+</p>
+</section>
+</section>
+<section>
+<section id="slide-orgf83e311">
+<h2 id="orgf83e311">Credibility Through Co-Simulation</h2>
+<div class="tight-cols" style="display:grid; grid-template-columns:1fr 1fr; gap:1em; align-items:center;">
+<style>.tight-cols p{margin:.15em 0!important;} .tight-cols ul{margin:.1em 0 .5em 0!important;} .tight-cols li{margin:.05em 0!important;} .tight-cols .figure{margin:0;} .tight-cols .figure p{margin:0!important;}</style>
+<div>
+
+<p>
+<b>Middleware Player</b>
+</p>
+
+<ul>
+<li>Controls <b>data flow</b> between applications</li>
+<li>Controls <b>control flow</b> of applications</li>
+
+</ul>
+
+<p>
+<b>Timing Simulation</b>
+</p>
+
+<ul>
+<li>Receives workload information</li>
+<li>Captures timing behavior</li>
+<li>Provides schedule updates</li>
+
+</ul>
+
+</div>
+<div>
+
+
+<div id="org9f16cd4" class="figure">
+<p><img src="images/en-digital-twin-co-simulation.png" alt="Middleware between vehicle and digital twin" style="width:100%; max-width:420px; height:auto; display:block; margin:0 auto;" />
+</p>
+</div>
+
+</div>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-org679094c">
+<h2 id="org679094c">Verification via UQ</h2>
+<div style="position:relative; width:80%; max-width:900px; aspect-ratio: 16 / 9; margin:0 auto;">
+
+
+<div id="org03e806e" class="figure">
+<p><img src="images/en-digital-twin-vehicle-uq.svg" alt="Uncertainty quantification for the digital twin" class="org-svg" style="position:absolute; inset:0; width:100%; height:100%; object-fit:contain;" />
+</p>
+</div>
+
+<div class="fragment fade-in" data-fragment-index="1" style="position:absolute; inset:0; backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); background:rgba(255,255,255,0.15);"></div>
+<div class="fragment fade-in" data-fragment-index="1" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:#fff; color:#000; border:2px solid #000; padding:0.5em 1em; border-radius:0.3em; font-size:0.7em;">
+<p>
+UQ closes the reality gap → evidence for the <b>credibility assessment</b>
+</p>
+</div>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-org15b4a61">
+<h2 id="org15b4a61">Conclusion - Cars to Clinics</h2>
+<div class="tight-cols" style="display:grid; grid-template-columns:1fr 1fr; gap:1em; align-items:start;">
+<style>.tight-cols p{margin:.15em 0!important;} .tight-cols ul{margin:.1em 0 .5em 0!important;} .tight-cols li{margin:.05em 0!important;} .tight-cols .figure{margin:0;} .tight-cols .figure p{margin:0!important;}</style>
+<div>
+
+<p>
+<b>Networked Systems</b>
+</p>
+
+<ul>
+<li>Service oriented communication — from ECUs to SDC/BICEPS medical devices</li>
+
+</ul>
+
+<p>
+<b>Co-simulation &amp; Middleware</b>
+</p>
+
+<ul>
+<li>Middleware player → patient-specific device twin</li>
+
+</ul>
+
+<p>
+<b>Credibility Assessment</b>
+</p>
+
+<ul>
+<li>Aligns with regulatory needs (ISO 26262 → IEC 62304)</li>
+
+</ul>
+
+</div>
+<div>
+
+
+<div id="org87c2a96" class="figure">
+<p><img src="images/en-digital-twin-co-simulation.png" alt="Middleware between vehicle and digital twin" style="width:100%; max-width:420px; height:auto; display:block; margin:0 auto;" />
+</p>
+</div>
+
+</div>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-orgd2c9e70" style="font-size:0.55em; line-height:1.15;">
+<h2 id="orgd2c9e70">References</h2>
+<p>
+<b>Patents</b>
+</p>
+<ol>
+<li>Franzelin, F.; Kokemüller, J. <i>Computer-implementierte Testumgebung
+sowie Verfahren zum Testen von Software-Komponenten.</i> Robert Bosch
+GmbH, DE 10 2021 214 973.1, 2021.</li>
+<li>Franzelin, F.; Kokemüller, J. <i>Verfahren zum Testen einer auf
+mehrere Programme verteilten Datenverarbeitung.</i> Robert Bosch GmbH,
+DE 10 2022 203 166.0, 2022.</li>
+<li>Three further patents pending (Robert Bosch GmbH).</li>
+
+</ol>
+
+<p>
+<b>Industrial research (unpublished)</b>
+</p>
+<ol>
+<li>Bosch research reports on uncertainty quantification for
+safety-critical automotive software, in collaboration with
+Prof. Bruno Sudret (ETH Zürich).</li>
+
+</ol>
+
+<p>
+<b>Paper(s)</b>
+</p>
+<ol>
+<li>Jakeman, J. D.; Franzelin, F.; Narayan, A. et al. “Polynomial chaos
+expansions for dependent random variables”. <i>Computer Methods in
+Applied Mechanics and Engineering</i> 351 (2019), pp. 643–666.</li>
+<li>Markus Köppel, Fabian Franzelin, Ilja Kröker u. a. “Comparison of
+data-driven uncertainty quantification methods for a carbon dioxide
+storage benchmark scenario”. In: Computational Geosciences 23.2
+(Nov. 2018), S. 339–354.</li>
+
+</ol>
+</section>
+</section>
+</div>
+</div>
+<script src="../assets/vendor/reveal.js/dist/reveal.js"></script>
+<script src="../assets/vendor/reveal.js/plugin/highlight/highlight.js"></script>
+<script src="../assets/vendor/reveal.js-pointer/dist/pointer.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight, RevealPointer],
+center: false, margin: 0.02, transition: 'slide', width: 1200, height: 760, hash: true, history: true, hashOneBasedIndex: true
+});
+
+</script>
+<style>#ff-reveal-footer{position:fixed;bottom:10px;left:10px;right:10px;display:flex;justify-content:space-between;align-items:center;font-size:18px;color:#666;z-index:1000;pointer-events:none;font-family:sans-serif;}.reveal .slide-number{display:none!important;}</style><div id="ff-reveal-footer"><span>Public — CC0-1.0 · Fabian Franzelin · 2026</span><span id="ff-reveal-footer-page"></span></div><script>document.addEventListener('DOMContentLoaded',function(){if(typeof Reveal!=='undefined'){var K='ff-reveal-pos:'+location.pathname;function u(){var el=document.getElementById('ff-reveal-footer-page');if(el){el.textContent=Reveal.getIndices().h+1;}try{var i=Reveal.getIndices();sessionStorage.setItem(K,JSON.stringify([i.h,i.v,i.f]));}catch(e){}}function restore(){try{var s=sessionStorage.getItem(K);if(!s)return;var a=JSON.parse(s);var sh=a[0]||0,sv=a[1]||0,sf=(typeof a[2]==='number'&&!isNaN(a[2]))?a[2]:undefined;if(!sh&&!sv&&sf===undefined)return;var i=Reveal.getIndices();var hasHash=location.hash&&location.hash!=='#'&&location.hash!=='#/';var landedZero=(i.h===0&&i.v===0);if(!hasHash||landedZero){Reveal.slide(sh,sv,sf);}}catch(e){}}Reveal.on('slidechanged',u);Reveal.on('fragmentshown',u);Reveal.on('fragmenthidden',u);Reveal.on('ready',function(){restore();u();});}});</script></body>
+</html>

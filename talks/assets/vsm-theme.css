@@ -351,3 +351,13 @@ body,
 .reveal .slide-number { display: none !important; }
 .reveal .controls { color: var(--vsm-ink-soft); }
 .reveal .progress { color: var(--vsm-accent); }
+
+/* ---------- tight-cols helper (shared by talks) ---------- */
+
+.tight-cols p { margin: .15em 0 !important; }
+.tight-cols ul { margin: .1em 0 .5em 0 !important; }
+.tight-cols li { margin: .05em 0 !important; }
+.tight-cols .figure { margin: 0; }
+.tight-cols .figure p { margin: 0 !important; }
+.setup-diagram .figure,
+.setup-diagram .figure p { margin: 0; padding: 0; }

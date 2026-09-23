@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Service-oriented Device Connectivity (SDC)</title>
+<meta name="author" content="Dr. Fabian Franzelin"/>
+<meta name="description" content=""/>
+<meta name="keywords" content="SDC, BICEPS, IEEE 11073, medical devices, interoperability"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../assets/vendor/reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../assets/vendor/reveal.js/dist/theme/white.css" id="theme"/>
+
+<link rel="stylesheet" href="assets/vsm-theme.css"/>
+
+<link rel="stylesheet" href="../assets/vendor/reveal.js-pointer/dist/pointer.css"/>
+
+<link rel="stylesheet" href="../assets/vendor/reveal.js/plugin/highlight/monokai.css"/>
+<link rel="stylesheet" href="../assets/vendor/reveal.js/plugin/highlight/zenburn.css"/><link href="../assets/vendor/fonts/fonts.css" rel="stylesheet">
+<style>.demo-frame{width:95%;height:560px;border:1px solid #cbd5e1;border-radius:6px;} .two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.5em;align-items:start;} .muted{color:#475569;font-size:0.75em;} .accent{color:#0e7490;} .mini-corner{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);width:528px;height:160px;border:0;border-radius:6px;box-shadow:0 2px 6px rgba(0,0,0,0.08);z-index:5;background:#fff;} .reveal pre{box-shadow:none;background:#272822;border-radius:6px;padding:0.6em 0.8em;} .reveal pre code{background:#272822!important;color:#f8f8f2;font-size:0.75em;line-height:1.35;} .reveal pre code .org-comment,.reveal pre code .hljs-comment{color:#75715e;} .reveal pre code .hljs-string{color:#e6db74;} .reveal pre code .hljs-number{color:#ae81ff;} .reveal pre code .hljs-keyword,.reveal pre code .hljs-built_in{color:#f92672;}</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h2>Service-oriented Device Connectivity (SDC)</h2><h4>A wearable demo</h4><p>Dr. Fabian Franzelin · 2026-09-24</p><p style="font-size:0.6em;">Talk · W2-Professorship Computer Science · Reutlingen University</p>
+</section>
+<section>
+<section id="slide-orgb2c69c7">
+<h2 id="orgb2c69c7">Home patient → hospital clinician</h2>
+<aside class="notes">
+<ul>
+<li>A wearable sensor on the belt streams 3D acceleration at 100 Hz.</li>
+<li>A clinician's dashboard shows the patient's gait cadence in real time.</li>
+<li>Multiple sclerosis follow-up — no clinic visit needed today.</li>
+
+</ul>
+
+</aside>
+
+<iframe class="demo-frame" src="http://localhost:8000" title="Live SDC dashboard"></iframe>
+</section>
+</section>
+<section>
+<section id="slide-org374ba27">
+<h2 id="org374ba27">Service-oriented Device Connectivity</h2>
+<p>
+<b>General</b>
+</p>
+<ul>
+<li>Medical devices in clinical settings</li>
+<li>Discover each other</li>
+<li>Exchange data over IP networks</li>
+
+</ul>
+
+<p>
+<b>Communication Layers</b>
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="text" >BICEPS       what is exchanged   ✅  full model, correct vocabulary
+SDC services how it is exchanged 🟡  same operations, different bindings
+MDPWS        over what           ❌  skipped
+DPWS/SOAP    web-service stack   ❌  skipped; replaced by HTTP
+</code></pre>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-org3059681">
+<h2 id="org3059681">The Demo — BICEPS in SDC</h2>
+<p>
+<i>BICEPS (IEEE 11073-10207): the information model behind SDC.</i>
+</p>
+
+<ul>
+<li><b>Domain model</b>, not a wire format.</li>
+<li><b>Hierarchy</b>: <code>MDS → VMD → Channel → Metric</code>, joined by <i>handle</i>.</li>
+<li><b>Descriptor vs. state</b>: static structure vs. live values.</li>
+<li><b>Typed metrics</b>: <code>NumericMetric</code>, <code>RealTimeSampleArrayMetric</code>, alerts, contexts.</li>
+<li><b>MDC nomenclature</b>: semantic codes (<code>MDC_ACT_STEP_RATE</code>), not just numbers.</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-orgdb5d1bf">
+<h3 id="orgdb5d1bf">BICEPS in the demo — descriptor</h3>
+<p>
+<a href="../../demo/provider.py"><code>demo/provider.py</code></a> — Medical Device Information Base (MDIB)
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" ># ---------- BICEPS-style information model (static descriptors) ----------
+MDIB = {
+  # medical device system
+  "mds": {
+    "handle": "mds.wearable", "model": "gaitband-sim",
+    # Virtual medical device
+    "vmds": [{"handle": "vmd.gait", "channels": [{"handle": "channel.imu",
+      "metrics": [
+        {"handle": "metric.cadence",
+         "kind": "NumericMetric",
+         "unit": "1/min", "code": "MDC_ACT_STEP_RATE"},
+        {"handle": "metric.accel",
+         "kind": "RealTimeSampleArrayMetric",
+         "unit": "g", "code": "MDC_ACT_ACCEL_VEC",
+         "sample_rate_hz": 100.0, "components": ["ax","ay","az"]},
+      ]}]}]}}
+</code></pre>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-org91ccd70">
+<h3 id="org91ccd70">BICEPS in the demo — state split</h3>
+<p>
+<a href="../../demo/provider.py"><code>demo/provider.py</code></a> — States
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >STATE = {
+    "metric.cadence": {"value": None, "unit": "1/min",  "ts": 0.0},
+    "metric.accel":   {"value": [None]*3, "unit": "g",  "ts": 0.0},
+}
+</code></pre>
+</div>
+
+<ul>
+<li><b>Same handles</b> as the MDIB</li>
+<li><b>Mutable</b> — updated each sample</li>
+<li><b>Self-contained values</b> — unit + timestamp travel with the value.</li>
+<li><b>Snapshot on demand</b> via <code>GET /state</code>; deltas pushed on <code>GET /events</code>.</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org3429c58">
+<h3 id="org3429c58">BICEPS operations → demo endpoints</h3>
+
+<div id="org04d3385" class="figure">
+<p><img src="images/en-soc-message-flow.png" alt="en-soc-message-flow.png" style="max-height:60vh;width:auto;" />
+</p>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-org20e35d8">
+<h2 id="org20e35d8">Conclusion — Clinics to Cars</h2>
+<iframe class="mini-corner" src="http://localhost:8000/mini?v=2" title="Live cadence & activity"></iframe>
+
+<ul>
+<li>Same pattern across domains: <i>discover → describe → subscribe → stream</i>.</li>
+<li>Medical: <b>SDC</b> (IEEE 11073) — this demo.</li>
+<li>Automotive: <b>SOME/IP</b> — service discovery + pub/sub on IP.</li>
+<li>Industrial / avionics: <b>DDS</b> — data-centric pub/sub.</li>
+<li>Takeaway: service-oriented device connectivity is a <i>pattern</i>, not a stack.</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org220735a" style="font-size:0.55em; line-height:1.15;">
+<h2 id="org220735a">References</h2>
+<p>
+<b>Standards</b>
+</p>
+<ol>
+<li>IEEE 11073-10207 — Domain Information &amp; Service Model for
+Service-Oriented Point-of-Care Medical Device Communication (BICEPS).</li>
+<li>IEEE 11073-20701 — Service-Oriented Medical Device Exchange
+Architecture and Protocol Binding (SDC).</li>
+<li>IEEE 11073-20702 — Medical Device Communication Profile for Web
+Services (MDPWS).</li>
+<li>OASIS — Devices Profile for Web Services (DPWS) 1.1.</li>
+
+</ol>
+
+<p>
+<b>Open-source implementations</b>
+</p>
+<ol>
+<li>OR.NET / SDCLib — reference SDC implementation, <a href="https://sdclib.github.io/">https://sdclib.github.io/</a></li>
+
+</ol>
+
+<p>
+<b>Bachelor's Thesis</b>
+</p>
+<ol>
+<li>Fabian Franzelin: Bachelor-Thesis with Prof. Nassir Navab, TU
+Munich "IT-Tools zur On- und Offline Analyse von Einzelschritten,
+die mit dem hochauflösenden 3D-Akzelerometer actibelt®
+aufgezeichnet werden", 2009</li>
+
+</ol>
+</section>
+</section>
+</div>
+</div>
+<script src="../assets/vendor/reveal.js/dist/reveal.js"></script>
+<script src="../assets/vendor/reveal.js/plugin/highlight/highlight.js"></script>
+<script src="../assets/vendor/reveal.js-pointer/dist/pointer.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight, RevealPointer],
+center: false, margin: 0.02, transition: 'slide', width: 1200, height: 760, hash: true, history: true, hashOneBasedIndex: true
+});
+
+</script>
+<style>#ff-reveal-footer{position:fixed;bottom:10px;left:10px;right:10px;display:flex;justify-content:space-between;align-items:center;font-size:18px;color:#666;z-index:1000;pointer-events:none;font-family:sans-serif;}.reveal .slide-number{display:none!important;}</style><div id="ff-reveal-footer"><span>Public — CC0-1.0 · Fabian Franzelin · 2026</span><span id="ff-reveal-footer-page"></span></div><script>document.addEventListener('DOMContentLoaded',function(){if(typeof Reveal!=='undefined'){var K='ff-reveal-pos:'+location.pathname;function u(){var el=document.getElementById('ff-reveal-footer-page');if(el){el.textContent=Reveal.getIndices().h+1;}try{var i=Reveal.getIndices();sessionStorage.setItem(K,JSON.stringify([i.h,i.v,i.f]));}catch(e){}}function restore(){try{var s=sessionStorage.getItem(K);if(!s)return;var a=JSON.parse(s);var sh=a[0]||0,sv=a[1]||0,sf=(typeof a[2]==='number'&&!isNaN(a[2]))?a[2]:undefined;if(!sh&&!sv&&sf===undefined)return;var i=Reveal.getIndices();var hasHash=location.hash&&location.hash!=='#'&&location.hash!=='#/';var landedZero=(i.h===0&&i.v===0);if(!hasHash||landedZero){Reveal.slide(sh,sv,sf);}}catch(e){}}Reveal.on('slidechanged',u);Reveal.on('fragmentshown',u);Reveal.on('fragmenthidden',u);Reveal.on('ready',function(){restore();u();});}});</script></body>
+</html>
