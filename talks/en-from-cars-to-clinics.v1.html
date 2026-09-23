@@ -25,14 +25,14 @@
 <section id="sec-title-slide"><h2>From Cars to Clinics</h2><h4>Service-Oriented Middleware for Networked Medical Devices</h4><p>Dr. Fabian Franzelin · 2026-09-24</p><p style="font-size:0.6em;">Trial lecture · W2 Vernetzte Systeme in der Medizin · Hochschule Reutlingen</p>
 </section>
 <section>
-<section id="slide-orgc43d105">
-<h2 id="orgc43d105">A patient at home. A clinician in the hospital.</h2>
+<section id="slide-org4c7b84f">
+<h2 id="org4c7b84f">A patient at home. A clinician in the hospital.</h2>
 <iframe class="demo-frame" src="http://localhost:8000" title="Live SDC dashboard"></iframe>
 </section>
 </section>
 <section>
-<section id="slide-org7ba6fbd">
-<h2 id="org7ba6fbd">One question drives the next 20 minutes</h2>
+<section id="slide-org438a7ba">
+<h2 id="org438a7ba">One question drives the next 20 minutes</h2>
 <blockquote >
 <p>
 How does the dashboard actually talk to the sensor
@@ -42,8 +42,8 @@ How does the dashboard actually talk to the sensor
 </section>
 </section>
 <section>
-<section id="slide-orgafa6efc">
-<h2 id="orgafa6efc">Prerequisites I assume</h2>
+<section id="slide-org56ffd79">
+<h2 id="org56ffd79">Prerequisites I assume</h2>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -96,8 +96,8 @@ How does the dashboard actually talk to the sensor
 </section>
 </section>
 <section>
-<section id="slide-orgddc6fef">
-<h2 id="orgddc6fef">Outline</h2>
+<section id="slide-orgd317b0d">
+<h2 id="orgd317b0d">Outline</h2>
 <ol>
 <li>Requirements of a networked medical device</li>
 <li>Deep dive: SDC / IEEE 11073</li>
@@ -109,8 +109,8 @@ How does the dashboard actually talk to the sensor
 </section>
 </section>
 <section>
-<section id="slide-org3b28cbd">
-<h2 id="org3b28cbd">Requirements</h2>
+<section id="slide-orgd5b944f">
+<h2 id="orgd5b944f">Requirements</h2>
 <ol>
 <li><b>→ Requirements of a networked medical device</b></li>
 <li>Deep dive: SDC / IEEE 11073</li>
@@ -124,8 +124,8 @@ How does the dashboard actually talk to the sensor
 </section>
 </section>
 <section>
-<section id="slide-org810e1e7">
-<h3 id="org810e1e7">What a networked medical device must offer</h3>
+<section id="slide-org8edfb6d">
+<h3 id="org8edfb6d">What a networked medical device must offer</h3>
 <ol>
 <li class="fragment appear"><b>Interoperability</b> &#x2014; multi-vendor plug-and-play in the OR / at home</li>
 <li class="fragment appear"><b>Real time</b> &#x2014; alarms, closed-loop control, streaming vitals</li>
@@ -138,8 +138,8 @@ How does the dashboard actually talk to the sensor
 </section>
 </section>
 <section>
-<section id="slide-org72e9cdd">
-<h3 id="org72e9cdd">A single scenario forces all six</h3>
+<section id="slide-org1710adb">
+<h3 id="org1710adb">A single scenario forces all six</h3>
 <ul>
 <li>Wearable sends <i>TidalVolume</i>, <i>HeartRate</i>, <i>StepCadence</i>.</li>
 <li>Dashboard subscribes, renders, raises an alert if a threshold is crossed.</li>
@@ -153,8 +153,8 @@ How does the dashboard actually talk to the sensor
 </section>
 </section>
 <section>
-<section id="slide-orgf67fc09">
-<h2 id="orgf67fc09">Deep dive &#x2014; SDC / IEEE 11073</h2>
+<section id="slide-org64e17fe">
+<h2 id="org64e17fe">Deep dive &#x2014; SDC / IEEE 11073</h2>
 <ol>
 <li>Requirements of a networked medical device</li>
 <li><b>→ Deep dive: SDC / IEEE 11073</b></li>
@@ -168,8 +168,8 @@ How does the dashboard actually talk to the sensor
 </section>
 </section>
 <section>
-<section id="slide-orge21f7a7">
-<h3 id="orge21f7a7">IEEE 11073 &#x2014; a family, not a single standard</h3>
+<section id="slide-orgc510cf0">
+<h3 id="orgc510cf0">IEEE 11073 &#x2014; a family, not a single standard</h3>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -213,8 +213,8 @@ How does the dashboard actually talk to the sensor
 </section>
 </section>
 <section>
-<section id="slide-orgd83dde7">
-<h3 id="orgd83dde7">The three roles in SDC</h3>
+<section id="slide-org2422da3">
+<h3 id="org2422da3">The three roles in SDC</h3>
 <ul>
 <li><b>Provider</b> &#x2014; a medical device that offers services (a ventilator).</li>
 <li><b>Consumer</b> &#x2014; a system that consumes them (a monitor, a dashboard).</li>
@@ -228,8 +228,8 @@ Everything above the network layer is <b>domain-specific medical semantics</b>.
 </section>
 </section>
 <section>
-<section id="slide-orgf744939">
-<h3 id="orgf744939">BICEPS descriptors &#x2014; static structure</h3>
+<section id="slide-org8e49430">
+<h3 id="org8e49430">BICEPS descriptors &#x2014; static structure</h3>
 <p>
 Every provider hosts an <b>MDIB</b> (Medical Device Information Base):
 </p>
@@ -250,8 +250,8 @@ Every provider hosts an <b>MDIB</b> (Medical Device Information Base):
 </section>
 </section>
 <section>
-<section id="slide-org903dd1a">
-<h3 id="org903dd1a">BICEPS states &#x2014; live values</h3>
+<section id="slide-orge771400">
+<h3 id="orge771400">BICEPS states &#x2014; live values</h3>
 <p>
 The state tree carries the current values against each descriptor:
 </p>
@@ -269,8 +269,8 @@ The state tree carries the current values against each descriptor:
 </section>
 </section>
 <section>
-<section id="slide-org0b3c0bb">
-<h3 id="org0b3c0bb">The four service groups</h3>
+<section id="slide-org294ff51">
+<h3 id="org294ff51">The four service groups</h3>
 <ul>
 <li class="fragment appear"><b>Get Service</b> &#x2014; pull the MDIB, one snapshot.</li>
 <li class="fragment appear"><b>Set Service</b> &#x2014; change device settings (with safety context!).</li>
@@ -281,8 +281,8 @@ The state tree carries the current values against each descriptor:
 </section>
 </section>
 <section>
-<section id="slide-org06e8138">
-<h3 id="org06e8138">Safety Contexts &#x2014; the hard part</h3>
+<section id="slide-org9fcb75c">
+<h3 id="org9fcb75c">Safety Contexts &#x2014; the hard part</h3>
 <p>
 A <i>Set</i> operation is not just an RPC.
 The consumer must include a <b>Safety Context</b> proving:
@@ -302,8 +302,8 @@ The consumer must include a <b>Safety Context</b> proving:
 </section>
 </section>
 <section>
-<section id="slide-org05a1896">
-<h3 id="org05a1896">Transport &#x2014; Medical DPWS</h3>
+<section id="slide-orgf8dfd13">
+<h3 id="orgf8dfd13">Transport &#x2014; Medical DPWS</h3>
 <ul>
 <li><b>WS-Discovery</b> over UDP multicast &#x2014; how devices find each other</li>
 <li><b>SOAP/HTTP(S)</b> over TCP &#x2014; for messages</li>
@@ -319,8 +319,8 @@ Layering, cleanly separated.
 </section>
 </section>
 <section>
-<section id="slide-org04d6ecc">
-<h3 id="org04d6ecc">Sequence 1 &#x2014; discovery and MDIB fetch</h3>
+<section id="slide-org72bf188">
+<h3 id="org72bf188">Sequence 1 &#x2014; discovery and MDIB fetch</h3>
 <div class="org-src-container">
 
 <pre   ><code class="text" >Consumer                       Provider (wearable)
@@ -339,8 +339,8 @@ Layering, cleanly separated.
 </section>
 </section>
 <section>
-<section id="slide-org2827edd">
-<h3 id="org2827edd">Sequence 2 &#x2014; subscribe and stream</h3>
+<section id="slide-org931ecb0">
+<h3 id="org931ecb0">Sequence 2 &#x2014; subscribe and stream</h3>
 <div class="org-src-container">
 
 <pre   ><code class="text" >Consumer                       Provider (wearable)
@@ -360,8 +360,8 @@ Layering, cleanly separated.
 </section>
 </section>
 <section>
-<section id="slide-org9bfbbfd">
-<h3 id="org9bfbbfd">Look at the corner of your screen</h3>
+<section id="slide-org4ba8c8a">
+<h3 id="org4ba8c8a">Look at the corner of your screen</h3>
 <p>
 The live cadence in the corner has been running through this whole
 section &#x2014; same SDC provider, same subscription, filtered down to two
@@ -381,8 +381,8 @@ No cloud. No configuration. Localhost only.
 </section>
 </section>
 <section>
-<section id="slide-orgc012843">
-<h2 id="orgc012843">Automotive lens</h2>
+<section id="slide-org9a679dc">
+<h2 id="org9a679dc">Automotive lens</h2>
 <ol>
 <li>Requirements of a networked medical device</li>
 <li>Deep dive: SDC / IEEE 11073</li>
@@ -396,8 +396,8 @@ No cloud. No configuration. Localhost only.
 </section>
 </section>
 <section>
-<section id="slide-org831234f">
-<h3 id="org831234f">Same problem, different domain</h3>
+<section id="slide-orgf24c567">
+<h3 id="orgf24c567">Same problem, different domain</h3>
 <p>
 In eight years at Bosch I built middleware for a car with 100+ ECUs.
 The requirements list I showed you earlier?
@@ -409,8 +409,8 @@ The requirements list I showed you earlier?
 </section>
 </section>
 <section>
-<section id="slide-orgdad5895">
-<h3 id="orgdad5895">Side-by-side</h3>
+<section id="slide-orgd16137e">
+<h3 id="orgd16137e">Side-by-side</h3>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -469,8 +469,8 @@ The requirements list I showed you earlier?
 </section>
 </section>
 <section>
-<section id="slide-org2a22ca2">
-<h3 id="org2a22ca2">What transfers, what does not</h3>
+<section id="slide-org462a590">
+<h3 id="org462a590">What transfers, what does not</h3>
 <p>
 <b>Transfers well:</b>
 </p>
@@ -494,8 +494,8 @@ The requirements list I showed you earlier?
 </section>
 </section>
 <section>
-<section id="slide-org6db93d1">
-<h3 id="org6db93d1">The insight</h3>
+<section id="slide-org73267db">
+<h3 id="org73267db">The insight</h3>
 <blockquote >
 <p>
 Architectural patterns are transferable.
@@ -510,8 +510,8 @@ And that is what I want to teach and research at Reutlingen.
 </section>
 </section>
 <section>
-<section id="slide-org1942fd0">
-<h2 id="org1942fd0">Where SDC fits</h2>
+<section id="slide-org59cff62">
+<h2 id="org59cff62">Where SDC fits</h2>
 <ol>
 <li>Requirements of a networked medical device</li>
 <li>Deep dive: SDC / IEEE 11073</li>
@@ -525,8 +525,8 @@ And that is what I want to teach and research at Reutlingen.
 </section>
 </section>
 <section>
-<section id="slide-org599db18">
-<h3 id="org599db18">One wearable, one dashboard &#x2014; but there is more</h3>
+<section id="slide-org1377264">
+<h3 id="org1377264">One wearable, one dashboard &#x2014; but there is more</h3>
 <p>
 The demo you have been watching sits at the bottom of a much taller
 stack that a networked medical system spans:
@@ -552,8 +552,8 @@ Patient wearable
 </section>
 </section>
 <section>
-<section id="slide-orgf019473">
-<h3 id="orgf019473">Two layers of the same stack</h3>
+<section id="slide-org79312aa">
+<h3 id="org79312aa">Two layers of the same stack</h3>
 <ul>
 <li>Above the device layer: the <b>Telematikinfrastruktur</b> &#x2014; topic of my
 German talk earlier today.</li>
@@ -568,8 +568,8 @@ It is a consistent architectural stance across many.</i>
 </section>
 </section>
 <section>
-<section id="slide-orgba04bfb">
-<h2 id="orgba04bfb">Research at Reutlingen</h2>
+<section id="slide-org84d933d">
+<h2 id="org84d933d">Research at Reutlingen</h2>
 <ol>
 <li>Requirements of a networked medical device</li>
 <li>Deep dive: SDC / IEEE 11073</li>
@@ -583,8 +583,8 @@ It is a consistent architectural stance across many.</i>
 </section>
 </section>
 <section>
-<section id="slide-org2e2ac80">
-<h3 id="org2e2ac80">What I would bring to CaMed</h3>
+<section id="slide-org60066a8">
+<h3 id="org60066a8">What I would bring to CaMed</h3>
 <p>
 Three concrete directions &#x2014; each with an existing anchor at Reutlingen:
 </p>
@@ -601,8 +601,8 @@ wearables to closed-loop clinical decisions (my PhD, applied to medicine).</li>
 </section>
 </section>
 <section>
-<section id="slide-org6bff8cf">
-<h3 id="org6bff8cf">Teaching stance</h3>
+<section id="slide-orgdc27f0a">
+<h3 id="orgdc27f0a">Teaching stance</h3>
 <ul>
 <li>Project-based, end-to-end: requirements → architecture → code → V&amp;V → regulatory dossier.</li>
 <li>Everything as code, everything reproducible, everything reviewable.</li>
@@ -612,8 +612,8 @@ wearables to closed-loop clinical decisions (my PhD, applied to medicine).</li>
 </section>
 </section>
 <section>
-<section id="slide-orgc3a5639">
-<h3 id="orgc3a5639">Closing the circle</h3>
+<section id="slide-org3db718c">
+<h3 id="org3db718c">Closing the circle</h3>
 <ul>
 <li>The dashboard was running from a git repository.</li>
 <li>Provider + consumer + dashboard in ~200 lines of Python.</li>
@@ -626,8 +626,8 @@ in the same git repository.</li>
 </section>
 </section>
 <section>
-<section id="slide-orgc4b7510">
-<h2 id="orgc4b7510">github.com/fabianfranzelin/vernetzte-systeme-in-der-medizin</h2>
+<section id="slide-org780a298">
+<h2 id="org780a298">github.com/fabianfranzelin/vernetzte-systeme-in-der-medizin</h2>
 <div class="two-col">
 <div>
 <blockquote>These slides.  This demo.  Reproducible.  Public domain.</blockquote>
@@ -642,15 +642,15 @@ in the same git repository.</li>
 </section>
 </section>
 <section>
-<section id="slide-orgabe122b">
-<h2 id="orgabe122b">Backup slides</h2>
-<div class="outline-text-2" id="text-orgabe122b">
+<section id="slide-org2e40b32">
+<h2 id="org2e40b32">Backup slides</h2>
+<div class="outline-text-2" id="text-org2e40b32">
 </div>
 </section>
 </section>
 <section>
-<section id="slide-org82369b4">
-<h3 id="org82369b4">BICEPS metric types in detail</h3>
+<section id="slide-org943bed5">
+<h3 id="org943bed5">BICEPS metric types in detail</h3>
 <ul>
 <li><code>NumericMetricState</code> &#x2014; single scalar with unit + timestamp</li>
 <li><code>StringMetricState</code> &#x2014; textual value</li>
@@ -662,8 +662,8 @@ in the same git repository.</li>
 </section>
 </section>
 <section>
-<section id="slide-org116bdfc">
-<h3 id="org116bdfc">IEC 62304 Class C artifact list</h3>
+<section id="slide-orga51a283">
+<h3 id="orga51a283">IEC 62304 Class C artifact list</h3>
 <ul>
 <li>Software development plan</li>
 <li>Software requirements specification</li>
@@ -679,8 +679,8 @@ in the same git repository.</li>
 </section>
 </section>
 <section>
-<section id="slide-org5b99dd2">
-<h3 id="org5b99dd2">SDC vs. FHIR &#x2014; one line</h3>
+<section id="slide-org3850cac">
+<h3 id="org3850cac">SDC vs. FHIR &#x2014; one line</h3>
 <ul>
 <li><b>SDC</b>: real-time, device-to-device, inside a clinical space, milliseconds.</li>
 <li><b>FHIR</b>: system-to-system, cross-institution, over the internet, seconds.</li>
