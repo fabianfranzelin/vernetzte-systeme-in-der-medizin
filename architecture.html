@@ -18,13 +18,13 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org7b9c1d8">Overview</a></li>
-<li><a href="#orgff31669">IEEE 11073 &#x2014; family map</a></li>
-<li><a href="#org6c9dcb1">BICEPS</a></li>
-<li><a href="#orgbb7a128">Sequence</a></li>
-<li><a href="#orgd886f69">Safety Contexts</a></li>
-<li><a href="#org46049d3">Transport &#x2014; Medical DPWS</a></li>
-<li><a href="#org163f55e">Components</a>
+<li><a href="#org7b49b51">Overview</a></li>
+<li><a href="#orgcd2558c">IEEE 11073 &#x2014; family map</a></li>
+<li><a href="#org8be2be9">BICEPS</a></li>
+<li><a href="#org6cbae23">Sequence</a></li>
+<li><a href="#org8c00932">Safety Contexts</a></li>
+<li><a href="#orgf0257d2">Transport &#x2014; Medical DPWS</a></li>
+<li><a href="#org83b75fc">Components</a>
 <ul>
 <li><a href="#COMP-MDIB">COMP-MDIB &#x2014; Information Model</a></li>
 <li><a href="#COMP-GAIT">COMP-GAIT &#x2014; Gait Analysis</a></li>
@@ -35,14 +35,14 @@
 <li><a href="#COMP-DASH">COMP-DASH &#x2014; Dashboard UI + JSON API</a></li>
 </ul>
 </li>
-<li><a href="#org2981df3">Traceability matrix</a></li>
-<li><a href="#org38d00d5">Related documents</a></li>
+<li><a href="#org323a4ab">Traceability matrix</a></li>
+<li><a href="#orgd86c45c">Related documents</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org7b9c1d8" class="outline-2">
-<h2 id="org7b9c1d8">Overview</h2>
-<div class="outline-text-2" id="text-org7b9c1d8">
+<div id="outline-container-org7b49b51" class="outline-2">
+<h2 id="org7b49b51">Overview</h2>
+<div class="outline-text-2" id="text-org7b49b51">
 <p>
 The demo in this repository implements a minimal <i>provider</i> and <i>consumer</i>
 following the <b>Service-Oriented Device Connectivity</b> (SDC) family of standards
@@ -51,9 +51,9 @@ the source code without prior SDC background.
 </p>
 </div>
 </div>
-<div id="outline-container-orgff31669" class="outline-2">
-<h2 id="orgff31669">IEEE 11073 &#x2014; family map</h2>
-<div class="outline-text-2" id="text-orgff31669">
+<div id="outline-container-orgcd2558c" class="outline-2">
+<h2 id="orgcd2558c">IEEE 11073 &#x2014; family map</h2>
+<div class="outline-text-2" id="text-orgcd2558c">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -92,9 +92,9 @@ the source code without prior SDC background.
 </table>
 </div>
 </div>
-<div id="outline-container-org6c9dcb1" class="outline-2">
-<h2 id="org6c9dcb1">BICEPS</h2>
-<div class="outline-text-2" id="text-org6c9dcb1">
+<div id="outline-container-org8be2be9" class="outline-2">
+<h2 id="org8be2be9">BICEPS</h2>
+<div class="outline-text-2" id="text-org8be2be9">
 <p>
 BICEPS = <i>Basic Integrated Clinical Environment Protocol Specification</i>.
 </p>
@@ -130,9 +130,9 @@ per-sample data) &#x2014; Nyquist-safe by construction.
 </p>
 </div>
 </div>
-<div id="outline-container-orgbb7a128" class="outline-2">
-<h2 id="orgbb7a128">Sequence</h2>
-<div class="outline-text-2" id="text-orgbb7a128">
+<div id="outline-container-org6cbae23" class="outline-2">
+<h2 id="org6cbae23">Sequence</h2>
+<div class="outline-text-2" id="text-org6cbae23">
 <p>
 A minimal interaction looks like this:
 </p>
@@ -156,9 +156,9 @@ A minimal interaction looks like this:
 </div>
 </div>
 </div>
-<div id="outline-container-orgd886f69" class="outline-2">
-<h2 id="orgd886f69">Safety Contexts</h2>
-<div class="outline-text-2" id="text-orgd886f69">
+<div id="outline-container-org8c00932" class="outline-2">
+<h2 id="org8c00932">Safety Contexts</h2>
+<div class="outline-text-2" id="text-org8c00932">
 <p>
 A <code>Set</code> operation in SDC is never just a remote procedure call.  It carries
 a <b>Safety Context</b> proving the operation is:
@@ -177,9 +177,9 @@ service bus over TLS.
 </p>
 </div>
 </div>
-<div id="outline-container-org46049d3" class="outline-2">
-<h2 id="org46049d3">Transport &#x2014; Medical DPWS</h2>
-<div class="outline-text-2" id="text-org46049d3">
+<div id="outline-container-orgf0257d2" class="outline-2">
+<h2 id="orgf0257d2">Transport &#x2014; Medical DPWS</h2>
+<div class="outline-text-2" id="text-orgf0257d2">
 <ul class="org-ul">
 <li><b>WS-Discovery</b> over UDP multicast (device discovery)</li>
 <li><b>SOAP over HTTP(S)/TCP</b> (messages)</li>
@@ -189,9 +189,9 @@ service bus over TLS.
 </ul>
 </div>
 </div>
-<div id="outline-container-org163f55e" class="outline-2">
-<h2 id="org163f55e">Components</h2>
-<div class="outline-text-2" id="text-org163f55e">
+<div id="outline-container-org83b75fc" class="outline-2">
+<h2 id="org83b75fc">Components</h2>
+<div class="outline-text-2" id="text-org83b75fc">
 <p>
 The demo splits into the components below.  Each component declares which
 requirements from <a href="specs.html">specs.org</a> it implements (<code>:implements:</code> property), in
@@ -273,9 +273,9 @@ connection state.
 </div>
 </div>
 </div>
-<div id="outline-container-org2981df3" class="outline-2">
-<h2 id="org2981df3">Traceability matrix</h2>
-<div class="outline-text-2" id="text-org2981df3">
+<div id="outline-container-org323a4ab" class="outline-2">
+<h2 id="org323a4ab">Traceability matrix</h2>
+<div class="outline-text-2" id="text-org323a4ab">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -339,9 +339,9 @@ connection state.
 </table>
 </div>
 </div>
-<div id="outline-container-org38d00d5" class="outline-2">
-<h2 id="org38d00d5">Related documents</h2>
-<div class="outline-text-2" id="text-org38d00d5">
+<div id="outline-container-orgd86c45c" class="outline-2">
+<h2 id="orgd86c45c">Related documents</h2>
+<div class="outline-text-2" id="text-orgd86c45c">
 <ul class="org-ul">
 <li><a href="specs.html">Specifications &#x2014; Use Case and Requirements</a></li>
 <li><a href="automotive-vs-medical.html">Automotive vs. Medical Standards</a></li>
