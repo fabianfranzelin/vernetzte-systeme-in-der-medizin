@@ -18,19 +18,21 @@
                                       "docs/content/talks/roam" root)))
                      (with-eval-after-load 'org-roam
                        (ff/org-set-roam-directory roam)))))
-         (eval . (ff/scope-org-roam))
          (eval . (defun run-command-recipe-vsm/local ()
                    (when-let* ((project-dir (locate-dominating-file
                                              default-directory ".git"))
                                (demo-dir (expand-file-name "demo" project-dir)))
                      (list
                       ;; ---------------- documentation & slides ----------------
-                      (list :command-name "sh:build html (slides + docs)"
-                            :command-line "make html"
-                            :working-dir project-dir)
-                      (list :command-name "sh:build glossar (Handout PDF)"
-                            :command-line "make glossar"
-                            :working-dir project-dir)
+                       (list :command-name "sh:build html (slides + docs)"
+                             :command-line "make html"
+                             :working-dir project-dir)
+                       (list :command-name "sh:export reveal.js PDFs"
+                             :command-line "make pdf"
+                             :working-dir project-dir)
+                       (list :command-name "sh:build glossar (Handout PDF)"
+                             :command-line "make glossar"
+                             :working-dir project-dir)
                       (list :command-name "sh:build all (html + glossar)"
                             :command-line "make all"
                             :working-dir project-dir)

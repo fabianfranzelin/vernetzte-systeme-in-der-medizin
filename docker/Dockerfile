@@ -26,6 +26,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         psmisc \
     && rm -rf /var/lib/apt/lists/*
 
+# decktape --- reveal.js -> PDF exporter (bundles Chromium via puppeteer).
+RUN npm install -g decktape@3.14.0 \
+    && rm -rf /root/.npm
+
 # Pre-install Emacs packages non-interactively so build.el is offline-friendly.
 RUN mkdir -p /root/.emacs.d && \
     emacs --batch --eval "(progn \

@@ -6,6 +6,7 @@
 # Usage:
 #   make image      - build the Docker image
 #   make html       - build reveal.js slides + HTML docs
+#   make pdf        - export reveal.js talks to PDF via decktape
 #   make glossar    - build the German glossary handout PDF (article)
 #   make all        - html + glossar
 #   make serve      - serve docs/public/ on :8080
@@ -32,7 +33,7 @@ else
   DOCKER :=
 endif
 
-.PHONY: image vendor clean-vendor diagrams html glossar all serve demo data shell clean
+.PHONY: image vendor clean-vendor diagrams html pdf glossar all serve demo data shell clean
 
 image:
 	docker build -t $(IMAGE) -f docker/Dockerfile .
@@ -92,6 +93,18 @@ docs/content/talks/images/en-safe-engineering-middleware-step-1.svg: $(DIAGRAM_M
 
 html: vendor diagrams
 	$(DOCKER) emacs -Q --script build.el
+
+# PDF exports of the reveal.js talks (via decktape).
+# Output: docs/public/talks/<slug>.pdf
+TALK_SLUGS := \
+	de-telematikinfrastruktur \
+	en-digital-twins \
+	en-safe-engineering \
+	en-service-oriented-communication
+PDF_PORT ?= 8090
+
+pdf: html
+	$(DOCKER) env PDF_PORT=$(PDF_PORT) ./scripts/export-pdfs.sh $(TALK_SLUGS)
 
 # Glossary handout (German) --- rendered as a plain LaTeX article (not Beamer)
 # via Emacs's `org-latex-export-to-pdf`.  Output lands in
