@@ -19,6 +19,7 @@
 
 <link rel="stylesheet" href="../assets/vendor/reveal.js/plugin/highlight/monokai.css"/>
 <link rel="stylesheet" href="../assets/vendor/reveal.js/plugin/highlight/zenburn.css"/><link href="../assets/vendor/fonts/fonts.css" rel="stylesheet">
+<script defer src="assets/js/sdc-live-probe.js"></script>
 <style>.demo-frame{width:95%;height:560px;border:1px solid #cbd5e1;border-radius:6px;} .two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.5em;align-items:start;} .muted{color:#475569;font-size:0.75em;} .accent{color:#0e7490;} .mini-corner{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);width:528px;height:160px;border:0;border-radius:6px;box-shadow:0 2px 6px rgba(0,0,0,0.08);z-index:5;background:#fff;} .reveal pre{box-shadow:none;background:#272822;border-radius:6px;padding:0.6em 0.8em;} .reveal pre code{background:#272822!important;color:#f8f8f2;font-size:0.75em;line-height:1.35;} .reveal pre code .org-comment,.reveal pre code .hljs-comment{color:#75715e;} .reveal pre code .hljs-string{color:#e6db74;} .reveal pre code .hljs-number{color:#ae81ff;} .reveal pre code .hljs-keyword,.reveal pre code .hljs-built_in{color:#f92672;}</style>
 </head>
 <body>
@@ -27,8 +28,8 @@
 <section id="sec-title-slide"><h2>Service-oriented Device Connectivity (SDC)</h2><h4>A wearable demo</h4><p>Dr. Fabian Franzelin · 2026-09-24</p><p style="font-size:0.6em;">Talk · W2-Professorship Computer Science · Reutlingen University</p>
 </section>
 <section>
-<section id="slide-org333c6ac">
-<h2 id="org333c6ac">Home patient → hospital clinician</h2>
+<section id="slide-org42067e8">
+<h2 id="org42067e8">Home patient → hospital clinician</h2>
 <aside class="notes">
 <ul>
 <li>A wearable sensor on the belt streams 3D acceleration at 100 Hz.</li>
@@ -39,12 +40,20 @@
 
 </aside>
 
-<iframe class="demo-frame" src="http://localhost:8000" title="Live SDC dashboard"></iframe>
+<div class="demo-frame" data-sdc-live="http://localhost:8000" style="position:relative;padding:0;overflow:hidden;">
+  <iframe data-live-iframe
+          title="Live SDC dashboard"
+          style="width:100%;height:100%;border:0;display:none;"></iframe>
+  <img data-fallback-img
+       src="data/1a/177e99-660c-4c80-b317-fe03c5ab0445/wearable-simulation.png"
+       alt="Wearable simulation (offline snapshot)"
+       style="width:100%;height:100%;object-fit:contain;display:block;"/>
+</div>
 </section>
 </section>
 <section>
-<section id="slide-org4d19d4b">
-<h2 id="org4d19d4b">Service-oriented Device Connectivity</h2>
+<section id="slide-org3df2458">
+<h2 id="org3df2458">Service-oriented Device Connectivity</h2>
 <p>
 <b>General</b>
 </p>
@@ -69,8 +78,8 @@ DPWS/SOAP    web-service stack   ❌  skipped; replaced by HTTP
 </section>
 </section>
 <section>
-<section id="slide-orgf884ffa">
-<h2 id="orgf884ffa">The Demo — BICEPS in SDC</h2>
+<section id="slide-orgcae8a3a">
+<h2 id="orgcae8a3a">The Demo — BICEPS in SDC</h2>
 <p>
 <i>BICEPS (IEEE 11073-10207): the information model behind SDC.</i>
 </p>
@@ -86,8 +95,8 @@ DPWS/SOAP    web-service stack   ❌  skipped; replaced by HTTP
 </section>
 </section>
 <section>
-<section id="slide-orge7ee758">
-<h3 id="orge7ee758">BICEPS in the demo — descriptor</h3>
+<section id="slide-org2287c5b">
+<h3 id="org2287c5b">BICEPS in the demo — descriptor</h3>
 <p>
 <a href="../../demo/provider.py"><code>demo/provider.py</code></a> — Medical Device Information Base (MDIB)
 </p>
@@ -115,8 +124,8 @@ MDIB = {
 </section>
 </section>
 <section>
-<section id="slide-org7c3dc5d">
-<h3 id="org7c3dc5d">BICEPS in the demo — state split</h3>
+<section id="slide-org55c3d00">
+<h3 id="org55c3d00">BICEPS in the demo — state split</h3>
 <p>
 <a href="../../demo/provider.py"><code>demo/provider.py</code></a> — States
 </p>
@@ -140,19 +149,27 @@ MDIB = {
 </section>
 </section>
 <section>
-<section id="slide-org1633554">
-<h3 id="org1633554">BICEPS operations → demo endpoints</h3>
+<section id="slide-org1574595">
+<h3 id="org1574595">BICEPS operations → demo endpoints</h3>
 
-<div id="org00e64ec" class="figure">
+<div id="org2d945cc" class="figure">
 <p><img src="images/en-soc-message-flow.png" alt="en-soc-message-flow.png" style="max-height:60vh;width:auto;" />
 </p>
 </div>
 </section>
 </section>
 <section>
-<section id="slide-org49fd0d5">
-<h2 id="org49fd0d5">Conclusion — Clinics to Cars</h2>
-<iframe class="mini-corner" src="http://localhost:8000/mini?v=2" title="Live cadence & activity"></iframe>
+<section id="slide-org4151187">
+<h2 id="org4151187">Conclusion — Clinics to Cars</h2>
+<div class="mini-corner" data-sdc-live="http://localhost:8000/mini?v=2" style="overflow:hidden;">
+  <iframe data-live-iframe
+          title="Live cadence & activity"
+          style="width:100%;height:100%;border:0;display:none;"></iframe>
+  <img data-fallback-img
+       src="data/77/f6992b-614f-4610-bf51-430e3e9b07dd/wearable-simulation-mini.png"
+       alt="Live cadence & activity (offline snapshot)"
+       style="width:100%;height:100%;object-fit:contain;display:block;"/>
+</div>
 
 <ul>
 <li>Same pattern across domains: <i>discover → describe → subscribe → stream</i>.</li>
@@ -165,8 +182,8 @@ MDIB = {
 </section>
 </section>
 <section>
-<section id="slide-org2997f8d" style="font-size:0.55em; line-height:1.15;">
-<h2 id="org2997f8d">References</h2>
+<section id="slide-orgbd607c5" style="font-size:0.55em; line-height:1.15;">
+<h2 id="orgbd607c5">References</h2>
 <p>
 <b>Standards</b>
 </p>
