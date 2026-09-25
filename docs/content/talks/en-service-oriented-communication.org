@@ -26,9 +26,13 @@
 #+REVEAL_EXTRA_CSS: ../assets/vendor/reveal.js-pointer/dist/pointer.css
 #+REVEAL_EXTRA_CSS: ../assets/vendor/reveal.js/plugin/highlight/monokai.css
 #+HTML_HEAD: <link href="../assets/vendor/fonts/fonts.css" rel="stylesheet">
+#+HTML_HEAD: <script defer src="assets/js/sdc-live-probe.js"></script>
 #+HTML_HEAD: <style>.demo-frame{width:95%;height:560px;border:1px solid #cbd5e1;border-radius:6px;} .two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.5em;align-items:start;} .muted{color:#475569;font-size:0.75em;} .accent{color:#0e7490;} .mini-corner{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);width:528px;height:160px;border:0;border-radius:6px;box-shadow:0 2px 6px rgba(0,0,0,0.08);z-index:5;background:#fff;} .reveal pre{box-shadow:none;background:#272822;border-radius:6px;padding:0.6em 0.8em;} .reveal pre code{background:#272822!important;color:#f8f8f2;font-size:0.75em;line-height:1.35;} .reveal pre code .org-comment,.reveal pre code .hljs-comment{color:#75715e;} .reveal pre code .hljs-string{color:#e6db74;} .reveal pre code .hljs-number{color:#ae81ff;} .reveal pre code .hljs-keyword,.reveal pre code .hljs-built_in{color:#f92672;}</style>
 
-* Home patient → hospital clinician
+* Home patient → hospital clinician :ATTACH:
+:PROPERTIES:
+:ID:       1a177e99-660c-4c80-b317-fe03c5ab0445
+:END:
 
 #+begin_notes
 - A wearable sensor on the belt streams 3D acceleration at 100 Hz.
@@ -37,7 +41,15 @@
 #+end_notes
 
 #+BEGIN_EXPORT html
-<iframe class="demo-frame" src="http://localhost:8000" title="Live SDC dashboard"></iframe>
+<div class="demo-frame" data-sdc-live="http://localhost:8000" style="position:relative;padding:0;overflow:hidden;">
+  <iframe data-live-iframe
+          title="Live SDC dashboard"
+          style="width:100%;height:100%;border:0;display:none;"></iframe>
+  <img data-fallback-img
+       src="data/1a/177e99-660c-4c80-b317-fe03c5ab0445/wearable-simulation.png"
+       alt="Wearable simulation (offline snapshot)"
+       style="width:100%;height:100%;object-fit:contain;display:block;"/>
+</div>
 #+END_EXPORT
 
 * Service-oriented Device Connectivity
@@ -143,10 +155,21 @@ C ->> D : push (SSE / WebSocket)
 #+ATTR_HTML: :style max-height:60vh;width:auto;
 [[file:images/en-soc-message-flow.png]]
 
-* Conclusion — Clinics to Cars
+* Conclusion — Clinics to Cars :ATTACH:
+:PROPERTIES:
+:ID:       77f6992b-614f-4610-bf51-430e3e9b07dd
+:END:
 
 #+BEGIN_EXPORT html
-<iframe class="mini-corner" src="http://localhost:8000/mini?v=2" title="Live cadence & activity"></iframe>
+<div class="mini-corner" data-sdc-live="http://localhost:8000/mini?v=2" style="overflow:hidden;">
+  <iframe data-live-iframe
+          title="Live cadence & activity"
+          style="width:100%;height:100%;border:0;display:none;"></iframe>
+  <img data-fallback-img
+       src="data/77/f6992b-614f-4610-bf51-430e3e9b07dd/wearable-simulation-mini.png"
+       alt="Live cadence & activity (offline snapshot)"
+       style="width:100%;height:100%;object-fit:contain;display:block;"/>
+</div>
 #+END_EXPORT
 
 - Same pattern across domains: /discover → describe → subscribe → stream/.
