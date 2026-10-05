@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-09-25 Fri 20:26 -->
+<!-- 2026-10-05 Mon 20:34 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Architecture &#x2014; SDC / IEEE 11073</title>
@@ -18,13 +18,13 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgbdeb634">Overview</a></li>
-<li><a href="#orge42c037">IEEE 11073 &#x2014; family map</a></li>
-<li><a href="#org4dfcdaa">BICEPS</a></li>
-<li><a href="#org434db68">Sequence</a></li>
-<li><a href="#org64216d2">Safety Contexts</a></li>
-<li><a href="#org12bb7f3">Transport &#x2014; Medical DPWS</a></li>
-<li><a href="#orgccf387b">Components</a>
+<li><a href="#org2511aee">Overview</a></li>
+<li><a href="#org844bc17">IEEE 11073 &#x2014; family map</a></li>
+<li><a href="#orge6943bd">BICEPS</a></li>
+<li><a href="#orgd4f7834">Sequence</a></li>
+<li><a href="#orgc3a5119">Safety Contexts</a></li>
+<li><a href="#orgd205145">Transport &#x2014; Medical DPWS</a></li>
+<li><a href="#org401aaff">Components</a>
 <ul>
 <li><a href="#COMP-MDIB">COMP-MDIB &#x2014; Information Model</a></li>
 <li><a href="#COMP-GAIT">COMP-GAIT &#x2014; Gait Analysis</a></li>
@@ -35,14 +35,14 @@
 <li><a href="#COMP-DASH">COMP-DASH &#x2014; Dashboard UI + JSON API</a></li>
 </ul>
 </li>
-<li><a href="#org87c0418">Traceability matrix</a></li>
-<li><a href="#org64de551">Related documents</a></li>
+<li><a href="#org1e741c1">Traceability matrix</a></li>
+<li><a href="#orgf946929">Related documents</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgbdeb634" class="outline-2">
-<h2 id="orgbdeb634">Overview</h2>
-<div class="outline-text-2" id="text-orgbdeb634">
+<div id="outline-container-org2511aee" class="outline-2">
+<h2 id="org2511aee">Overview</h2>
+<div class="outline-text-2" id="text-org2511aee">
 <p>
 The demo in this repository implements a minimal <i>provider</i> and <i>consumer</i>
 following the <b>Service-Oriented Device Connectivity</b> (SDC) family of standards
@@ -51,9 +51,9 @@ the source code without prior SDC background.
 </p>
 </div>
 </div>
-<div id="outline-container-orge42c037" class="outline-2">
-<h2 id="orge42c037">IEEE 11073 &#x2014; family map</h2>
-<div class="outline-text-2" id="text-orge42c037">
+<div id="outline-container-org844bc17" class="outline-2">
+<h2 id="org844bc17">IEEE 11073 &#x2014; family map</h2>
+<div class="outline-text-2" id="text-org844bc17">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -92,9 +92,9 @@ the source code without prior SDC background.
 </table>
 </div>
 </div>
-<div id="outline-container-org4dfcdaa" class="outline-2">
-<h2 id="org4dfcdaa">BICEPS</h2>
-<div class="outline-text-2" id="text-org4dfcdaa">
+<div id="outline-container-orge6943bd" class="outline-2">
+<h2 id="orge6943bd">BICEPS</h2>
+<div class="outline-text-2" id="text-orge6943bd">
 <p>
 BICEPS = <i>Basic Integrated Clinical Environment Protocol Specification</i>.
 </p>
@@ -130,9 +130,9 @@ per-sample data) &#x2014; Nyquist-safe by construction.
 </p>
 </div>
 </div>
-<div id="outline-container-org434db68" class="outline-2">
-<h2 id="org434db68">Sequence</h2>
-<div class="outline-text-2" id="text-org434db68">
+<div id="outline-container-orgd4f7834" class="outline-2">
+<h2 id="orgd4f7834">Sequence</h2>
+<div class="outline-text-2" id="text-orgd4f7834">
 <p>
 A minimal interaction looks like this:
 </p>
@@ -156,9 +156,9 @@ A minimal interaction looks like this:
 </div>
 </div>
 </div>
-<div id="outline-container-org64216d2" class="outline-2">
-<h2 id="org64216d2">Safety Contexts</h2>
-<div class="outline-text-2" id="text-org64216d2">
+<div id="outline-container-orgc3a5119" class="outline-2">
+<h2 id="orgc3a5119">Safety Contexts</h2>
+<div class="outline-text-2" id="text-orgc3a5119">
 <p>
 A <code>Set</code> operation in SDC is never just a remote procedure call.  It carries
 a <b>Safety Context</b> proving the operation is:
@@ -177,9 +177,9 @@ service bus over TLS.
 </p>
 </div>
 </div>
-<div id="outline-container-org12bb7f3" class="outline-2">
-<h2 id="org12bb7f3">Transport &#x2014; Medical DPWS</h2>
-<div class="outline-text-2" id="text-org12bb7f3">
+<div id="outline-container-orgd205145" class="outline-2">
+<h2 id="orgd205145">Transport &#x2014; Medical DPWS</h2>
+<div class="outline-text-2" id="text-orgd205145">
 <ul class="org-ul">
 <li><b>WS-Discovery</b> over UDP multicast (device discovery)</li>
 <li><b>SOAP over HTTP(S)/TCP</b> (messages)</li>
@@ -189,9 +189,9 @@ service bus over TLS.
 </ul>
 </div>
 </div>
-<div id="outline-container-orgccf387b" class="outline-2">
-<h2 id="orgccf387b">Components</h2>
-<div class="outline-text-2" id="text-orgccf387b">
+<div id="outline-container-org401aaff" class="outline-2">
+<h2 id="org401aaff">Components</h2>
+<div class="outline-text-2" id="text-org401aaff">
 <p>
 The demo splits into the components below.  Each component declares which
 requirements from <a href="specs.html">specs.org</a> it implements (<code>:implements:</code> property), in
@@ -273,9 +273,9 @@ connection state.
 </div>
 </div>
 </div>
-<div id="outline-container-org87c0418" class="outline-2">
-<h2 id="org87c0418">Traceability matrix</h2>
-<div class="outline-text-2" id="text-org87c0418">
+<div id="outline-container-org1e741c1" class="outline-2">
+<h2 id="org1e741c1">Traceability matrix</h2>
+<div class="outline-text-2" id="text-org1e741c1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -339,9 +339,9 @@ connection state.
 </table>
 </div>
 </div>
-<div id="outline-container-org64de551" class="outline-2">
-<h2 id="org64de551">Related documents</h2>
-<div class="outline-text-2" id="text-org64de551">
+<div id="outline-container-orgf946929" class="outline-2">
+<h2 id="orgf946929">Related documents</h2>
+<div class="outline-text-2" id="text-orgf946929">
 <ul class="org-ul">
 <li><a href="specs.html">Specifications &#x2014; Use Case and Requirements</a></li>
 <li><a href="automotive-vs-medical.html">Automotive vs. Medical Standards</a></li>
